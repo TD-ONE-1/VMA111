@@ -73,6 +73,7 @@ namespace RMS.Controllers
 
                     _context.SignUpUsers.Add(MapperHelper.Map<SignUpUser, SignUpUsersModel>(user));
 
+                    _context.SaveChanges();
 
                     return Ok(new { success = true, message = "Successful Sign Up!" });
                 }

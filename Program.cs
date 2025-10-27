@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using RMS.Entity;
+using RMS.Repository.Implementation;
+using RMS.Repository.Interface;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +28,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure DbContext with connection string
+builder.Services.AddDbContext<RMSContext>(options =>
+    options.UseSqlServer(config.GetConnectionString("dbcs")));
+
 var key = "RM1C91EE720F4B3788B51718RME0B82S";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -37,6 +45,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
+
+builder.Services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
 
 var app = builder.Build();
 
