@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/Account/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "RMS.Models.AccountModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "UsersSignUp",
+    "RelativePath": "api/Account/UsersSignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "RMS.Models.SignUpUsersModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
