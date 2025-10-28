@@ -15,6 +15,12 @@ public partial class RMSContext : DbContext
     {
     }
 
+    public virtual DbSet<Resturant> Resturants { get; set; }
+
+    public virtual DbSet<ResturantConfigration> ResturantConfigrations { get; set; }
+
+    public virtual DbSet<ResturantOffer> ResturantOffers { get; set; }
+
     public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
@@ -25,6 +31,34 @@ public partial class RMSContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Resturant>(entity =>
+        {
+            entity.ToTable("Resturant");
+        });
+
+        modelBuilder.Entity<ResturantConfigration>(entity =>
+        {
+            entity.ToTable("ResturantConfigration");
+
+            entity.Property(e => e.From).HasColumnType("datetime");
+            entity.Property(e => e.To).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Offer).WithMany(p => p.ResturantConfigrations)
+                .HasForeignKey(d => d.OfferId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResturantConfigration_ResturantOffer");
+
+            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantConfigrations)
+                .HasForeignKey(d => d.ResturantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResturantConfigration_Resturant");
+        });
+
+        modelBuilder.Entity<ResturantOffer>(entity =>
+        {
+            entity.ToTable("ResturantOffer");
+        });
+
         modelBuilder.Entity<SignUpUser>(entity =>
         {
             entity.Property(e => e.Date).HasColumnType("datetime");
