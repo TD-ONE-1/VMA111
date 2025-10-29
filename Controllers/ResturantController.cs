@@ -9,7 +9,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ResturantController : ControllerBase
@@ -41,11 +41,108 @@ namespace RMS.Controllers
         [HttpGet, Route("GetResturantConfigurationByResturantId")]
         public IActionResult GetResturantConfigurationByResturantId(int ResturantId)
         {
+            if(ResturantId == 0)
+                return Ok(new { success = false, message = "Resturant is required!" });
+
             List<ResturantConfigrationModel> model = new List<ResturantConfigrationModel>();
             model = MapperHelper.MapList<ResturantConfigrationModel, ResturantConfigration>(_context.ResturantConfigrations
                 .Where(p => p.Status == true && p.ResturantId == ResturantId).ToList());
 
             return Ok(model);
+        }
+
+        [HttpPost("SaveResturant")]
+        public IActionResult SaveResturant([FromBody] ResturantModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Description))
+                    return Ok(new { success = false, message = "Description is required!" });
+                
+                var dupCheck = _context.Resturants.Where(x => x.Description.ToLower() == model.Description.ToLower()).FirstOrDefault();
+                if (dupCheck != null)
+                {
+                    return Ok(new { success = false, message = "This Resturant is already present. Please add a different one!" });
+                }
+                if (model.Id == 0)
+                {
+                    _context.Resturants.Add(MapperHelper.Map<Resturant, ResturantModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.Resturants.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.Description = model.Description;
+                        record.Status = model.Status;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpPost("SaveResturantOffer")]
+        public IActionResult SaveResturantOffer([FromBody] ResturantOfferModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Description) || model.ResturantId == 0)
+                {
+                    return Ok("Description or Resturant is required!");
+                }
+                var dupCheck = _context.ResturantOffers.Where(x => x.Description.ToLower() == model.Description.ToLower() && x.ResturantId == model.ResturantId).FirstOrDefault();
+                if (dupCheck != null)
+                {
+                    return Ok(new { success = false, message = "This Resturant Offer is already present. Please add a different one!" });
+                }
+                if (model.Id == 0)
+                {
+                    _context.ResturantOffers.Add(MapperHelper.Map<ResturantOffer, ResturantOfferModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.ResturantOffers.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.Description = model.Description;
+                        record.ResturantId = model.ResturantId;
+                        record.Status = model.Status;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
         }
 
         [HttpPost("SaveResturantConfiguration")]

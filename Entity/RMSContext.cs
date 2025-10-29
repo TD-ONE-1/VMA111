@@ -57,6 +57,11 @@ public partial class RMSContext : DbContext
         modelBuilder.Entity<ResturantOffer>(entity =>
         {
             entity.ToTable("ResturantOffer");
+
+            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantOffers)
+                .HasForeignKey(d => d.ResturantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResturantOffer_Resturant");
         });
 
         modelBuilder.Entity<SignUpUser>(entity =>
