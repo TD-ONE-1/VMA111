@@ -11,6 +11,8 @@ public partial class ResturantConfigration
 
     public int OfferId { get; set; }
 
+    public int VenueId { get; set; }
+
     public string Day { get; set; } = null!;
 
     public DateTime From { get; set; }
@@ -28,4 +30,6 @@ public partial class ResturantConfigration
     public virtual ResturantOffer Offer { get; set; } = null!;
 
     public virtual Resturant Resturant { get; set; } = null!;
+
+    public virtual ResturantVenue Venue { get; set; } = null!;
 }

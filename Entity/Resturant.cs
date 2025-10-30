@@ -14,4 +14,6 @@ public partial class Resturant
     public virtual ICollection<ResturantConfigration> ResturantConfigrations { get; set; } = new List<ResturantConfigration>();
 
     public virtual ICollection<ResturantOffer> ResturantOffers { get; set; } = new List<ResturantOffer>();
+
+    public virtual ICollection<ResturantVenue> ResturantVenues { get; set; } = new List<ResturantVenue>();
 }

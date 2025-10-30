@@ -8,6 +8,8 @@
 
         public int OfferId { get; set; }
 
+        public int VenueId { get; set; }
+
         public string Day { get; set; } = null!;
 
         public DateTime From { get; set; }

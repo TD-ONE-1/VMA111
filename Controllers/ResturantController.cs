@@ -9,7 +9,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ResturantController : ControllerBase
@@ -30,10 +30,21 @@ namespace RMS.Controllers
         }
 
         [HttpGet, Route("GetResturantOffer")]
-        public IActionResult GetResturantOffer()
+        public IActionResult GetResturantOffer(int ResturantId)
         {
             List<ResturantOfferModel> model = new List<ResturantOfferModel>();
-            model = MapperHelper.MapList<ResturantOfferModel, ResturantOffer>(_context.ResturantOffers.Where(p => p.Status == true).ToList());
+            model = MapperHelper.MapList<ResturantOfferModel, ResturantOffer>(_context.ResturantOffers
+                .Where(p => p.Status == true && p.ResturantId == ResturantId).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetResturantVenue")]
+        public IActionResult GetResturantVenue(int ResturantId)
+        {
+            List<ResturantVenueModel> model = new List<ResturantVenueModel>();
+            model = MapperHelper.MapList<ResturantVenueModel, ResturantVenue>(_context.ResturantVenues
+                .Where(p => p.Status == true && p.ResturantId == ResturantId).ToList());
 
             return Ok(model);
         }
@@ -145,6 +156,59 @@ namespace RMS.Controllers
             }
         }
 
+        [HttpPost("SaveResturantVenues")]
+        public IActionResult SaveResturantVenues([FromBody] ResturantVenueModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Description))
+                    return Ok(new { success = false, message = "Description is required!" });
+
+                if (model.ResturantId == 0)
+                    return Ok(new { success = false, message = "Resturant is required!" });
+
+                var dupCheck = _context.ResturantVenues
+                    .Where(x => x.Description.ToLower() == model.Description.ToLower() && x.ResturantId == model.ResturantId).FirstOrDefault();
+
+                if (dupCheck != null)
+                {
+                    return Ok(new { success = false, message = "This Venue is already present for this resturant. Please add a different one!" });
+                }
+                if (model.Id == 0)
+                {
+                    _context.ResturantVenues.Add(MapperHelper.Map<ResturantVenue, ResturantVenueModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.ResturantVenues.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.Description = model.Description;
+                        record.ResturantId = model.ResturantId;
+                        record.Location = model.Location;
+                        record.Status = model.Status;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
         [HttpPost("SaveResturantConfiguration")]
         public IActionResult SaveResturantConfiguration([FromBody] ResturantConfigrationModel conf)
         {
@@ -178,6 +242,7 @@ namespace RMS.Controllers
                     {
                         record.ResturantId = conf.ResturantId;
                         record.OfferId = conf.OfferId;
+                        record.VenueId = conf.VenueId;
                         record.Day = conf.Day;
                         record.From = conf.From;
                         record.To = conf.To;

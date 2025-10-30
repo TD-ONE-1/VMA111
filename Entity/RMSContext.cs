@@ -21,6 +21,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<ResturantOffer> ResturantOffers { get; set; }
 
+    public virtual DbSet<ResturantVenue> ResturantVenues { get; set; }
+
     public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
@@ -52,6 +54,11 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.ResturantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ResturantConfigration_Resturant");
+
+            entity.HasOne(d => d.Venue).WithMany(p => p.ResturantConfigrations)
+                .HasForeignKey(d => d.VenueId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResturantConfigration_ResturantVenue");
         });
 
         modelBuilder.Entity<ResturantOffer>(entity =>
@@ -62,6 +69,16 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.ResturantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ResturantOffer_Resturant");
+        });
+
+        modelBuilder.Entity<ResturantVenue>(entity =>
+        {
+            entity.ToTable("ResturantVenue");
+
+            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantVenues)
+                .HasForeignKey(d => d.ResturantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResturantVenue_Resturant");
         });
 
         modelBuilder.Entity<SignUpUser>(entity =>
