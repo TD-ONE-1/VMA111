@@ -15,13 +15,21 @@ public partial class RMSContext : DbContext
     {
     }
 
-    public virtual DbSet<Resturant> Resturants { get; set; }
+    public virtual DbSet<R_BookingType> R_BookingTypes { get; set; }
 
-    public virtual DbSet<ResturantConfigration> ResturantConfigrations { get; set; }
+    public virtual DbSet<R_Branch> R_Branches { get; set; }
 
-    public virtual DbSet<ResturantOffer> ResturantOffers { get; set; }
+    public virtual DbSet<R_Event> R_Events { get; set; }
 
-    public virtual DbSet<ResturantVenue> ResturantVenues { get; set; }
+    public virtual DbSet<R_Offer> R_Offers { get; set; }
+
+    public virtual DbSet<R_Slot> R_Slots { get; set; }
+
+    public virtual DbSet<ReservationMaster> ReservationMasters { get; set; }
+
+    public virtual DbSet<ReservationRequest> ReservationRequests { get; set; }
+
+    public virtual DbSet<Restaurant> Restaurants { get; set; }
 
     public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
 
@@ -33,52 +41,90 @@ public partial class RMSContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Resturant>(entity =>
+        modelBuilder.Entity<R_BookingType>(entity =>
         {
-            entity.ToTable("Resturant");
+            entity.HasKey(e => e.Id).HasName("PK__BookingType");
+
+            entity.ToTable("R_BookingType");
+
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ResturantConfigration>(entity =>
+        modelBuilder.Entity<R_Branch>(entity =>
         {
-            entity.ToTable("ResturantConfigration");
+            entity.HasKey(e => e.Id).HasName("PK__RestaurantBranches");
 
-            entity.Property(e => e.From).HasColumnType("datetime");
-            entity.Property(e => e.To).HasColumnType("datetime");
-
-            entity.HasOne(d => d.Offer).WithMany(p => p.ResturantConfigrations)
-                .HasForeignKey(d => d.OfferId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResturantConfigration_ResturantOffer");
-
-            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantConfigrations)
-                .HasForeignKey(d => d.ResturantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResturantConfigration_Resturant");
-
-            entity.HasOne(d => d.Venue).WithMany(p => p.ResturantConfigrations)
-                .HasForeignKey(d => d.VenueId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResturantConfigration_ResturantVenue");
+            entity.Property(e => e.Location).IsUnicode(false);
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ResturantOffer>(entity =>
+        modelBuilder.Entity<R_Event>(entity =>
         {
-            entity.ToTable("ResturantOffer");
+            entity.HasKey(e => e.Id).HasName("PK__Events");
 
-            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantOffers)
-                .HasForeignKey(d => d.ResturantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResturantOffer_Resturant");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ResturantVenue>(entity =>
+        modelBuilder.Entity<R_Offer>(entity =>
         {
-            entity.ToTable("ResturantVenue");
+            entity.HasKey(e => e.Id).HasName("PK__Restaura__3214EC07F22961E3");
 
-            entity.HasOne(d => d.Resturant).WithMany(p => p.ResturantVenues)
-                .HasForeignKey(d => d.ResturantId)
+            entity.Property(e => e.EndDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.EndTime).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.OfferType)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.StartDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.StartTime).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.Restaurant).WithMany(p => p.R_Offers)
+                .HasForeignKey(d => d.RestaurantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResturantVenue_Resturant");
+                .HasConstraintName("FK_R_Offers_Restaurant");
+        });
+
+        modelBuilder.Entity<R_Slot>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__R_Slots");
+        });
+
+        modelBuilder.Entity<ReservationMaster>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Reservat__3214EC078928C7A6");
+
+            entity.ToTable("ReservationMaster");
+        });
+
+        modelBuilder.Entity<ReservationRequest>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Reservat__3214EC07E561D4AD");
+
+            entity.ToTable("ReservationRequest");
+
+            entity.Property(e => e.Remarks).HasMaxLength(500);
+            entity.Property(e => e.RequestDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ReservationDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Restaurant>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Resturant");
+
+            entity.ToTable("Restaurant");
+
+            entity.Property(e => e.ClosingTime).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Location).HasDefaultValue("");
+            entity.Property(e => e.Name).HasDefaultValue("");
+            entity.Property(e => e.OpeningTime).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<SignUpUser>(entity =>

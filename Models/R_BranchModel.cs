@@ -1,17 +1,17 @@
 ﻿namespace RMS.Models
 {
-    public class ResturantModel
+    public class R_BranchModel
     {
         public int Id { get; set; }
+
+        public int RestaurantId { get; set; }
 
         public string Name { get; set; } = null!;
 
         public string Location { get; set; } = null!;
 
-        public TimeOnly OpeningTime { get; set; }
+        public int Capacity { get; set; }
 
-        public TimeOnly ClosingTime { get; set; }
-
-        public bool Status { get; set; }
+        public bool IsActive { get; set; }
     }
 }

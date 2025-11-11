@@ -26,10 +26,4 @@ public partial class ResturantConfigration
     public int Interval { get; set; }
 
     public bool Status { get; set; }
-
-    public virtual ResturantOffer Offer { get; set; } = null!;
-
-    public virtual Resturant Resturant { get; set; } = null!;
-
-    public virtual ResturantVenue Venue { get; set; } = null!;
 }
