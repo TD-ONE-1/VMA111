@@ -10,7 +10,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ResturantController : ControllerBase
@@ -437,6 +437,63 @@ namespace RMS.Controllers
             List<R_SlotModel> model = new List<R_SlotModel>();
             model = MapperHelper.MapList<R_SlotModel, R_Slot>(_context.R_Slots
                 .Where(p => p.IsActive == true && p.RestaurantId == RestaurantId && p.BranchId == BranchId).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpPost("ReservationRequest")]
+        public IActionResult ReservationRequest([FromBody] ReservationRequestModel model)
+        {
+            try
+            {
+                if (model.ReservationType == 0 || model.ReservationDate == null || model.RestaurantId == 0 || model.Members == 0)
+                    return Ok(new { success = false, message = "Invalid Data!" });
+
+                if (model.Id == 0)
+                {
+                    _context.ReservationRequests.Add(MapperHelper.Map<ReservationRequest, ReservationRequestModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.ReservationRequests.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.ReservationType = model.ReservationType;
+                        record.ReservationDate = model.ReservationDate;
+                        record.RestaurantId = model.RestaurantId;
+                        record.BranchId = model.BranchId;
+                        record.OfferId = model.OfferId;
+                        record.BookingTypeId = model.BookingTypeId;
+                        record.SlotId = model.SlotId;
+                        record.Members = model.Members;
+                        record.Remarks = model.Remarks;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetReservations")]
+        public IActionResult GetReservations()
+        {
+            List<ReservationRequestModel> model = new List<ReservationRequestModel>();
+            model = MapperHelper.MapList<ReservationRequestModel, ReservationRequest>(_context.ReservationRequests.Where(p => p.Id != 0).ToList());
 
             return Ok(model);
         }

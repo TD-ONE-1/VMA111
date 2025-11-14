@@ -25,9 +25,9 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<R_Slot> R_Slots { get; set; }
 
-    public virtual DbSet<ReservationMaster> ReservationMasters { get; set; }
-
     public virtual DbSet<ReservationRequest> ReservationRequests { get; set; }
+
+    public virtual DbSet<ReservationRequestDetail> ReservationRequestDetails { get; set; }
 
     public virtual DbSet<Restaurant> Restaurants { get; set; }
 
@@ -95,24 +95,53 @@ public partial class RMSContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__R_Slots");
         });
 
-        modelBuilder.Entity<ReservationMaster>(entity =>
+        modelBuilder.Entity<ReservationRequest>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Reservat__3214EC078928C7A6");
 
-            entity.ToTable("ReservationMaster");
+            entity.ToTable("ReservationRequest");
+
+            entity.Property(e => e.Remarks).HasDefaultValue("");
+            entity.Property(e => e.ReservationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.BookingType).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.BookingTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_R_BookingType");
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_R_Branches");
+
+            entity.HasOne(d => d.Offer).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.OfferId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_R_Offers");
+
+            entity.HasOne(d => d.Restaurant).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.RestaurantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_Restaurant");
+
+            entity.HasOne(d => d.Slot).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.SlotId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_R_Slots");
         });
 
-        modelBuilder.Entity<ReservationRequest>(entity =>
+        modelBuilder.Entity<ReservationRequestDetail>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Reservat__3214EC07E561D4AD");
 
-            entity.ToTable("ReservationRequest");
+            entity.ToTable("ReservationRequestDetail");
 
-            entity.Property(e => e.Remarks).HasMaxLength(500);
-            entity.Property(e => e.RequestDate)
+            entity.Property(e => e.ConfirmedBy).HasDefaultValue("");
+            entity.Property(e => e.ConfirmedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.ReservationDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Restaurant>(entity =>

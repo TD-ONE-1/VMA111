@@ -16,4 +16,6 @@ public partial class R_Branch
     public int Capacity { get; set; }
 
     public bool IsActive { get; set; }
+
+    public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 }

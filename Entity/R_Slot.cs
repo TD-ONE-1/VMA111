@@ -16,4 +16,6 @@ public partial class R_Slot
     public TimeOnly EndTime { get; set; }
 
     public bool IsActive { get; set; }
+
+    public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 }
