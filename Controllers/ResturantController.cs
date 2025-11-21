@@ -10,7 +10,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ResturantController : ControllerBase
@@ -56,7 +56,8 @@ namespace RMS.Controllers
                         record.OpeningTime = model.OpeningTime;
                         record.ClosingTime = model.ClosingTime;
                         record.Status = model.Status;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -116,7 +117,8 @@ namespace RMS.Controllers
                         record.RestaurantId = model.RestaurantId;
                         record.BranchId = model.BranchId;
                         record.IsActive = model.IsActive;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -259,7 +261,8 @@ namespace RMS.Controllers
                         record.RestaurantId = model.RestaurantId;
                         record.BranchId = model.BranchId;
                         record.IsActive = model.IsActive;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -333,7 +336,8 @@ namespace RMS.Controllers
                         record.StartTime = model.StartTime;
                         record.EndTime = model.EndTime;
                         record.IsActive = model.IsActive;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -376,9 +380,9 @@ namespace RMS.Controllers
             {
                 if (model.RestaurantId == 0 || model.BranchId == 0)
                     return Ok(new { success = false, message = "Resturant and Branch are required!" });
-                
+
                 var dupCheck = _context.R_Slots.Where(x => x.RestaurantId == model.RestaurantId && x.BranchId == model.BranchId &&
-                        x.StartTime == model.StartTime && x.EndTime == model.EndTime &&  x.IsActive == model.IsActive).FirstOrDefault();
+                        x.StartTime == model.StartTime && x.EndTime == model.EndTime && x.IsActive == model.IsActive).FirstOrDefault();
                 if (dupCheck != null)
                 {
                     return Ok(new { success = false, message = "This Slot is already present. Please add a different one!" });
@@ -405,7 +409,8 @@ namespace RMS.Controllers
                         record.StartTime = model.StartTime;
                         record.EndTime = model.EndTime;
                         record.IsActive = model.IsActive;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -466,6 +471,7 @@ namespace RMS.Controllers
 
                     if (record != null)
                     {
+                        record.UserId = model.UserId;
                         record.ReservationType = model.ReservationType;
                         record.ReservationDate = model.ReservationDate;
                         record.RestaurantId = model.RestaurantId;
@@ -475,7 +481,8 @@ namespace RMS.Controllers
                         record.SlotId = model.SlotId;
                         record.Members = model.Members;
                         record.Remarks = model.Remarks;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 
@@ -498,71 +505,49 @@ namespace RMS.Controllers
             return Ok(model);
         }
 
-        //[HttpPost("ReserveSlot")]
-        //public IActionResult ReserveSlot([FromBody] ReservationRequestModel model)
-        //{
-        //    try
-        //    {
-        //        if (model.ResturantId <= 0 || model.OfferId <= 0 || model.VenueId <= 0
-        //            || model.Members <= 0 || model.Slot <= 0)
-        //        {
-        //            return BadRequest("Invalid input data!");
-        //        }
+        [HttpPost("ConfirmReservation")]
+        public IActionResult ConfirmReservation(int ReservationRequestId)
+        {
+            try
+            {
+                if (ReservationRequestId == 0)
+                    return BadRequest("Reservation is required!");
 
-        //        var offer = _context.ResturantConfigrations
-        //                            .FirstOrDefault(x => x.ResturantId == model.ResturantId && x.OfferId == model.OfferId
-        //                                              && x.VenueId == model.VenueId);
+                var reservation = _context.ReservationRequests.Where(r => r.Id == ReservationRequestId).FirstOrDefault();
 
-        //        if (offer == null)
-        //            return BadRequest("Resturant not found!");
+                if (reservation == null)
+                    return BadRequest("Reservation not found!");
 
-        //        int totalCapacityPerSlot = offer.Capacity;
+                return Ok(new { success = true, message = "Reservation confirmed!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong: " + ex.Message);
+            }
+        }
 
-        //        var master = _context.ReservationMasters
-        //                     .FirstOrDefault(x => x.ResturantId == model.ResturantId
-        //                                       && x.OfferId == model.OfferId
-        //                                       && x.VenueId == model.VenueId
-        //                                       && x.Slot == model.Slot);
+        [HttpGet, Route("GetReviews")]
+        public IActionResult GetReviews()
+        {
+            List<ReviewModel> model = new List<ReviewModel>();
+            model = MapperHelper.MapList<ReviewModel, Review>(_context.Reviews.Where(p => p.Id != 0).ToList());
 
-        //        if (master == null)
-        //        {
-        //            master = new ReservationMaster
-        //            {
-        //                ResturantId = model.ResturantId,
-        //                OfferId = model.OfferId,
-        //                VenueId = model.VenueId,
-        //                Slot = model.Slot,
-        //                TotalCapacity = totalCapacityPerSlot,
-        //                CurrentCapacity = totalCapacityPerSlot - model.Members
-        //            };
-        //            _context.ReservationMasters.Add(master);
-        //            _context.SaveChanges();
-        //        }
-        //        else
-        //        {
-        //            if (master.CurrentCapacity < model.Members)
-        //            {
-        //                return Ok(new { success = false, message = "Slot Full! Not enough capacity." });
-        //            }
+            return Ok(model);
+        }
 
-        //            master.CurrentCapacity -= model.Members;
-        //            _context.SaveChanges();
-        //        }
-
-        //        var detail = new ReservationRequest
-        //        {
-        //        };
-
-        //        _context.ReservationRequests.Add(detail);
-        //        _context.SaveChanges();
-
-        //        return Ok(new { success = true, message = "Reservation confirmed!" });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, "Something went wrong: " + ex.Message);
-        //    }
-        //}
-
+        [HttpPost("AddReview")]
+        public IActionResult AddReview([FromBody] ReviewModel model)
+        {
+            try
+            {
+                _context.Reviews.Add(MapperHelper.Map<Review, ReviewModel>(model));
+                _context.SaveChanges();
+                return Ok(new { success = true, message = "Saved Successfully!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
     }
 }

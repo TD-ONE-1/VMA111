@@ -21,6 +21,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<R_Event> R_Events { get; set; }
 
+    public virtual DbSet<R_Menu> R_Menus { get; set; }
+
     public virtual DbSet<R_Offer> R_Offers { get; set; }
 
     public virtual DbSet<R_Slot> R_Slots { get; set; }
@@ -31,7 +33,11 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Restaurant> Restaurants { get; set; }
 
+    public virtual DbSet<Review> Reviews { get; set; }
+
     public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
+
+    public virtual DbSet<UserType> UserTypes { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
 
@@ -69,6 +75,28 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<R_Menu>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__R_Menu");
+
+            entity.ToTable("R_Menu");
+
+            entity.Property(e => e.ItemDetail).IsUnicode(false);
+            entity.Property(e => e.ItemName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Offer).WithMany(p => p.R_Menus)
+                .HasForeignKey(d => d.OfferId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_R_Menu_R_Offers");
+
+            entity.HasOne(d => d.Restaurant).WithMany(p => p.R_Menus)
+                .HasForeignKey(d => d.RestaurantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_R_Menu_Restaurant");
         });
 
         modelBuilder.Entity<R_Offer>(entity =>
@@ -156,20 +184,52 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.OpeningTime).HasDefaultValueSql("(getdate())");
         });
 
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Reviews");
+
+            entity.Property(e => e.Remarks)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<SignUpUser>(entity =>
         {
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(500);
         });
 
+        modelBuilder.Entity<UserType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserTypes");
+
+            entity.Property(e => e.UserTypes)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<tblAuthentication>(entity =>
         {
             entity.ToTable("tblAuthentication");
 
+            entity.Property(e => e.CreatedBy)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(500);
             entity.Property(e => e.UserCode).HasMaxLength(20);
-            entity.Property(e => e.createdBy).HasColumnType("text");
-            entity.Property(e => e.creationDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany(p => p.tblAuthentications)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblAuthentication_SignUpUsers");
+
+            entity.HasOne(d => d.UserType).WithMany(p => p.tblAuthentications)
+                .HasForeignKey(d => d.UserTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblAuthentication_UserTypes");
         });
 
         OnModelCreatingPartial(modelBuilder);

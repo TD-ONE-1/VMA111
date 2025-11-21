@@ -7,6 +7,8 @@ public partial class ReservationRequest
 {
     public int Id { get; set; }
 
+    public int UserId { get; set; }
+
     public int ReservationType { get; set; }
 
     public DateTime ReservationDate { get; set; }
@@ -24,6 +26,8 @@ public partial class ReservationRequest
     public int Members { get; set; }
 
     public string Remarks { get; set; } = null!;
+
+    public bool Status { get; set; }
 
     public virtual R_BookingType BookingType { get; set; } = null!;
 

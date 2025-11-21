@@ -1,10 +1,8 @@
 ﻿namespace RMS.Models
 {
-    public class AccountModel
+    public class ConfirmSignUpModel
     {
         public int Id { get; set; }
-
-        public int UserId { get; set; }
 
         public string UserCode { get; set; } = null!;
 
@@ -12,10 +10,12 @@
 
         public string Password { get; set; } = null!;
 
+        public int UserTypeId { get; set; }
+
         public bool isActive { get; set; }
 
-        public DateTime? creationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public string? createdBy { get; set; }
+        public string CreatedBy { get; set; } = null!;
     }
 }

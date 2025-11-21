@@ -17,6 +17,8 @@ public partial class Restaurant
 
     public bool Status { get; set; }
 
+    public virtual ICollection<R_Menu> R_Menus { get; set; } = new List<R_Menu>();
+
     public virtual ICollection<R_Offer> R_Offers { get; set; } = new List<R_Offer>();
 
     public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();

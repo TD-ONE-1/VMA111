@@ -50,8 +50,6 @@ namespace RMS.Controllers
             {
                 return Ok("Invalid UserName or Password!");
             }
-
-            return Unauthorized();
         }
 
         [HttpPost("UsersSignUp")]
@@ -95,7 +93,8 @@ namespace RMS.Controllers
                         record.Password = user.Password;
                         record.Date = user.Date ?? user.Date;
                         record.Status = user.Status;
-                    };
+                    }
+                    ;
 
                     _context.SaveChanges();
 

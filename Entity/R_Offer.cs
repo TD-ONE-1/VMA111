@@ -21,6 +21,8 @@ public partial class R_Offer
 
     public bool IsActive { get; set; }
 
+    public virtual ICollection<R_Menu> R_Menus { get; set; } = new List<R_Menu>();
+
     public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 
     public virtual Restaurant Restaurant { get; set; } = null!;
