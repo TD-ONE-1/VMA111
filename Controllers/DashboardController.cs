@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RMS.Common.Helper;
 using RMS.Entity;
@@ -6,6 +7,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DashboardController : ControllerBase
@@ -36,6 +38,19 @@ namespace RMS.Controllers
                 ConfirmReservationCount = data?.Confirmed ?? 0,
                 PendingReservationCount = data?.Pending ?? 0
             };
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetReservationDateByUser")]
+        public IActionResult GetReservationDateByUser(int UserId)
+        {
+            var model = _context.ReservationRequests.Where(x => x.UserId == UserId)
+             .Select(x => new ReservationRequestModel
+             {
+                 Id = x.Id,
+                 ReservationDate = x.ReservationDate
+             }).ToList();
 
             return Ok(model);
         }

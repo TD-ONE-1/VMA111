@@ -8,7 +8,7 @@ using System.IO;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller

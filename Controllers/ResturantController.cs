@@ -10,7 +10,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ResturantController : ControllerBase
@@ -543,6 +543,72 @@ namespace RMS.Controllers
                 _context.Reviews.Add(MapperHelper.Map<Review, ReviewModel>(model));
                 _context.SaveChanges();
                 return Ok(new { success = true, message = "Saved Successfully!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetMenuByRestaurantIdandOfferId")]
+        public IActionResult GetMenuByRestaurantIdandOfferId(int RestaurantId, int OfferId)
+        {
+            List<R_MenuModel> model = new List<R_MenuModel>();
+            model = MapperHelper.MapList<R_MenuModel, R_Menu>(_context.R_Menus.Where(p => p.RestaurantId == RestaurantId
+                                            && p.OfferId == OfferId).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpPost("SaveMenu")]
+        public IActionResult SaveMenu([FromBody] R_MenuModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.ItemName))
+                    return Ok(new { success = false, message = "Item Name is required!" });
+
+                if (model.RestaurantId == 0)
+                    return Ok(new { success = false, message = "Resturant is required!" });
+
+                var dupCheck = _context.R_Menus.Where(x => x.ItemName.ToLower() == model.ItemName.ToLower() && x.IsActive == true &&
+                            x.OfferId == model.OfferId && x.RestaurantId == model.RestaurantId).FirstOrDefault();
+                if (dupCheck != null)
+                {
+                    return Ok(new { success = false, message = "This Item is already present. Please add a different one!" });
+                }
+                if (model.Id == 0)
+                {
+                    _context.R_Menus.Add(MapperHelper.Map<R_Menu, R_MenuModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.R_Menus.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.RestaurantId = model.RestaurantId;
+                        record.OfferId = model.OfferId;
+                        record.ItemName = model.ItemName;
+                        record.ItemDetail = model.ItemDetail;
+                        record.Price = model.Price;
+                        record.DiscountedPrice = model.DiscountedPrice;
+                        record.ItemImage = model.ItemImage;
+                        record.IsActive = model.IsActive;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
             }
             catch (Exception)
             {
