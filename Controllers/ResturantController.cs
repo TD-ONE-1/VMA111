@@ -303,11 +303,11 @@ namespace RMS.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(model.OfferType) || model.RestaurantId == 0)
+                if (string.IsNullOrEmpty(model.Offer) || model.RestaurantId == 0)
                 {
                     return Ok("Offer Type or Resturant is required!");
                 }
-                var dupCheck = _context.R_Offers.Where(x => x.OfferType.ToLower() == model.OfferType.ToLower() && x.RestaurantId == model.RestaurantId && x.IsActive == model.IsActive).FirstOrDefault();
+                var dupCheck = _context.R_Offers.Where(x => x.Offer.ToLower() == model.Offer.ToLower() && x.RestaurantId == model.RestaurantId && x.IsActive == model.IsActive).FirstOrDefault();
                 if (dupCheck != null)
                 {
                     return Ok(new { success = false, message = "This Resturant Offer is already present. Please add a different one!" });
@@ -330,7 +330,8 @@ namespace RMS.Controllers
                     if (record != null)
                     {
                         record.RestaurantId = model.RestaurantId;
-                        record.OfferType = model.OfferType;
+                        record.Offer = model.Offer;
+                        record.BranchId = model.BranchId;
                         record.StartDate = model.StartDate;
                         record.EndDate = model.EndDate;
                         record.StartTime = model.StartTime;

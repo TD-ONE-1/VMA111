@@ -18,8 +18,55 @@ namespace RMS.Controllers
             _context = context;
         }
 
-        [HttpGet, Route("GetReservationCountByUser")]
-        public IActionResult GetReservationCountByUser(int UserId)
+        [HttpGet, Route("GetReservationCount")]
+        public IActionResult GetReservationCount()
+        {
+            var data = _context.ReservationRequests
+           .GroupBy(x => 1)
+           .Select(g => new
+           {
+               Total = g.Count(),
+               Confirmed = g.Count(x => x.Status == true),
+               Pending = g.Count(x => x.Status == false)
+           })
+            .FirstOrDefault();
+
+            DashboardModel model = new DashboardModel
+            {
+                TotalReservationCount = data?.Total ?? 0,
+                ConfirmReservationCount = data?.Confirmed ?? 0,
+                PendingReservationCount = data?.Pending ?? 0
+            };
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetReservationCountByRestaurantId")]
+        public IActionResult GetReservationCountByRestaurantId(int RestaurantId)
+        {
+            var data = _context.ReservationRequests
+           .Where(x => x.RestaurantId == RestaurantId)
+           .GroupBy(x => 1)
+           .Select(g => new
+           {
+               Total = g.Count(),
+               Confirmed = g.Count(x => x.Status == true),
+               Pending = g.Count(x => x.Status == false)
+           })
+            .FirstOrDefault();
+
+            DashboardModel model = new DashboardModel
+            {
+                TotalReservationCount = data?.Total ?? 0,
+                ConfirmReservationCount = data?.Confirmed ?? 0,
+                PendingReservationCount = data?.Pending ?? 0
+            };
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetReservationCountByUserId")]
+        public IActionResult GetReservationCountByUserId(int UserId)
         {
             var data = _context.ReservationRequests
            .Where(x => x.UserId == UserId)
@@ -42,10 +89,36 @@ namespace RMS.Controllers
             return Ok(model);
         }
 
-        [HttpGet, Route("GetReservationDateByUser")]
-        public IActionResult GetReservationDateByUser(int UserId)
+        [HttpGet, Route("GetReservationDateByRestaurantIdandStatus")]
+        public IActionResult GetReservationDateByRestaurantIdandStatus(int RestaurantId, bool Status)
         {
-            var model = _context.ReservationRequests.Where(x => x.UserId == UserId)
+            var model = _context.ReservationRequests.Where(x => x.UserId == RestaurantId && x.Status == Status)
+             .Select(x => new ReservationRequestModel
+             {
+                 Id = x.Id,
+                 ReservationDate = x.ReservationDate
+             }).ToList();
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetReservationDatesByStatus")]
+        public IActionResult GetReservationDatesByStatus(bool Status)
+        {
+            var model = _context.ReservationRequests.Where(x => x.Status == Status)
+             .Select(x => new ReservationRequestModel
+             {
+                 Id = x.Id,
+                 ReservationDate = x.ReservationDate
+             }).ToList();
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetReservationDateByUserandStatus")]
+        public IActionResult GetReservationDateByUser(int UserId, bool Status)
+        {
+            var model = _context.ReservationRequests.Where(x => x.UserId == UserId && x.Status == Status)
              .Select(x => new ReservationRequestModel
              {
                  Id = x.Id,

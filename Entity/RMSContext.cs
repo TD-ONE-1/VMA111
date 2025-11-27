@@ -106,11 +106,16 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.EndDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.EndTime).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
-            entity.Property(e => e.OfferType)
+            entity.Property(e => e.Offer)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.StartDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.StartTime).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.R_Offers)
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_R_Offers_R_Branches");
 
             entity.HasOne(d => d.Restaurant).WithMany(p => p.R_Offers)
                 .HasForeignKey(d => d.RestaurantId)
