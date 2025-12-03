@@ -33,8 +33,34 @@
   },
   {
     "ContainingType": "RMS.Controllers.DashboardController",
-    "Method": "GetResturants",
-    "RelativePath": "api/Dashboard/GetReservationCountByUser",
+    "Method": "GetReservationCount",
+    "RelativePath": "api/Dashboard/GetReservationCount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetReservationCountByRestaurantId",
+    "RelativePath": "api/Dashboard/GetReservationCountByRestaurantId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetReservationCountByUserId",
+    "RelativePath": "api/Dashboard/GetReservationCountByUserId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -43,6 +69,80 @@
         "Name": "UserId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetReservationDateByRestaurantIdandStatus",
+    "RelativePath": "api/Dashboard/GetReservationDateByRestaurantIdandStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetReservationDateByUser",
+    "RelativePath": "api/Dashboard/GetReservationDateByUserandStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetReservationDatesByStatus",
+    "RelativePath": "api/Dashboard/GetReservationDatesByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.EmailController",
+    "Method": "SendEmail",
+    "RelativePath": "api/Email/SendEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.EmailRequestModel",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -73,6 +173,27 @@
     "Parameters": [
       {
         "Name": "ReservationRequestId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetMenuByRestaurantIdandOfferId",
+    "RelativePath": "api/Resturant/GetMenuByRestaurantIdandOfferId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OfferId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -272,6 +393,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveMenu",
+    "RelativePath": "api/Resturant/SaveMenu",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_MenuModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "SaveR_BookingType",
     "RelativePath": "api/Resturant/SaveR_BookingType",
     "HttpMethod": "POST",
@@ -401,6 +538,16 @@
     "ContainingType": "RMS.Controllers.UserController",
     "Method": "GetSignUpRequest",
     "RelativePath": "api/User/GetSignUpRequest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.UserController",
+    "Method": "GetUsers",
+    "RelativePath": "api/User/GetUsers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

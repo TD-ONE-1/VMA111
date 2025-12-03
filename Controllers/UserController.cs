@@ -8,7 +8,7 @@ using System.IO;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -21,7 +21,16 @@ namespace RMS.Controllers
             _context = context;
             _jWTManager = jWTManagerRepository;
             Configuration = configuration;
-        }        
+        }
+
+        [HttpGet, Route("GetUsers")]
+        public IActionResult GetUsers()
+        {
+            List<AccountModel> model = new List<AccountModel>();
+            model = MapperHelper.MapList<AccountModel, tblAuthentication>(_context.tblAuthentications.ToList());
+
+            return Ok(model);
+        }
 
         [HttpGet, Route("GetUserType")]
         public IActionResult GetUserType()

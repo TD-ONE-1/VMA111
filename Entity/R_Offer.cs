@@ -9,7 +9,9 @@ public partial class R_Offer
 
     public int RestaurantId { get; set; }
 
-    public string OfferType { get; set; } = null!;
+    public int BranchId { get; set; }
+
+    public string Offer { get; set; } = null!;
 
     public DateOnly StartDate { get; set; }
 
@@ -20,6 +22,8 @@ public partial class R_Offer
     public TimeOnly EndTime { get; set; }
 
     public bool IsActive { get; set; }
+
+    public virtual R_Branch Branch { get; set; } = null!;
 
     public virtual ICollection<R_Menu> R_Menus { get; set; } = new List<R_Menu>();
 

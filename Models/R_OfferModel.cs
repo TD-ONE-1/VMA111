@@ -6,7 +6,9 @@
 
         public int RestaurantId { get; set; }
 
-        public string OfferType { get; set; } = null!;
+        public int BranchId { get; set; }
+
+        public string Offer { get; set; } = null!;
 
         public DateOnly StartDate { get; set; }
 
