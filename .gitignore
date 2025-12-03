@@ -4,3 +4,12 @@
 
 /.vs/RMS
 /bin/Debug/net8.0
+/bin/Release/net8.0
+/Publish
+/Properties/PublishProfiles
+/obj/Release/net8.0
+/obj/Debug/net8.0
+/obj/project.assets.json
+/obj/project.nuget.cache
+/obj/RMS.csproj.nuget.dgspec.json
+/obj/RMS.csproj.nuget.g.props
