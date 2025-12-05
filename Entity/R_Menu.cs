@@ -24,6 +24,4 @@ public partial class R_Menu
     public bool IsActive { get; set; }
 
     public virtual R_Offer Offer { get; set; } = null!;
-
-    public virtual Restaurant Restaurant { get; set; } = null!;
 }

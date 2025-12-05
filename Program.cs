@@ -2,12 +2,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using RMS.Common.Helper;
 using RMS.Entity;
 using RMS.Repository.Implementation;
 using RMS.Repository.Interface;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<FileService>();
 
 builder.Services.AddCors(options =>
 {

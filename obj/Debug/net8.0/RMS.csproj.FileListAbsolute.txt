@@ -354,6 +354,7 @@ D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.AssemblyInfo.cs
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.csproj.CoreCompileInputs.cache
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.MvcApplicationPartsAssemblyInfo.cs
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.MvcApplicationPartsAssemblyInfo.cache
+D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.sourcelink.json
 D:\FL\RMS\VMA111\obj\Debug\net8.0\scopedcss\bundle\RMS.styles.css
 D:\FL\RMS\VMA111\obj\Debug\net8.0\staticwebassets.build.json
 D:\FL\RMS\VMA111\obj\Debug\net8.0\staticwebassets.build.json.cache
@@ -366,4 +367,3 @@ D:\FL\RMS\VMA111\obj\Debug\net8.0\refint\RMS.dll
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.pdb
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.genruntimeconfig.cache
 D:\FL\RMS\VMA111\obj\Debug\net8.0\ref\RMS.dll
-D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.sourcelink.json

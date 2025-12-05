@@ -1,4 +1,6 @@
-﻿namespace RMS.Models
+﻿using RMS.Entity;
+
+namespace RMS.Models
 {
     public class R_OfferModel
     {
@@ -10,14 +12,8 @@
 
         public string Offer { get; set; } = null!;
 
-        public DateOnly StartDate { get; set; }
-
-        public DateOnly EndDate { get; set; }
-
-        public TimeOnly StartTime { get; set; }
-
-        public TimeOnly EndTime { get; set; }
-
         public bool IsActive { get; set; }
+
+        public virtual R_Branch Branch { get; set; } = null!;
     }
 }

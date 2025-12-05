@@ -16,9 +16,11 @@ namespace RMS.Controllers
     public class ResturantController : ControllerBase
     {
         private readonly RMSContext _context;
-        public ResturantController(RMSContext context)
+        private readonly IWebHostEnvironment _env;
+        public ResturantController(RMSContext context, IWebHostEnvironment env  )
         {
             _context = context;
+            _env = env;
         }
 
         [HttpPost("SaveResturant")]
@@ -29,7 +31,7 @@ namespace RMS.Controllers
                 if (string.IsNullOrEmpty(model.Name))
                     return Ok(new { success = false, message = "Name is required!" });
 
-                var dupCheck = _context.Restaurants.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Status == true).FirstOrDefault();
+                var dupCheck = _context.Restaurants.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.IsActive == true).FirstOrDefault();
                 if (dupCheck != null)
                 {
                     return Ok(new { success = false, message = "This Resturant is already present. Please add a different one!" });
@@ -52,10 +54,10 @@ namespace RMS.Controllers
                     if (record != null)
                     {
                         record.Name = model.Name;
-                        record.Location = model.Location;
-                        record.OpeningTime = model.OpeningTime;
-                        record.ClosingTime = model.ClosingTime;
-                        record.Status = model.Status;
+                        record.About_Description = model.About_Description;
+                        record.CuisineType = model.CuisineType;
+                        record.PriceRange = model.PriceRange;
+                        record.IsActive = model.IsActive;
                     }
                     ;
 
@@ -75,7 +77,7 @@ namespace RMS.Controllers
         public IActionResult GetResturants()
         {
             List<ResturantModel> model = new List<ResturantModel>();
-            model = MapperHelper.MapList<ResturantModel, Restaurant>(_context.Restaurants.Where(p => p.Status == true).ToList());
+            model = MapperHelper.MapList<ResturantModel, Restaurant>(_context.Restaurants.Where(p => p.IsActive == true).ToList());
 
             return Ok(model);
         }
@@ -189,8 +191,10 @@ namespace RMS.Controllers
                     {
                         record.Name = model.Name;
                         record.RestaurantId = model.RestaurantId;
-                        record.Location = model.Location;
-                        record.Capacity = model.Capacity;
+                        record.Name = model.Name;
+                        record.Address = model.Address;
+                        record.PhoneNumber = model.PhoneNumber;
+                        record.Email = model.Email;
                         record.IsActive = model.IsActive;
                     }
                     ;
@@ -332,10 +336,6 @@ namespace RMS.Controllers
                         record.RestaurantId = model.RestaurantId;
                         record.Offer = model.Offer;
                         record.BranchId = model.BranchId;
-                        record.StartDate = model.StartDate;
-                        record.EndDate = model.EndDate;
-                        record.StartTime = model.StartTime;
-                        record.EndTime = model.EndTime;
                         record.IsActive = model.IsActive;
                     }
                     ;
@@ -407,8 +407,11 @@ namespace RMS.Controllers
                     {
                         record.RestaurantId = model.RestaurantId;
                         record.BranchId = model.BranchId;
+                        record.Day = model.Day;
                         record.StartTime = model.StartTime;
                         record.EndTime = model.EndTime;
+                        record.Duration = model.Duration;
+                        record.Maximum_Capacity = model.Maximum_Capacity;
                         record.IsActive = model.IsActive;
                     }
                     ;
@@ -616,5 +619,90 @@ namespace RMS.Controllers
                 return Ok("Something went wrong!");
             }
         }
+
+        [HttpPost("SaveR_Media")]
+        public IActionResult SaveR_Media([FromForm] RestaurantImageUploadModel model)
+        {
+            try
+            {
+                if (model.RestaurantId == 0)
+                    return Ok(new { success = false, message = "RestaurantId is required!" });
+
+                var fileService = new FileService(_env);
+
+                if (model.Logo != null)
+                {
+                    var old = _context.R_Images
+                                      .Where(x => x.RestaurantId == model.RestaurantId && x.ImageType == "Logo")
+                                      .ToList();
+                    _context.R_Images.RemoveRange(old);
+
+                    _context.R_Images.Add(new R_Image
+                    {
+                        RestaurantId = model.RestaurantId,
+                        ImageType = "Logo",
+                        ImagePath = fileService.Save(model.Logo, "uploads/logo")
+                    });
+                }
+
+                if (model.Banner != null)
+                {
+                    var old = _context.R_Images
+                                      .Where(x => x.RestaurantId == model.RestaurantId && x.ImageType == "Banner")
+                                      .ToList();
+                    _context.R_Images.RemoveRange(old);
+
+                    _context.R_Images.Add(new R_Image
+                    {
+                        RestaurantId = model.RestaurantId,
+                        ImageType = "Banner",
+                        ImagePath = fileService.Save(model.Banner, "uploads/banner")
+                    });
+                }
+
+                if (model.Gallery != null)
+                {
+                    foreach (var img in model.Gallery)
+                    {
+                        _context.R_Images.Add(new R_Image
+                        {
+                            RestaurantId = model.RestaurantId,
+                            ImageType = "Gallery",
+                            ImagePath = fileService.Save(img, "uploads/gallery")
+                        });
+                    }
+                }
+
+                _context.SaveChanges();
+
+                return Ok(new { success = true, message = "Images saved successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet("GetR_MediaByRestaurantId")]
+        public IActionResult GetR_MediaByRestaurantId(int RestaurantId)
+        {
+            var images = _context.R_Images
+                                 .Where(x => x.RestaurantId == RestaurantId)
+                                 .ToList();
+
+            return Ok(new
+            {
+                success = true,
+                data = new
+                {
+                    Logo = images.FirstOrDefault(x => x.ImageType == "Logo")?.ImagePath,
+                    Banner = images.FirstOrDefault(x => x.ImageType == "Banner")?.ImagePath,
+                    Gallery = images.Where(x => x.ImageType == "Gallery")
+                                    .Select(x => x.ImagePath)
+                                    .ToList()
+                }
+            });
+        }
+
     }
 }

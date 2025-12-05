@@ -35,7 +35,5 @@ public partial class ReservationRequest
 
     public virtual R_Offer Offer { get; set; } = null!;
 
-    public virtual Restaurant Restaurant { get; set; } = null!;
-
     public virtual R_Slot Slot { get; set; } = null!;
 }

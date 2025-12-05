@@ -11,9 +11,11 @@ public partial class R_Branch
 
     public string Name { get; set; } = null!;
 
-    public string Location { get; set; } = null!;
+    public string Address { get; set; } = null!;
 
-    public int Capacity { get; set; }
+    public string PhoneNumber { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
 
     public bool IsActive { get; set; }
 

@@ -6,12 +6,12 @@
 
         public string Name { get; set; } = null!;
 
-        public string Location { get; set; } = null!;
+        public string About_Description { get; set; } = null!;
 
-        public TimeOnly OpeningTime { get; set; }
+        public string CuisineType { get; set; } = null!;
 
-        public TimeOnly ClosingTime { get; set; }
+        public string PriceRange { get; set; } = null!;
 
-        public bool Status { get; set; }
+        public bool IsActive { get; set; }
     }
 }

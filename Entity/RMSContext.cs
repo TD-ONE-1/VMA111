@@ -21,6 +21,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<R_Event> R_Events { get; set; }
 
+    public virtual DbSet<R_Image> R_Images { get; set; }
+
     public virtual DbSet<R_Menu> R_Menus { get; set; }
 
     public virtual DbSet<R_Offer> R_Offers { get; set; }
@@ -62,10 +64,12 @@ public partial class RMSContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__RestaurantBranches");
 
-            entity.Property(e => e.Location).IsUnicode(false);
+            entity.Property(e => e.Address).IsUnicode(false);
+            entity.Property(e => e.Email).IsUnicode(false);
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.PhoneNumber).IsUnicode(false);
         });
 
         modelBuilder.Entity<R_Event>(entity =>
@@ -74,6 +78,19 @@ public partial class RMSContext : DbContext
 
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<R_Image>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__R_Images__3214EC07A48391A7");
+
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ImagePath).HasMaxLength(300);
+            entity.Property(e => e.ImageType)
+                .HasMaxLength(20)
                 .IsUnicode(false);
         });
 
@@ -92,40 +109,30 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.OfferId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_R_Menu_R_Offers");
-
-            entity.HasOne(d => d.Restaurant).WithMany(p => p.R_Menus)
-                .HasForeignKey(d => d.RestaurantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_R_Menu_Restaurant");
         });
 
         modelBuilder.Entity<R_Offer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Restaura__3214EC07F22961E3");
 
-            entity.Property(e => e.EndDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.EndTime).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.Offer)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.StartDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.StartTime).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Branch).WithMany(p => p.R_Offers)
                 .HasForeignKey(d => d.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_R_Offers_R_Branches");
-
-            entity.HasOne(d => d.Restaurant).WithMany(p => p.R_Offers)
-                .HasForeignKey(d => d.RestaurantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_R_Offers_Restaurant");
         });
 
         modelBuilder.Entity<R_Slot>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__R_Slots");
+
+            entity.Property(e => e.Day)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
         });
 
         modelBuilder.Entity<ReservationRequest>(entity =>
@@ -154,11 +161,6 @@ public partial class RMSContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReservationMaster_R_Offers");
 
-            entity.HasOne(d => d.Restaurant).WithMany(p => p.ReservationRequests)
-                .HasForeignKey(d => d.RestaurantId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ReservationMaster_Restaurant");
-
             entity.HasOne(d => d.Slot).WithMany(p => p.ReservationRequests)
                 .HasForeignKey(d => d.SlotId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -183,10 +185,10 @@ public partial class RMSContext : DbContext
 
             entity.ToTable("Restaurant");
 
-            entity.Property(e => e.ClosingTime).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Location).HasDefaultValue("");
+            entity.Property(e => e.About_Description).HasDefaultValue("");
+            entity.Property(e => e.CuisineType).HasDefaultValue("");
             entity.Property(e => e.Name).HasDefaultValue("");
-            entity.Property(e => e.OpeningTime).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.PriceRange).HasDefaultValue("");
         });
 
         modelBuilder.Entity<Review>(entity =>
