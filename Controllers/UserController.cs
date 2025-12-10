@@ -40,43 +40,5 @@ namespace RMS.Controllers
 
             return Ok(model);
         }
-
-        [HttpGet, Route("GetSignUpRequest")]
-        public IActionResult GetSignUpRequest()
-        {
-            List<SignUpUsersModel> model = new List<SignUpUsersModel>();
-            model = MapperHelper.MapList<SignUpUsersModel, SignUpUser>(_context.SignUpUsers.Where(u => u.Status == false).ToList());
-
-            return Ok(model);
-        }
-
-        [HttpPost, Route("ConfirmSignUp")]
-        public IActionResult ConfirmSignUp(string UserCode, int userId, int userTypeId, string ConfirmedBy)
-        {
-            if (userId == 0 || userTypeId == 0)
-                return Ok("User and User Type is required!");
-
-            var user = _context.SignUpUsers.FirstOrDefault(u => u.Id == userId);
-
-            var newCont = new tblAuthentication
-            {
-                UserCode = string.IsNullOrEmpty(UserCode) ? user.UserName : UserCode,
-                UserId = userId,
-                username = user.UserName,
-                Password = user.Password,
-                UserTypeId = userTypeId,
-                isActive = true,
-                CreationDate = DateTime.Now,
-                CreatedBy = ConfirmedBy
-            };
-
-            _context.tblAuthentications.Add(newCont);
-
-            user.Status = true;
-
-            _context.SaveChanges();
-
-            return Ok(new { success = true, message = "Signed Up successfully" });
-        }
     }
 }

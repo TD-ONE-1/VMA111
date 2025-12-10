@@ -23,8 +23,7 @@ namespace RMS.Repository.Implementation
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                     new Claim(ClaimTypes.Name, users.username),
-                     new Claim("UserCode", users.UserCode),
+                     new Claim(ClaimTypes.Name, users.UserName),
                      new Claim("Password", users.Password)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(tokenTimeOut),

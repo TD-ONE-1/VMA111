@@ -25,7 +25,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "RMS.Models.SignUpUsersModel",
+        "Type": "RMS.Models.AccountModel",
         "IsRequired": true
       }
     ],
@@ -548,47 +548,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.UserController",
-    "Method": "ConfirmSignUp",
-    "RelativePath": "api/User/ConfirmSignUp",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "UserCode",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "userTypeId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "ConfirmedBy",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.UserController",
-    "Method": "GetSignUpRequest",
-    "RelativePath": "api/User/GetSignUpRequest",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

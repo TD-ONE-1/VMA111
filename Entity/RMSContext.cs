@@ -37,8 +37,6 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Review> Reviews { get; set; }
 
-    public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
-
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
@@ -200,12 +198,6 @@ public partial class RMSContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<SignUpUser>(entity =>
-        {
-            entity.Property(e => e.Date).HasColumnType("datetime");
-            entity.Property(e => e.Password).HasMaxLength(500);
-        });
-
         modelBuilder.Entity<UserType>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__UserTypes");
@@ -226,12 +218,6 @@ public partial class RMSContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(500);
-            entity.Property(e => e.UserCode).HasMaxLength(20);
-
-            entity.HasOne(d => d.User).WithMany(p => p.tblAuthentications)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tblAuthentication_SignUpUsers");
 
             entity.HasOne(d => d.UserType).WithMany(p => p.tblAuthentications)
                 .HasForeignKey(d => d.UserTypeId)

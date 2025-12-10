@@ -31,11 +31,11 @@ namespace RMS.Controllers
             {
                 TokenModel model = new TokenModel();
 
-                if (login.username == null || login.Password == null)
+                if (login.UserName == null || login.Password == null)
                 {
                     return Ok("Invalid UserName or Password!");
                 }
-                var user = _context.tblAuthentications.Where(x => x.isActive == true && (x.username == login.username || x.UserCode == login.username) && x.Password == login.Password).FirstOrDefault();
+                var user = _context.tblAuthentications.Where(x => x.isActive == true && x.UserName == login.UserName && x.Password == login.Password).FirstOrDefault();
                 if (user == null)
                 {
                     return Ok("Invalid UserName or Password!");
@@ -53,7 +53,7 @@ namespace RMS.Controllers
         }
 
         [HttpPost("UsersSignUp")]
-        public IActionResult UsersSignUp([FromBody] SignUpUsersModel user)
+        public IActionResult UsersSignUp([FromBody] AccountModel user)
         {
             try
             {
@@ -63,13 +63,13 @@ namespace RMS.Controllers
                 }
                 if (user.Id == 0)
                 {
-                    var dupCheck = _context.SignUpUsers.Where(x => x.UserName == user.UserName).FirstOrDefault();
+                    var dupCheck = _context.tblAuthentications.Where(x => x.UserName == user.UserName).FirstOrDefault();
                     if (dupCheck != null)
                     {
                         return Ok(new { success = false, message = "This User Name is already present. Please add a different one!" });
                     }
 
-                    _context.SignUpUsers.Add(MapperHelper.Map<SignUpUser, SignUpUsersModel>(user));
+                    _context.tblAuthentications.Add(MapperHelper.Map<tblAuthentication, AccountModel>(user));
 
                     _context.SaveChanges();
 
@@ -77,7 +77,7 @@ namespace RMS.Controllers
                 }
                 if (user.Id != 0)
                 {
-                    var record = _context.SignUpUsers.FirstOrDefault(p => p.Id == user.Id);
+                    var record = _context.tblAuthentications.FirstOrDefault(p => p.Id == user.Id);
 
                     if (record == null)
                         return Ok(new { success = true, message = "Not Found!" });
@@ -91,8 +91,8 @@ namespace RMS.Controllers
                     {
                         record.UserName = user.UserName;
                         record.Password = user.Password;
-                        record.Date = user.Date ?? user.Date;
-                        record.Status = user.Status;
+                        record.CreationDate = user.CreationDate;
+                        record.isActive = user.isActive;
                     }
                     ;
 
