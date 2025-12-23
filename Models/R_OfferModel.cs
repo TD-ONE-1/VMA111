@@ -13,7 +13,5 @@ namespace RMS.Models
         public string Offer { get; set; } = null!;
 
         public bool IsActive { get; set; }
-
-        public virtual R_Branch Branch { get; set; } = null!;
     }
 }

@@ -872,6 +872,115 @@
         }
       }
     },
+    "/api/Resturant/GetReservations/{id}": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Service/SaveServiceMaster": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Service/GetServiceMaster": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Service/SavePackage": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackageModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackageModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PackageModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Service/GetPackages": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/GetUsers": {
       "get": {
         "tags": [
@@ -950,34 +1059,39 @@
         },
         "additionalProperties": false
       },
-      "R_BookingType": {
+      "PackageModel": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "branchId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
+          "pkgName": {
             "type": "string",
             "nullable": true
           },
+          "minCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxCapacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "pkgServiceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
           "isActive": {
             "type": "boolean"
-          },
-          "reservationRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReservationRequest"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1003,53 +1117,6 @@
           },
           "isActive": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "R_Branch": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "r_Offers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/R_Offer"
-            },
-            "nullable": true
-          },
-          "reservationRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReservationRequest"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1112,51 +1179,6 @@
         },
         "additionalProperties": false
       },
-      "R_Menu": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "offerId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemName": {
-            "type": "string",
-            "nullable": true
-          },
-          "itemDetail": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "discountedPrice": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemImage": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "offer": {
-            "$ref": "#/components/schemas/R_Offer"
-          }
-        },
-        "additionalProperties": false
-      },
       "R_MenuModel": {
         "type": "object",
         "properties": {
@@ -1199,48 +1221,6 @@
         },
         "additionalProperties": false
       },
-      "R_Offer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "branchId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "offer": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "branch": {
-            "$ref": "#/components/schemas/R_Branch"
-          },
-          "r_Menus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/R_Menu"
-            },
-            "nullable": true
-          },
-          "reservationRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReservationRequest"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "R_OfferModel": {
         "type": "object",
         "properties": {
@@ -1262,57 +1242,6 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "branch": {
-            "$ref": "#/components/schemas/R_Branch"
-          }
-        },
-        "additionalProperties": false
-      },
-      "R_Slot": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "branchId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "day": {
-            "type": "string",
-            "nullable": true
-          },
-          "startTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "maximum_Capacity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "reservationRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReservationRequest"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1332,6 +1261,11 @@
             "type": "integer",
             "format": "int32"
           },
+          "offerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "day": {
             "type": "string",
             "nullable": true
@@ -1345,8 +1279,8 @@
             "format": "time"
           },
           "duration": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "maximum_Capacity": {
             "type": "integer",
@@ -1354,71 +1288,21 @@
           },
           "isActive": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ReservationRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reservationType": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reservationDate": {
+          "breakStartTime": {
             "type": "string",
-            "format": "date-time"
-          },
-          "restaurantId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "branchId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "offerId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "bookingTypeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "slotId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "members": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "remarks": {
-            "type": "string",
+            "format": "time",
             "nullable": true
           },
-          "status": {
-            "type": "boolean"
+          "breakEndTime": {
+            "type": "string",
+            "format": "time",
+            "nullable": true
           },
-          "bookingType": {
-            "$ref": "#/components/schemas/R_BookingType"
-          },
-          "branch": {
-            "$ref": "#/components/schemas/R_Branch"
-          },
-          "offer": {
-            "$ref": "#/components/schemas/R_Offer"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/R_Slot"
+          "breakDuration": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1527,6 +1411,27 @@
           "remarks": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceMasterModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

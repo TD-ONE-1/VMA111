@@ -34,6 +34,4 @@ public partial class ReservationRequest
     public virtual R_Branch Branch { get; set; } = null!;
 
     public virtual R_Offer Offer { get; set; } = null!;
-
-    public virtual R_Slot Slot { get; set; } = null!;
 }

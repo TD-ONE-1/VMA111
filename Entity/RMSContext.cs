@@ -15,6 +15,12 @@ public partial class RMSContext : DbContext
     {
     }
 
+    public virtual DbSet<EventQuery> EventQueries { get; set; }
+
+    public virtual DbSet<Package> Packages { get; set; }
+
+    public virtual DbSet<PackageService> PackageServices { get; set; }
+
     public virtual DbSet<R_BookingType> R_BookingTypes { get; set; }
 
     public virtual DbSet<R_Branch> R_Branches { get; set; }
@@ -37,6 +43,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Review> Reviews { get; set; }
 
+    public virtual DbSet<ServiceMaster> ServiceMasters { get; set; }
+
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
@@ -47,6 +55,54 @@ public partial class RMSContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<EventQuery>(entity =>
+        {
+            entity.ToTable("EventQuery");
+
+            entity.Property(e => e.BookingDate).HasColumnType("datetime");
+            entity.Property(e => e.CellNumber).HasMaxLength(50);
+            entity.Property(e => e.ContactPersonName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.EnquiryDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.EventType).WithMany(p => p.EventQueries)
+                .HasForeignKey(d => d.EventTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EventQuery_R_Events");
+
+            entity.HasOne(d => d.ServiceType).WithMany(p => p.EventQueries)
+                .HasForeignKey(d => d.ServiceTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EventQuery_ServiceMaster");
+        });
+
+        modelBuilder.Entity<Package>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.PkgName)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+        });
+
+        modelBuilder.Entity<PackageService>(entity =>
+        {
+            entity.ToTable("PackageService");
+
+            entity.HasOne(d => d.Package).WithMany(p => p.PackageServices)
+                .HasForeignKey(d => d.PackageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PackageService_Packages");
+
+            entity.HasOne(d => d.Service).WithMany(p => p.PackageServices)
+                .HasForeignKey(d => d.ServiceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PackageService_ServiceMaster");
+        });
+
         modelBuilder.Entity<R_BookingType>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__BookingType");
@@ -128,9 +184,11 @@ public partial class RMSContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__R_Slots");
 
+            entity.Property(e => e.BreakDuration).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Day)
                 .HasMaxLength(50)
                 .HasDefaultValue("");
+            entity.Property(e => e.Duration).HasColumnType("decimal(18, 2)");
         });
 
         modelBuilder.Entity<ReservationRequest>(entity =>
@@ -158,11 +216,6 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.OfferId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReservationMaster_R_Offers");
-
-            entity.HasOne(d => d.Slot).WithMany(p => p.ReservationRequests)
-                .HasForeignKey(d => d.SlotId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ReservationMaster_R_Slots");
         });
 
         modelBuilder.Entity<ReservationRequestDetail>(entity =>
@@ -196,6 +249,15 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Remarks)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ServiceMaster>(entity =>
+        {
+            entity.ToTable("ServiceMaster");
+
+            entity.Property(e => e.ServiceName)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
         });
 
         modelBuilder.Entity<UserType>(entity =>

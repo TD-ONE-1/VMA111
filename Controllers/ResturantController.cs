@@ -17,7 +17,7 @@ namespace RMS.Controllers
     {
         private readonly RMSContext _context;
         private readonly IWebHostEnvironment _env;
-        public ResturantController(RMSContext context, IWebHostEnvironment env  )
+        public ResturantController(RMSContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -404,17 +404,20 @@ namespace RMS.Controllers
                         return Ok(new { success = true, message = "Not Found!" });
 
                     if (record != null)
-                    {
+                    {  
                         record.RestaurantId = model.RestaurantId;
                         record.BranchId = model.BranchId;
+                        record.OfferId = model.OfferId;
                         record.Day = model.Day;
                         record.StartTime = model.StartTime;
                         record.EndTime = model.EndTime;
                         record.Duration = model.Duration;
                         record.Maximum_Capacity = model.Maximum_Capacity;
                         record.IsActive = model.IsActive;
-                    }
-                    ;
+                        record.BreakStartTime = model.BreakStartTime;
+                        record.BreakEndTime = model.BreakEndTime;
+                        record.BreakDuration = model.BreakDuration;
+                    };
 
                     _context.SaveChanges();
 
@@ -704,5 +707,113 @@ namespace RMS.Controllers
             });
         }
 
+        [HttpGet, Route("GetReservations/{id:int}")]
+        public IActionResult GetReservations(int id)
+        {
+            var result = (from r in _context.ReservationRequests
+                          join rest in _context.Restaurants
+                              on r.RestaurantId equals rest.Id into restJoin
+                          from rest in restJoin.DefaultIfEmpty()
+
+                          join br in _context.R_Branches
+                              on r.BranchId equals br.Id into brJoin
+                          from br in brJoin.DefaultIfEmpty()
+
+                          join off in _context.R_Offers
+                              on r.OfferId equals off.Id into offJoin
+                          from off in offJoin.DefaultIfEmpty()
+
+                          join bt in _context.R_BookingTypes
+                              on r.BookingTypeId equals bt.Id into btJoin
+                          from bt in btJoin.DefaultIfEmpty()
+
+                          join sl in _context.R_Slots
+                              on r.SlotId equals sl.Id into slJoin
+                          from sl in slJoin.DefaultIfEmpty()
+
+                          where r.Id == id
+                          select new ReservationWithDescriptionModel
+                          {
+                              Id = r.Id,
+                              RestaurantId = r.RestaurantId,
+                              RestaurantDescription = rest.Name,
+                              BranchId = r.BranchId,
+                              BranchDescription = br.Name,
+                              OfferId = r.OfferId,
+                              OfferDescription = off.Offer,
+                              BookingTypeId = r.BookingTypeId,
+                              BookingTypeDescription = bt.Name,
+                              SlotId = r.SlotId,
+                              SlotDescription = "",
+                              BookingDate = r.ReservationDate,
+                              Members = r.Members,
+                              Remarks = r.Remarks,
+                              Status = r.Status,
+                          }).FirstOrDefault();
+
+            if (result == null)
+                return NotFound($"Reservation with ID {id} not found.");
+
+            return Ok(result);
+        }
+
+        [HttpPost("SaveEventQuery")]
+        public IActionResult SaveEventQuery([FromBody] EventQueryModel model)
+        {
+            try
+            {
+                if (model.EventTypeId == 0 || model.ServiceTypeId == 0)
+                    return Ok(new { success = false, message = "Event and Service is required!" });
+
+                if (model.Id == 0)
+                {
+                    _context.EventQueries.Add(MapperHelper.Map<EventQuery, EventQueryModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.EventQueries.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.UserId = model.UserId;
+                        record.ContactPersonName = model.ContactPersonName;
+                        record.CellNumber = model.CellNumber;
+                        record.BookingDate = model.BookingDate;
+                        record.NoOfPeople = model.NoOfPeople;
+                        record.EventTypeId = model.EventTypeId;
+                        record.ServiceTypeId = model.ServiceTypeId;
+                        record.Timing = model.Timing;
+                        record.EnquiryDate = model.EnquiryDate;
+                        record.Status = model.Status;
+                        record.IsActive = model.IsActive;
+                    };
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetEventQuery")]
+        public IActionResult GetEventQuery()
+        {
+            List<EventQueryModel> model = new List<EventQueryModel>();
+            model = MapperHelper.MapList<EventQueryModel, EventQuery>(_context.EventQueries.Where(p => p.IsActive == true).ToList());
+
+            return Ok(model);
+        }
     }
 }

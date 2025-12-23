@@ -373,6 +373,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservations",
+    "RelativePath": "api/Resturant/GetReservations/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "GetResturants",
     "RelativePath": "api/Resturant/GetResturants",
     "HttpMethod": "GET",
@@ -545,6 +561,58 @@
       {
         "Name": "model",
         "Type": "RMS.Models.ResturantModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "GetPackages",
+    "RelativePath": "api/Service/GetPackages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "GetServiceMaster",
+    "RelativePath": "api/Service/GetServiceMaster",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "SavePackage",
+    "RelativePath": "api/Service/SavePackage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.PackageModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "SaveServiceMaster",
+    "RelativePath": "api/Service/SaveServiceMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ServiceMasterModel",
         "IsRequired": true
       }
     ],
