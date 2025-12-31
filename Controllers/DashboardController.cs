@@ -26,8 +26,8 @@ namespace RMS.Controllers
            .Select(g => new
            {
                Total = g.Count(),
-               Confirmed = g.Count(x => x.Status == true),
-               Pending = g.Count(x => x.Status == false)
+               Confirmed = g.Count(x => x.Status == 1),
+               Pending = g.Count(x => x.Status == 0)
            })
             .FirstOrDefault();
 
@@ -50,8 +50,8 @@ namespace RMS.Controllers
            .Select(g => new
            {
                Total = g.Count(),
-               Confirmed = g.Count(x => x.Status == true),
-               Pending = g.Count(x => x.Status == false)
+               Confirmed = g.Count(x => x.Status == 1),
+               Pending = g.Count(x => x.Status == 0)
            })
             .FirstOrDefault();
 
@@ -74,8 +74,8 @@ namespace RMS.Controllers
            .Select(g => new
            {
                Total = g.Count(),
-               Confirmed = g.Count(x => x.Status == true),
-               Pending = g.Count(x => x.Status == false)
+               Confirmed = g.Count(x => x.Status == 1),
+               Pending = g.Count(x => x.Status == 0)
            })
             .FirstOrDefault();
 
@@ -90,7 +90,7 @@ namespace RMS.Controllers
         }
 
         [HttpGet, Route("GetReservationDateByRestaurantIdandStatus")]
-        public IActionResult GetReservationDateByRestaurantIdandStatus(int RestaurantId, bool Status)
+        public IActionResult GetReservationDateByRestaurantIdandStatus(int RestaurantId, int Status)
         {
             var model = _context.ReservationRequests.Where(x => x.UserId == RestaurantId && x.Status == Status)
              .Select(x => new ReservationRequestModel
@@ -103,7 +103,7 @@ namespace RMS.Controllers
         }
 
         [HttpGet, Route("GetReservationDatesByStatus")]
-        public IActionResult GetReservationDatesByStatus(bool Status)
+        public IActionResult GetReservationDatesByStatus(int Status)
         {
             var model = _context.ReservationRequests.Where(x => x.Status == Status)
              .Select(x => new ReservationRequestModel
@@ -116,7 +116,7 @@ namespace RMS.Controllers
         }
 
         [HttpGet, Route("GetReservationDateByUserandStatus")]
-        public IActionResult GetReservationDateByUser(int UserId, bool Status)
+        public IActionResult GetReservationDateByUser(int UserId, int Status)
         {
             var model = _context.ReservationRequests.Where(x => x.UserId == UserId && x.Status == Status)
              .Select(x => new ReservationRequestModel

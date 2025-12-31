@@ -24,6 +24,6 @@
 
         public string Remarks { get; set; } = null!;
 
-        public bool Status { get; set; }
+        public int Status { get; set; }
     }
 }

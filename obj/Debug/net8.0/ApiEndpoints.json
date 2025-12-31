@@ -181,6 +181,16 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEventQuery",
+    "RelativePath": "api/Resturant/GetEventQuery",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "GetMenuByRestaurantIdandOfferId",
     "RelativePath": "api/Resturant/GetMenuByRestaurantIdandOfferId",
     "HttpMethod": "GET",
@@ -425,6 +435,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveEventQuery",
+    "RelativePath": "api/Resturant/SaveEventQuery",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.EventQueryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "SaveMenu",
     "RelativePath": "api/Resturant/SaveMenu",
     "HttpMethod": "POST",
@@ -578,6 +604,16 @@
   },
   {
     "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "GetPackageService",
+    "RelativePath": "api/Service/GetPackageService",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
     "Method": "GetServiceMaster",
     "RelativePath": "api/Service/GetServiceMaster",
     "HttpMethod": "GET",
@@ -597,6 +633,22 @@
       {
         "Name": "model",
         "Type": "RMS.Models.PackageModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ServiceController",
+    "Method": "SavePackageService",
+    "RelativePath": "api/Service/SavePackageService",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.PackageServiceModel",
         "IsRequired": true
       }
     ],

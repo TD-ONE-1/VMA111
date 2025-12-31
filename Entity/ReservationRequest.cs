@@ -27,7 +27,7 @@ public partial class ReservationRequest
 
     public string Remarks { get; set; } = null!;
 
-    public bool Status { get; set; }
+    public int Status { get; set; }
 
     public virtual R_BookingType BookingType { get; set; } = null!;
 
