@@ -33,8 +33,8 @@
   },
   {
     "ContainingType": "RMS.Controllers.DashboardController",
-    "Method": "GetReservationCount",
-    "RelativePath": "api/Dashboard/GetReservationCount",
+    "Method": "GetDashboardCount",
+    "RelativePath": "api/Dashboard/GetDashboardCount",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -88,7 +88,7 @@
       },
       {
         "Name": "Status",
-        "Type": "System.Boolean",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -109,7 +109,7 @@
       },
       {
         "Name": "Status",
-        "Type": "System.Boolean",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -125,10 +125,20 @@
     "Parameters": [
       {
         "Name": "Status",
-        "Type": "System.Boolean",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.DashboardController",
+    "Method": "GetTop10ConfirmedReservation",
+    "RelativePath": "api/Dashboard/GetTop10ConfirmedReservation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

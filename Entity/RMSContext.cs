@@ -49,6 +49,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
 
+    public virtual DbSet<vwReservation> vwReservations { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=RMS;Data Source=IT-DHP-2300718\\MSSQLSERVER01; TrustServerCertificate=True;");
@@ -285,6 +287,26 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.UserTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tblAuthentication_UserTypes");
+        });
+
+        modelBuilder.Entity<vwReservation>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vwReservation");
+
+            entity.Property(e => e.BookingType)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Offer)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Slot)
+                .HasMaxLength(13)
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

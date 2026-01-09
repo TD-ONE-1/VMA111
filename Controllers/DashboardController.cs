@@ -18,24 +18,44 @@ namespace RMS.Controllers
             _context = context;
         }
 
-        [HttpGet, Route("GetReservationCount")]
-        public IActionResult GetReservationCount()
+        [HttpGet, Route("GetDashboardCount")]
+        public IActionResult GetDashboardCount()
         {
-            var data = _context.ReservationRequests
+            var res = _context.ReservationRequests
            .GroupBy(x => 1)
            .Select(g => new
            {
                Total = g.Count(),
+               Cancelled = g.Count(x => x.Status == 2),
                Confirmed = g.Count(x => x.Status == 1),
                Pending = g.Count(x => x.Status == 0)
            })
             .FirstOrDefault();
 
+            var eq = _context.EventQueries
+          .GroupBy(x => 1)
+          .Select(g => new
+          {
+              Total = g.Count(),
+              Cancelled = g.Count(x => x.Status == 2),
+              Confirmed = g.Count(x => x.Status == 1),
+              Pending = g.Count(x => x.Status == 0)
+          })
+           .FirstOrDefault();
+
+            var rev = _context.Reviews.Count();
+
             DashboardModel model = new DashboardModel
             {
-                TotalReservationCount = data?.Total ?? 0,
-                ConfirmReservationCount = data?.Confirmed ?? 0,
-                PendingReservationCount = data?.Pending ?? 0
+                TotalReservationCount = res?.Total ?? 0,
+                CancelledReservationCount = res?.Cancelled ?? 0,
+                ConfirmedReservationCount = res?.Confirmed ?? 0,
+                PendingReservationCount = res?.Pending ?? 0,
+                TotalEventQueryCount = eq?.Total ?? 0,
+                ConfirmedEventQueryCount = eq?.Cancelled ?? 0,
+                PendingEventQueryCount = eq?.Confirmed ?? 0,
+                CancelledEventQueryCount = eq?.Pending ?? 0,
+                ReviewsCount = rev
             };
 
             return Ok(model);
@@ -50,6 +70,7 @@ namespace RMS.Controllers
            .Select(g => new
            {
                Total = g.Count(),
+               Cancelled = g.Count(x => x.Status == 2),
                Confirmed = g.Count(x => x.Status == 1),
                Pending = g.Count(x => x.Status == 0)
            })
@@ -58,7 +79,8 @@ namespace RMS.Controllers
             DashboardModel model = new DashboardModel
             {
                 TotalReservationCount = data?.Total ?? 0,
-                ConfirmReservationCount = data?.Confirmed ?? 0,
+                CancelledReservationCount = data?.Cancelled ?? 0,
+                ConfirmedReservationCount = data?.Confirmed ?? 0,
                 PendingReservationCount = data?.Pending ?? 0
             };
 
@@ -74,6 +96,7 @@ namespace RMS.Controllers
            .Select(g => new
            {
                Total = g.Count(),
+               Cancelled = g.Count(x => x.Status == 2),
                Confirmed = g.Count(x => x.Status == 1),
                Pending = g.Count(x => x.Status == 0)
            })
@@ -82,7 +105,8 @@ namespace RMS.Controllers
             DashboardModel model = new DashboardModel
             {
                 TotalReservationCount = data?.Total ?? 0,
-                ConfirmReservationCount = data?.Confirmed ?? 0,
+                CancelledReservationCount = data?.Cancelled ?? 0,
+                ConfirmedReservationCount = data?.Confirmed ?? 0,
                 PendingReservationCount = data?.Pending ?? 0
             };
 
@@ -124,6 +148,15 @@ namespace RMS.Controllers
                  Id = x.Id,
                  ReservationDate = x.ReservationDate
              }).ToList();
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetTop10ConfirmedReservation")]
+        public IActionResult GetTop10ConfirmedReservation()
+        {
+            List<vwReservationModel> model = new List<vwReservationModel>();
+            model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == 1).OrderByDescending(p => p.id).Take(10).ToList());
 
             return Ok(model);
         }

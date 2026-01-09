@@ -67,7 +67,7 @@
         }
       }
     },
-    "/api/Dashboard/GetReservationCount": {
+    "/api/Dashboard/GetDashboardCount": {
       "get": {
         "tags": [
           "Dashboard"
@@ -141,7 +141,8 @@
             "name": "Status",
             "in": "query",
             "schema": {
-              "type": "boolean"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -162,7 +163,8 @@
             "name": "Status",
             "in": "query",
             "schema": {
-              "type": "boolean"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -191,9 +193,22 @@
             "name": "Status",
             "in": "query",
             "schema": {
-              "type": "boolean"
+              "type": "integer",
+              "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dashboard/GetTop10ConfirmedReservation": {
+      "get": {
+        "tags": [
+          "Dashboard"
         ],
         "responses": {
           "200": {
@@ -1519,7 +1534,8 @@
             "nullable": true
           },
           "status": {
-            "type": "boolean"
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
