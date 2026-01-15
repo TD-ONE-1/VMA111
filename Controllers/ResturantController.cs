@@ -512,6 +512,39 @@ namespace RMS.Controllers
             return Ok(model);
         }
 
+        [HttpPost("ConfirmReservation")]
+        public async Task<IActionResult> ConfirmReservation(string ReservationRequestIds, int StatusType)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(ReservationRequestIds))
+                    return BadRequest("Reservation is required!");
+
+                var ids = ReservationRequestIds
+                    .Split(',')
+                    .Select(id => Convert.ToInt32(id.Trim()))
+                    .ToList();
+
+                var reservations = await _context.ReservationRequests.Where(r => ids.Contains(r.Id)).ToListAsync();
+
+                if (!reservations.Any())
+                    return NotFound("No reservations found.");
+
+                foreach (var reservation in reservations)
+                {
+                    reservation.Status = StatusType;
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Reservations updated successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong: " + ex.Message);
+            }
+        }
+
         [HttpGet, Route("GetReviews")]
         public IActionResult GetReviews()
         {
@@ -734,6 +767,15 @@ namespace RMS.Controllers
                 return NotFound($"Reservation with ID {id} not found.");
 
             return Ok(result);
+        }
+
+        [HttpGet, Route("GetReservationsByStatus")]
+        public IActionResult GetReservationsByStatus(int status)
+        {
+            List<vwReservationModel> model = new List<vwReservationModel>();
+            model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == status).ToList());
+
+            return Ok(model);
         }
 
         [HttpPost("SaveEventQuery")]
