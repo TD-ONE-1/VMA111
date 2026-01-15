@@ -690,7 +690,14 @@
         ],
         "parameters": [
           {
-            "name": "ReservationRequestId",
+            "name": "ReservationRequestIds",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StatusType",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -897,6 +904,28 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Resturant/GetReservationsByStatus": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"

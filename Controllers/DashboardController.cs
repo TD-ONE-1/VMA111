@@ -117,11 +117,8 @@ namespace RMS.Controllers
         public IActionResult GetReservationDateByRestaurantIdandStatus(int RestaurantId, int Status)
         {
             var model = _context.ReservationRequests.Where(x => x.UserId == RestaurantId && x.Status == Status)
-             .Select(x => new ReservationRequestModel
-             {
-                 Id = x.Id,
-                 ReservationDate = x.ReservationDate
-             }).ToList();
+            .Select(x => x.ReservationDate.ToString("yyyy-MM-dd"))
+            .ToList();
 
             return Ok(model);
         }
@@ -129,12 +126,10 @@ namespace RMS.Controllers
         [HttpGet, Route("GetReservationDatesByStatus")]
         public IActionResult GetReservationDatesByStatus(int Status)
         {
-            var model = _context.ReservationRequests.Where(x => x.Status == Status)
-             .Select(x => new ReservationRequestModel
-             {
-                 Id = x.Id,
-                 ReservationDate = x.ReservationDate
-             }).ToList();
+            var model = _context.ReservationRequests
+            .Where(x => x.Status == Status)
+            .Select(x => x.ReservationDate.ToString("yyyy-MM-dd"))
+            .ToList();
 
             return Ok(model);
         }
@@ -143,11 +138,8 @@ namespace RMS.Controllers
         public IActionResult GetReservationDateByUser(int UserId, int Status)
         {
             var model = _context.ReservationRequests.Where(x => x.UserId == UserId && x.Status == Status)
-             .Select(x => new ReservationRequestModel
-             {
-                 Id = x.Id,
-                 ReservationDate = x.ReservationDate
-             }).ToList();
+             .Select(x => x.ReservationDate.ToString("yyyy-MM-dd"))
+             .ToList();
 
             return Ok(model);
         }

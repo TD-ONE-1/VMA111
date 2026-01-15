@@ -512,27 +512,6 @@ namespace RMS.Controllers
             return Ok(model);
         }
 
-        [HttpPost("ConfirmReservation")]
-        public IActionResult ConfirmReservation(int ReservationRequestId)
-        {
-            try
-            {
-                if (ReservationRequestId == 0)
-                    return BadRequest("Reservation is required!");
-
-                var reservation = _context.ReservationRequests.Where(r => r.Id == ReservationRequestId).FirstOrDefault();
-
-                if (reservation == null)
-                    return BadRequest("Reservation not found!");
-
-                return Ok(new { success = true, message = "Reservation confirmed!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Something went wrong: " + ex.Message);
-            }
-        }
-
         [HttpGet, Route("GetReviews")]
         public IActionResult GetReviews()
         {

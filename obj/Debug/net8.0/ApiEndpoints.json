@@ -182,7 +182,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ReservationRequestId",
+        "Name": "ReservationRequestIds",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusType",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -403,6 +408,22 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservationsByStatus",
+    "RelativePath": "api/Resturant/GetReservationsByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
