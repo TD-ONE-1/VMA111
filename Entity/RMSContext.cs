@@ -49,6 +49,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
 
+    public virtual DbSet<vwEventQuery> vwEventQueries { get; set; }
+
     public virtual DbSet<vwReservation> vwReservations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -287,6 +289,25 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.UserTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tblAuthentication_UserTypes");
+        });
+
+        modelBuilder.Entity<vwEventQuery>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vwEventQueries");
+
+            entity.Property(e => e.CellNumber).HasMaxLength(50);
+            entity.Property(e => e.ContactPersonName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.EventType)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.ServiceName).HasMaxLength(50);
+            entity.Property(e => e.Timing)
+                .HasMaxLength(5)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<vwReservation>(entity =>

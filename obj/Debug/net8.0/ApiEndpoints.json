@@ -175,6 +175,27 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "ConfirmEventQueries",
+    "RelativePath": "api/Resturant/ConfirmEventQueries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventQueriesIds",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "ConfirmReservation",
     "RelativePath": "api/Resturant/ConfirmReservation",
     "HttpMethod": "POST",
@@ -202,6 +223,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEventQueryByStatus",
+    "RelativePath": "api/Resturant/GetEventQueryByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

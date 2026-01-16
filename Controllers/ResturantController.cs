@@ -549,7 +549,7 @@ namespace RMS.Controllers
         public IActionResult GetReviews()
         {
             List<ReviewModel> model = new List<ReviewModel>();
-            model = MapperHelper.MapList<ReviewModel, Review>(_context.Reviews.Where(p => p.Id != 0).ToList());
+            model = MapperHelper.MapList<ReviewModel, Review>(_context.Reviews.Where(p => p.Id != 0).OrderByDescending(p => p.Id).ToList());
 
             return Ok(model);
         }
@@ -761,7 +761,7 @@ namespace RMS.Controllers
                               Members = r.Members,
                               Remarks = r.Remarks,
                               Status = r.Status,
-                          }).FirstOrDefault();
+                          }).OrderByDescending(p => p.Id).FirstOrDefault();
 
             if (result == null)
                 return NotFound($"Reservation with ID {id} not found.");
@@ -773,7 +773,7 @@ namespace RMS.Controllers
         public IActionResult GetReservationsByStatus(int status)
         {
             List<vwReservationModel> model = new List<vwReservationModel>();
-            model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == status).ToList());
+            model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
 
             return Ok(model);
         }
@@ -822,7 +822,7 @@ namespace RMS.Controllers
                 }
                 return Ok(new { success = false, message = "No action found!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Ok("Something went wrong!");
             }
@@ -832,7 +832,49 @@ namespace RMS.Controllers
         public IActionResult GetEventQuery()
         {
             List<EventQueryModel> model = new List<EventQueryModel>();
-            model = MapperHelper.MapList<EventQueryModel, EventQuery>(_context.EventQueries.Where(p => p.IsActive == true).ToList());
+            model = MapperHelper.MapList<EventQueryModel, EventQuery>(_context.EventQueries.Where(p => p.IsActive == true).OrderByDescending(p => p.Id).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpPost("ConfirmEventQueries")]
+        public async Task<IActionResult> ConfirmEventQueries(string EventQueriesIds, int StatusType)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(EventQueriesIds))
+                    return BadRequest("Event Query is required!");
+
+                var ids = EventQueriesIds
+                    .Split(',')
+                    .Select(id => Convert.ToInt32(id.Trim()))
+                    .ToList();
+
+                var queries = await _context.EventQueries.Where(r => ids.Contains(r.Id)).ToListAsync();
+
+                if (!queries.Any())
+                    return NotFound("No event query found.");
+
+                foreach (var que in queries)
+                {
+                    que.Status = StatusType;
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Event queries updated successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong: " + ex.Message);
+            }
+        }
+
+        [HttpGet, Route("GetEventQueryByStatus")]
+        public IActionResult GetEventQueryByStatus(int status)
+        {
+            List<vwEventQueryModel> model = new List<vwEventQueryModel>();
+            model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
 
             return Ok(model);
         }

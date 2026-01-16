@@ -982,6 +982,57 @@
         }
       }
     },
+    "/api/Resturant/ConfirmEventQueries": {
+      "post": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "EventQueriesIds",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "StatusType",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Resturant/GetEventQueryByStatus": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Service/SaveServiceMaster": {
       "post": {
         "tags": [

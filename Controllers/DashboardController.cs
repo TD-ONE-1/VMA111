@@ -52,9 +52,9 @@ namespace RMS.Controllers
                 ConfirmedReservationCount = res?.Confirmed ?? 0,
                 PendingReservationCount = res?.Pending ?? 0,
                 TotalEventQueryCount = eq?.Total ?? 0,
-                ConfirmedEventQueryCount = eq?.Cancelled ?? 0,
-                PendingEventQueryCount = eq?.Confirmed ?? 0,
-                CancelledEventQueryCount = eq?.Pending ?? 0,
+                ConfirmedEventQueryCount = eq?.Confirmed ?? 0,
+                PendingEventQueryCount = eq?.Pending ?? 0,
+                CancelledEventQueryCount = eq?.Cancelled ?? 0,
                 ReviewsCount = rev
             };
 
