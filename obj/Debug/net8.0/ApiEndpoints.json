@@ -467,6 +467,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservationsByUserId",
+    "RelativePath": "api/Resturant/GetReservationsByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "GetResturants",
     "RelativePath": "api/Resturant/GetResturants",
     "HttpMethod": "GET",

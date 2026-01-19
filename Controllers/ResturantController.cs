@@ -512,6 +512,15 @@ namespace RMS.Controllers
             return Ok(model);
         }
 
+        [HttpGet, Route("GetReservationsByUserId")]
+        public IActionResult GetReservationsByUserId(int UserId)
+        {
+            List<ReservationRequestModel> model = new List<ReservationRequestModel>();
+            model = MapperHelper.MapList<ReservationRequestModel, ReservationRequest>(_context.ReservationRequests.Where(p => p.UserId == UserId).ToList());
+
+            return Ok(model);
+        }
+
         [HttpPost("ConfirmReservation")]
         public async Task<IActionResult> ConfirmReservation(string ReservationRequestIds, int StatusType)
         {

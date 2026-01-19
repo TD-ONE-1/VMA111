@@ -683,6 +683,28 @@
         }
       }
     },
+    "/api/Resturant/GetReservationsByUserId": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Resturant/ConfirmReservation": {
       "post": {
         "tags": [
