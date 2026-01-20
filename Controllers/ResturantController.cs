@@ -782,8 +782,10 @@ namespace RMS.Controllers
         public IActionResult GetReservationsByStatus(int status)
         {
             List<vwReservationModel> model = new List<vwReservationModel>();
-            model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
-
+            if(status >= 0)
+                model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
+            else
+                model = MapperHelper.MapList<vwReservationModel, vwReservation>(_context.vwReservations.OrderByDescending(p => p.id).ToList());
             return Ok(model);
         }
 
@@ -883,7 +885,10 @@ namespace RMS.Controllers
         public IActionResult GetEventQueryByStatus(int status)
         {
             List<vwEventQueryModel> model = new List<vwEventQueryModel>();
-            model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
+            if (status >= 0)
+                model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
+            else
+                model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.OrderByDescending(p => p.id).ToList());
 
             return Ok(model);
         }
