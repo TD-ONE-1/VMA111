@@ -23,7 +23,5 @@
         public long Status { get; set; }
 
         public DateTime EnquiryDate { get; set; }
-
-        public bool IsActive { get; set; }
     }
 }

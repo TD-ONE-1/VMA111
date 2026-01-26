@@ -4,6 +4,10 @@
     {
         public int id { get; set; }
 
+        public string ReservationName { get; set; } = null!;
+
+        public string PhoneNo { get; set; } = null!;
+
         public DateOnly? ReservationDate { get; set; }
 
         public string UserName { get; set; } = null!;
@@ -21,5 +25,7 @@
         public string Remarks { get; set; } = null!;
 
         public int Status { get; set; }
+
+        public bool IsArrived { get; set; }
     }
 }

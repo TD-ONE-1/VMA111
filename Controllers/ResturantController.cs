@@ -488,6 +488,9 @@ namespace RMS.Controllers
                         record.SlotId = model.SlotId;
                         record.Members = model.Members;
                         record.Remarks = model.Remarks;
+                        record.PhoneNo = model.PhoneNo;
+                        record.ReservationName = model.ReservationName;
+                        record.IsArrived = model.IsArrived;
                     }
                     ;
 
@@ -539,11 +542,20 @@ namespace RMS.Controllers
                 if (!reservations.Any())
                     return NotFound("No reservations found.");
 
-                foreach (var reservation in reservations)
+                if(StatusType == 3)
                 {
-                    reservation.Status = StatusType;
+                    foreach (var reservation in reservations)
+                    {
+                        reservation.IsArrived = true;
+                    }
                 }
-
+                else
+                {
+                    foreach (var reservation in reservations)
+                    {
+                        reservation.Status = StatusType;
+                    }
+                }                    
                 await _context.SaveChangesAsync();
 
                 return Ok(new { success = true, message = "Reservations updated successfully!" });
@@ -824,7 +836,6 @@ namespace RMS.Controllers
                         record.Timing = model.Timing;
                         record.EnquiryDate = model.EnquiryDate;
                         record.Status = model.Status;
-                        record.IsActive = model.IsActive;
                     };
 
                     _context.SaveChanges();
@@ -843,7 +854,7 @@ namespace RMS.Controllers
         public IActionResult GetEventQuery()
         {
             List<EventQueryModel> model = new List<EventQueryModel>();
-            model = MapperHelper.MapList<EventQueryModel, EventQuery>(_context.EventQueries.Where(p => p.IsActive == true).OrderByDescending(p => p.Id).ToList());
+            model = MapperHelper.MapList<EventQueryModel, EventQuery>(_context.EventQueries.OrderByDescending(p => p.Id).ToList());
 
             return Ok(model);
         }

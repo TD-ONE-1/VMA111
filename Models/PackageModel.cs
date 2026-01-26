@@ -12,10 +12,6 @@
 
         public decimal Price { get; set; }
 
-        public int PkgServiceId { get; set; }
-
         public int Status { get; set; }
-
-        public bool IsActive { get; set; }
     }
 }

@@ -14,6 +14,4 @@ public partial class R_Event
     public string Name { get; set; } = null!;
 
     public bool IsActive { get; set; }
-
-    public virtual ICollection<EventQuery> EventQueries { get; set; } = new List<EventQuery>();
 }

@@ -30,4 +30,6 @@ public partial class R_Slot
     public TimeOnly? BreakEndTime { get; set; }
 
     public decimal? BreakDuration { get; set; }
+
+    public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 }

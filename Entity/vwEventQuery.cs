@@ -15,9 +15,9 @@ public partial class vwEventQuery
 
     public string? Timing { get; set; }
 
-    public long Status { get; set; }
+    public long? Status { get; set; }
 
-    public bool IsActive { get; set; }
+    public bool? IsActive { get; set; }
 
     public DateOnly? EnquiryDate { get; set; }
 
@@ -25,7 +25,7 @@ public partial class vwEventQuery
 
     public string UserName { get; set; } = null!;
 
-    public string ServiceName { get; set; } = null!;
+    public string? ServiceName { get; set; }
 
     public string EventType { get; set; } = null!;
 }

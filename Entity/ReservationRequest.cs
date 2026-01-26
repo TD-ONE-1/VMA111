@@ -13,6 +13,10 @@ public partial class ReservationRequest
 
     public DateTime ReservationDate { get; set; }
 
+    public string ReservationName { get; set; } = null!;
+
+    public string PhoneNo { get; set; } = null!;
+
     public int RestaurantId { get; set; }
 
     public int BranchId { get; set; }
@@ -29,9 +33,13 @@ public partial class ReservationRequest
 
     public int Status { get; set; }
 
+    public bool IsArrived { get; set; }
+
     public virtual R_BookingType BookingType { get; set; } = null!;
 
     public virtual R_Branch Branch { get; set; } = null!;
 
     public virtual R_Offer Offer { get; set; } = null!;
+
+    public virtual R_Slot Slot { get; set; } = null!;
 }

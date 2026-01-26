@@ -83,7 +83,7 @@ namespace RMS.Controllers
                 if (string.IsNullOrEmpty(model.PkgName))
                     return Ok(new { success = false, message = "Service Name is required!" });
 
-                var dupCheck = _context.Packages.Where(x => x.PkgName.ToLower() == model.PkgName.ToLower() && x.IsActive == true).FirstOrDefault();
+                var dupCheck = _context.Packages.Where(x => x.PkgName.ToLower() == model.PkgName.ToLower()).FirstOrDefault();
                 if (dupCheck != null)
                 {
                     return Ok(new { success = false, message = "This Package is already present. Please add a different one!" });
@@ -109,9 +109,7 @@ namespace RMS.Controllers
                         record.MinCapacity = model.MinCapacity;
                         record.MaxCapacity = model.MaxCapacity;
                         record.Price = model.Price;
-                        record.PkgServiceId = model.PkgServiceId;
                         record.Status = model.Status;
-                        record.IsActive = model.IsActive;
                     };
 
                     _context.SaveChanges();
@@ -130,7 +128,7 @@ namespace RMS.Controllers
         public IActionResult GetPackages()
         {
             List<PackageModel> model = new List<PackageModel>();
-            model = MapperHelper.MapList<PackageModel, Package>(_context.Packages.Where(p => p.IsActive == true).ToList());
+            model = MapperHelper.MapList<PackageModel, Package>(_context.Packages.ToList());
 
             return Ok(model);
         }
@@ -144,7 +142,7 @@ namespace RMS.Controllers
                     return Ok(new { success = false, message = "Package and Service is required!" });
 
                 var dupCheck = _context.PackageServices.Where(x => x.PackageId == model.PackageId &&
-                                            x.ServiceId == model.ServiceId && x.IsActive == true).FirstOrDefault();
+                                            x.ServiceId == model.ServiceId).FirstOrDefault();
                 if (dupCheck != null)
                 {
                     return Ok(new { success = false, message = "This Package Service already present. Please tagged a different one!" });
@@ -169,7 +167,6 @@ namespace RMS.Controllers
                         record.PackageId = model.PackageId;
                         record.ServiceId = model.ServiceId;
                         record.Status = model.Status;
-                        record.IsActive = model.IsActive;
                     };
 
                     _context.SaveChanges();
@@ -188,7 +185,7 @@ namespace RMS.Controllers
         public IActionResult GetPackageService()
         {
             List<PackageServiceModel> model = new List<PackageServiceModel>();
-            model = MapperHelper.MapList<PackageServiceModel, PackageService>(_context.PackageServices.Where(p => p.IsActive == true).ToList());
+            model = MapperHelper.MapList<PackageServiceModel, PackageService>(_context.PackageServices.ToList());
 
             return Ok(model);
         }

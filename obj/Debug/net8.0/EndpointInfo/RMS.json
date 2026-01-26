@@ -1308,9 +1308,6 @@
           "enquiryDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "isActive": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1338,16 +1335,9 @@
             "type": "number",
             "format": "double"
           },
-          "pkgServiceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "status": {
             "type": "integer",
             "format": "int32"
-          },
-          "isActive": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1370,9 +1360,6 @@
           "status": {
             "type": "integer",
             "format": "int32"
-          },
-          "isActive": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1607,6 +1594,14 @@
             "type": "string",
             "format": "date-time"
           },
+          "reservationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNo": {
+            "type": "string",
+            "nullable": true
+          },
           "restaurantId": {
             "type": "integer",
             "format": "int32"
@@ -1638,6 +1633,9 @@
           "status": {
             "type": "integer",
             "format": "int32"
+          },
+          "isArrived": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

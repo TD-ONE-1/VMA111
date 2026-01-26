@@ -71,40 +71,19 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.EnquiryDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-
-            entity.HasOne(d => d.EventType).WithMany(p => p.EventQueries)
-                .HasForeignKey(d => d.EventTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EventQuery_R_Events");
-
-            entity.HasOne(d => d.ServiceType).WithMany(p => p.EventQueries)
-                .HasForeignKey(d => d.ServiceTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EventQuery_ServiceMaster");
         });
 
         modelBuilder.Entity<Package>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.PkgName)
-                .HasMaxLength(50)
-                .HasDefaultValue("");
+            entity.HasNoKey();
+
+            entity.Property(e => e.PkgName).HasMaxLength(50);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
         });
 
         modelBuilder.Entity<PackageService>(entity =>
         {
             entity.ToTable("PackageService");
-
-            entity.HasOne(d => d.Package).WithMany(p => p.PackageServices)
-                .HasForeignKey(d => d.PackageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PackageService_Packages");
-
-            entity.HasOne(d => d.Service).WithMany(p => p.PackageServices)
-                .HasForeignKey(d => d.ServiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PackageService_ServiceMaster");
         });
 
         modelBuilder.Entity<R_BookingType>(entity =>
@@ -201,10 +180,16 @@ public partial class RMSContext : DbContext
 
             entity.ToTable("ReservationRequest");
 
+            entity.Property(e => e.PhoneNo)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
             entity.Property(e => e.Remarks).HasDefaultValue("");
             entity.Property(e => e.ReservationDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.ReservationName)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
 
             entity.HasOne(d => d.BookingType).WithMany(p => p.ReservationRequests)
                 .HasForeignKey(d => d.BookingTypeId)
@@ -220,6 +205,11 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.OfferId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReservationMaster_R_Offers");
+
+            entity.HasOne(d => d.Slot).WithMany(p => p.ReservationRequests)
+                .HasForeignKey(d => d.SlotId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ReservationMaster_R_Slots");
         });
 
         modelBuilder.Entity<ReservationRequestDetail>(entity =>
@@ -259,9 +249,7 @@ public partial class RMSContext : DbContext
         {
             entity.ToTable("ServiceMaster");
 
-            entity.Property(e => e.ServiceName)
-                .HasMaxLength(50)
-                .HasDefaultValue("");
+            entity.Property(e => e.ServiceName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<UserType>(entity =>
@@ -325,6 +313,8 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Offer)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.PhoneNo).HasMaxLength(50);
+            entity.Property(e => e.ReservationName).HasMaxLength(50);
             entity.Property(e => e.Slot)
                 .HasMaxLength(13)
                 .IsUnicode(false);

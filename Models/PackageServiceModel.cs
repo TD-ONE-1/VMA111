@@ -9,7 +9,5 @@
         public int ServiceId { get; set; }
 
         public int Status { get; set; }
-
-        public bool IsActive { get; set; }
     }
 }

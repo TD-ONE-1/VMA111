@@ -10,6 +10,10 @@
 
         public DateTime ReservationDate { get; set; }
 
+        public string ReservationName { get; set; } = null!;
+
+        public string PhoneNo { get; set; } = null!;
+
         public int RestaurantId { get; set; }
 
         public int BranchId { get; set; }
@@ -25,5 +29,7 @@
         public string Remarks { get; set; } = null!;
 
         public int Status { get; set; }
+
+        public bool IsArrived { get; set; }
     }
 }

@@ -5,21 +5,17 @@ namespace RMS.Entity;
 
 public partial class Package
 {
-    public int Id { get; set; }
+    public long? Id { get; set; }
 
-    public string PkgName { get; set; } = null!;
+    public string? PkgName { get; set; }
 
-    public int MinCapacity { get; set; }
+    public int? MinCapacity { get; set; }
 
-    public int MaxCapacity { get; set; }
+    public int? MaxCapacity { get; set; }
 
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 
-    public int PkgServiceId { get; set; }
+    public long? Status { get; set; }
 
-    public int Status { get; set; }
-
-    public bool IsActive { get; set; }
-
-    public virtual ICollection<PackageService> PackageServices { get; set; } = new List<PackageService>();
+    public bool? isActive { get; set; }
 }
