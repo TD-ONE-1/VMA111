@@ -17,9 +17,15 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<EventQuery> EventQueries { get; set; }
 
+    public virtual DbSet<OrdersListing> OrdersListings { get; set; }
+
     public virtual DbSet<Package> Packages { get; set; }
 
     public virtual DbSet<PackageService> PackageServices { get; set; }
+
+    public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<ProductListing> ProductListings { get; set; }
 
     public virtual DbSet<R_BookingType> R_BookingTypes { get; set; }
 
@@ -73,6 +79,20 @@ public partial class RMSContext : DbContext
                 .HasColumnType("datetime");
         });
 
+        modelBuilder.Entity<OrdersListing>(entity =>
+        {
+            entity.HasKey(e => e.OLId).HasName("PK__OrdersLi__AF348F78E0E7F3DB");
+
+            entity.Property(e => e.CategoryType).HasMaxLength(100);
+            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(150);
+            entity.Property(e => e.OrderAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.OrderDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Status).HasDefaultValue(true);
+        });
+
         modelBuilder.Entity<Package>(entity =>
         {
             entity.HasNoKey();
@@ -84,6 +104,36 @@ public partial class RMSContext : DbContext
         modelBuilder.Entity<PackageService>(entity =>
         {
             entity.ToTable("PackageService");
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6CDB5715087");
+
+            entity.Property(e => e.CategoryType).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(150);
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Status).HasDefaultValue(true);
+        });
+
+        modelBuilder.Entity<ProductListing>(entity =>
+        {
+            entity.HasKey(e => e.PLId).HasName("PK__ProductL__5ED8B9ABEABABB43");
+
+            entity.ToTable("ProductListing");
+
+            entity.Property(e => e.CategoryType).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(150);
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Status).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<R_BookingType>(entity =>
