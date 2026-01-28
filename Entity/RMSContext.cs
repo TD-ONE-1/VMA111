@@ -15,6 +15,8 @@ public partial class RMSContext : DbContext
     {
     }
 
+    public virtual DbSet<Customer> Customers { get; set; }
+
     public virtual DbSet<EventQuery> EventQueries { get; set; }
 
     public virtual DbSet<OrdersListing> OrdersListings { get; set; }
@@ -51,6 +53,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<ServiceMaster> ServiceMasters { get; set; }
 
+    public virtual DbSet<Shopkeeper> Shopkeepers { get; set; }
+
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
@@ -65,6 +69,41 @@ public partial class RMSContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D86724D10B");
+
+            entity.ToTable("Customer");
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(250)
+                .HasDefaultValue("");
+            entity.Property(e => e.CNIC)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.CustAccountCode)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+            entity.Property(e => e.CustName).HasMaxLength(100);
+            entity.Property(e => e.CustomerCode).HasMaxLength(50);
+            entity.Property(e => e.Discount).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.MobileNo)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.NTN)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+            entity.Property(e => e.PhoneNo)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.Status).HasDefaultValue(true);
+        });
+
         modelBuilder.Entity<EventQuery>(entity =>
         {
             entity.ToTable("EventQuery");
@@ -110,14 +149,22 @@ public partial class RMSContext : DbContext
         {
             entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6CDB5715087");
 
-            entity.Property(e => e.CategoryType).HasMaxLength(100);
+            entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Description).HasDefaultValue("");
+            entity.Property(e => e.Image)
+                .HasMaxLength(255)
+                .HasDefaultValue("");
             entity.Property(e => e.Name).HasMaxLength(150);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ProductCode)
+                .HasMaxLength(150)
+                .HasDefaultValue("");
             entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.TDDiscount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TaxAppilcable).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<ProductListing>(entity =>
@@ -300,6 +347,42 @@ public partial class RMSContext : DbContext
             entity.ToTable("ServiceMaster");
 
             entity.Property(e => e.ServiceName).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Shopkeeper>(entity =>
+        {
+            entity.HasKey(e => e.ShopkeeperId).HasName("PK__Shopkeep__84FE8E2D620DFDDC");
+
+            entity.ToTable("Shopkeeper");
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(250)
+                .HasDefaultValue("");
+            entity.Property(e => e.BusinessName)
+                .HasMaxLength(150)
+                .HasDefaultValue("");
+            entity.Property(e => e.CNIC)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.MobileNumber)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.NTN)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+            entity.Property(e => e.PhoneNo)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.ShopkeeperName).HasMaxLength(100);
+            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Website)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
         });
 
         modelBuilder.Entity<UserType>(entity =>
