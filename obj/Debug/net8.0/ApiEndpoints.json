@@ -755,6 +755,178 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetCustomers",
+    "RelativePath": "api/SWA/GetCustomers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GeTOrders",
+    "RelativePath": "api/SWA/GeTOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetProducts",
+    "RelativePath": "api/SWA/GetProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetPurchaseProducts",
+    "RelativePath": "api/SWA/GetPurchaseProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetShopBranches",
+    "RelativePath": "api/SWA/GetShopBranches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetShopkeeperByBussinessTypeId",
+    "RelativePath": "api/SWA/GetShopkeeperByBussinessTypeId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BussinessTypeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetShopkeepers",
+    "RelativePath": "api/SWA/GetShopkeepers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveCustomer",
+    "RelativePath": "api/SWA/SaveCustomer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.CustomerModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveOrder",
+    "RelativePath": "api/SWA/SaveOrder",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.OrdersModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveProducts",
+    "RelativePath": "api/SWA/SaveProducts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.ProductsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SavePurchaseProduct",
+    "RelativePath": "api/SWA/SavePurchaseProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.ProductPurchaseModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveShopBranch",
+    "RelativePath": "api/SWA/SaveShopBranch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.ShopBranchModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveShopkeeper",
+    "RelativePath": "api/SWA/SaveShopkeeper",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.ShopkeeperModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RMS.Controllers.UserController",
     "Method": "GetUsers",
     "RelativePath": "api/User/GetUsers",

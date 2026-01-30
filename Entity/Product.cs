@@ -34,4 +34,8 @@ public partial class Product
     public int TaxPercentage { get; set; }
 
     public DateTime CreatedOn { get; set; }
+
+    public virtual ShopBranch Branch { get; set; } = null!;
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

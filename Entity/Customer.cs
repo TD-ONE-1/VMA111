@@ -36,4 +36,6 @@ public partial class Customer
     public int PaymentTermId { get; set; }
 
     public decimal Discount { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

@@ -19,7 +19,7 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<EventQuery> EventQueries { get; set; }
 
-    public virtual DbSet<OrdersListing> OrdersListings { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Package> Packages { get; set; }
 
@@ -27,7 +27,7 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    public virtual DbSet<ProductListing> ProductListings { get; set; }
+    public virtual DbSet<ProductPurchase> ProductPurchases { get; set; }
 
     public virtual DbSet<R_BookingType> R_BookingTypes { get; set; }
 
@@ -52,6 +52,8 @@ public partial class RMSContext : DbContext
     public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<ServiceMaster> ServiceMasters { get; set; }
+
+    public virtual DbSet<ShopBranch> ShopBranches { get; set; }
 
     public virtual DbSet<Shopkeeper> Shopkeepers { get; set; }
 
@@ -118,18 +120,50 @@ public partial class RMSContext : DbContext
                 .HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<OrdersListing>(entity =>
+        modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OLId).HasName("PK__OrdersLi__AF348F78E0E7F3DB");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFFE47DB49");
 
-            entity.Property(e => e.CategoryType).HasMaxLength(100);
-            entity.Property(e => e.Image).HasMaxLength(255);
-            entity.Property(e => e.Name).HasMaxLength(150);
-            entity.Property(e => e.OrderAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ConfirmDeliveryDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ContactPerson)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.DeliveryAddress)
+                .HasMaxLength(250)
+                .HasDefaultValue("");
+            entity.Property(e => e.DeliveryReceivedBy)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Discount).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.ExpectedDeliveryDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
             entity.Property(e => e.OrderDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.OrderStatus).HasMaxLength(50);
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TaxPercentage).HasColumnType("decimal(5, 2)");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Orders_Customer");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Orders_Products");
+
+            entity.HasOne(d => d.Shopkeeper).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.ShopkeeperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Orders_ShopBranch");
         });
 
         modelBuilder.Entity<Package>(entity =>
@@ -165,22 +199,34 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Status).HasDefaultValue(true);
             entity.Property(e => e.TDDiscount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TaxAppilcable).HasDefaultValue(true);
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.Products)
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Products_ShopBranch");
         });
 
-        modelBuilder.Entity<ProductListing>(entity =>
+        modelBuilder.Entity<ProductPurchase>(entity =>
         {
-            entity.HasKey(e => e.PLId).HasName("PK__ProductL__5ED8B9ABEABABB43");
+            entity.HasKey(e => e.ProductPurchaseId).HasName("PK__ProductP__910433C8593E7698");
 
-            entity.ToTable("ProductListing");
+            entity.ToTable("ProductPurchase");
 
-            entity.Property(e => e.CategoryType).HasMaxLength(100);
-            entity.Property(e => e.CreatedOn)
+            entity.Property(e => e.PODate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.Image).HasMaxLength(255);
-            entity.Property(e => e.Name).HasMaxLength(150);
+            entity.Property(e => e.PONumber)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.TransactionType)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
+
+            entity.HasOne(d => d.Shopkeeper).WithMany(p => p.ProductPurchases)
+                .HasForeignKey(d => d.ShopkeeperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProductPurchase_Shopkeeper");
         });
 
         modelBuilder.Entity<R_BookingType>(entity =>
@@ -347,6 +393,29 @@ public partial class RMSContext : DbContext
             entity.ToTable("ServiceMaster");
 
             entity.Property(e => e.ServiceName).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<ShopBranch>(entity =>
+        {
+            entity.HasKey(e => e.BranchID).HasName("PK__ShopBran__A1682FA575A21290");
+
+            entity.ToTable("ShopBranch");
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(250)
+                .HasDefaultValue("");
+            entity.Property(e => e.BranchName).HasMaxLength(100);
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.MobileNumber)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
+            entity.Property(e => e.PhoneNo)
+                .HasMaxLength(20)
+                .HasDefaultValue("");
         });
 
         modelBuilder.Entity<Shopkeeper>(entity =>

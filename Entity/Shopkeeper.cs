@@ -34,4 +34,8 @@ public partial class Shopkeeper
     public decimal Longitude { get; set; }
 
     public int RatingId { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual ICollection<ProductPurchase> ProductPurchases { get; set; } = new List<ProductPurchase>();
 }
