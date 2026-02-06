@@ -11,7 +11,7 @@ public partial class R_Image
 
     public string ImageType { get; set; } = null!;
 
-    public string ImagePath { get; set; } = null!;
+    public string Image { get; set; } = null!;
 
     public DateTime CreatedOn { get; set; }
 }

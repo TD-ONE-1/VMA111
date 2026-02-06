@@ -3,8 +3,8 @@
     public class RestaurantImageUploadModel
     {
         public int RestaurantId { get; set; }
-        public IFormFile? Logo { get; set; }
-        public IFormFile? Banner { get; set; }
-        public List<IFormFile>? Gallery { get; set; }
+        public string? Logo { get; set; }
+        public string? Banner { get; set; }
+        public List<string>? Gallery { get; set; }
     }
 }

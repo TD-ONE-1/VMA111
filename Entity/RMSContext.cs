@@ -268,7 +268,6 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.ImagePath).HasMaxLength(300);
             entity.Property(e => e.ImageType)
                 .HasMaxLength(20)
                 .IsUnicode(false);

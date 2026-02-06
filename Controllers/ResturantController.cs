@@ -664,8 +664,6 @@ namespace RMS.Controllers
                 if (model.RestaurantId == 0)
                     return Ok(new { success = false, message = "RestaurantId is required!" });
 
-                var fileService = new FileService(_env);
-
                 if (model.Logo != null)
                 {
                     var old = _context.R_Images
@@ -677,7 +675,7 @@ namespace RMS.Controllers
                     {
                         RestaurantId = model.RestaurantId,
                         ImageType = "Logo",
-                        ImagePath = fileService.Save(model.Logo, "uploads/logo")
+                        Image = model.Logo,
                     });
                 }
 
@@ -692,7 +690,7 @@ namespace RMS.Controllers
                     {
                         RestaurantId = model.RestaurantId,
                         ImageType = "Banner",
-                        ImagePath = fileService.Save(model.Banner, "uploads/banner")
+                        Image = model.Banner
                     });
                 }
 
@@ -704,7 +702,7 @@ namespace RMS.Controllers
                         {
                             RestaurantId = model.RestaurantId,
                             ImageType = "Gallery",
-                            ImagePath = fileService.Save(img, "uploads/gallery")
+                            Image = img,
                         });
                     }
                 }
@@ -731,10 +729,10 @@ namespace RMS.Controllers
                 success = true,
                 data = new
                 {
-                    Logo = images.FirstOrDefault(x => x.ImageType == "Logo")?.ImagePath,
-                    Banner = images.FirstOrDefault(x => x.ImageType == "Banner")?.ImagePath,
+                    Logo = images.FirstOrDefault(x => x.ImageType == "Logo")?.Image,
+                    Banner = images.FirstOrDefault(x => x.ImageType == "Banner")?.Image,
                     Gallery = images.Where(x => x.ImageType == "Gallery")
-                                    .Select(x => x.ImagePath)
+                                    .Select(x => x.Image)
                                     .ToList()
                 }
             });
@@ -903,5 +901,105 @@ namespace RMS.Controllers
 
             return Ok(model);
         }
+
+        [HttpPost("CreateRestaurant")]
+        public async Task<IActionResult> CreateRestaurant([FromBody] RestaurantCreateModel model)
+        {
+            try
+            {
+                if (model == null)
+                    return BadRequest("Invalid payload");
+
+                var restaurant = new Restaurant
+                {
+                    Name = model.Restaurant.Name,
+                    About_Description = model.Restaurant.About_Description,
+                    CuisineType = model.Restaurant.CuisineType,
+                    PriceRange = model.Restaurant.PriceRange,
+                    IsActive = model.Restaurant.IsActive
+                };
+
+                _context.Restaurants.Add(restaurant);
+                await _context.SaveChangesAsync();
+
+                foreach (var img in model.Images ?? new())
+                {
+                    _context.R_Images.Add(new R_Image
+                    {
+                        RestaurantId = restaurant.Id,
+                        ImageType = img.ImageType,
+                        Image = img.File,
+                        CreatedOn = DateTime.Now
+                    });
+                }
+
+                foreach (var br in model.Branches ?? new())
+                {
+                    var branch = new R_Branch
+                    {
+                        RestaurantId = restaurant.Id,
+                        Name = br.BranchName,
+                        Address = br.Address,
+                        PhoneNumber = br.Phone,
+                        Email = br.Email,
+                        IsActive = true
+                    };
+
+                    _context.R_Branches.Add(branch);
+                    await _context.SaveChangesAsync(); 
+
+                    foreach (var bt in model.BookingTypes.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        _context.R_BookingTypes.Add(new R_BookingType
+                        {
+                            RestaurantId = restaurant.Id,
+                            BranchId = branch.Id,
+                            Name = bt.Trim(),
+                            IsActive = true
+                        });
+                    }
+
+                    foreach (var of in model.Offers.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        var ofr = new R_Offer
+                        {
+                            RestaurantId = restaurant.Id,
+                            BranchId = branch.Id,
+                            Offer = of.Trim(),
+                            IsActive = true
+                        };
+
+                        _context.R_Offers.Add(ofr);
+                        await _context.SaveChangesAsync();
+
+                        foreach (var s in model.Slots ?? new())
+                        {
+                            _context.R_Slots.Add(new R_Slot
+                            {
+                                RestaurantId = restaurant.Id,
+                                BranchId = branch.Id,
+                                OfferId = ofr.Id,
+                                Day = s.Day,
+                                StartTime = TimeOnly.Parse(s.StartTime),
+                                EndTime = TimeOnly.Parse(s.EndTime),
+                                Duration = s.Duration,
+                                Maximum_Capacity = s.Maximum_Capacity,
+                                IsActive = s.IsActive
+                            });
+                        }
+                    }                   
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Restaurant saved successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return Ok("Something went wrong!");
+            }
+           
+        }
+
     }
 }

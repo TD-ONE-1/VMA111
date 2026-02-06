@@ -217,6 +217,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "CreateRestaurant",
+    "RelativePath": "api/Resturant/CreateRestaurant",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.RestaurantCreateModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "GetEventQuery",
     "RelativePath": "api/Resturant/GetEventQuery",
     "HttpMethod": "GET",
@@ -612,17 +628,17 @@
       },
       {
         "Name": "Logo",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Banner",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Gallery",
-        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -766,8 +782,8 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
-    "Method": "GeTOrders",
-    "RelativePath": "api/SWA/GeTOrders",
+    "Method": "GetOrders",
+    "RelativePath": "api/SWA/GetOrders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -864,8 +880,8 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
-    "Method": "SaveProducts",
-    "RelativePath": "api/SWA/SaveProducts",
+    "Method": "SaveProduct",
+    "RelativePath": "api/SWA/SaveProduct",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -854,18 +854,15 @@
                     "format": "int32"
                   },
                   "Logo": {
-                    "type": "string",
-                    "format": "binary"
+                    "type": "string"
                   },
                   "Banner": {
-                    "type": "string",
-                    "format": "binary"
+                    "type": "string"
                   },
                   "Gallery": {
                     "type": "array",
                     "items": {
-                      "type": "string",
-                      "format": "binary"
+                      "type": "string"
                     }
                   }
                 }
@@ -1055,6 +1052,37 @@
         }
       }
     },
+    "/api/Resturant/CreateRestaurant": {
+      "post": {
+        "tags": [
+          "Resturant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantCreateModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantCreateModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantCreateModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Service/SaveServiceMaster": {
       "post": {
         "tags": [
@@ -1184,7 +1212,7 @@
         }
       }
     },
-    "/api/SWA/SaveProducts": {
+    "/api/SWA/SaveProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1409,7 +1437,7 @@
         }
       }
     },
-    "/api/SWA/GeTOrders": {
+    "/api/SWA/GetOrders": {
       "get": {
         "tags": [
           "SWA"
@@ -1518,6 +1546,28 @@
             "format": "date-time"
           },
           "createdBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BranchDto": {
+        "type": "object",
+        "properties": {
+          "branchName": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
             "type": "string",
             "nullable": true
           }
@@ -1657,6 +1707,20 @@
           "enquiryDate": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImageDto": {
+        "type": "object",
+        "properties": {
+          "imageType": {
+            "type": "string",
+            "nullable": true
+          },
+          "file": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2183,6 +2247,69 @@
         },
         "additionalProperties": false
       },
+      "RestaurantCreateModel": {
+        "type": "object",
+        "properties": {
+          "restaurant": {
+            "$ref": "#/components/schemas/RestaurantDto"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageDto"
+            },
+            "nullable": true
+          },
+          "bookingTypes": {
+            "type": "string",
+            "nullable": true
+          },
+          "offers": {
+            "type": "string",
+            "nullable": true
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BranchDto"
+            },
+            "nullable": true
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlotDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestaurantDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "about_Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuisineType": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceRange": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ResturantModel": {
         "type": "object",
         "properties": {
@@ -2365,6 +2492,35 @@
           "ratingId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SlotDto": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maximum_Capacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
