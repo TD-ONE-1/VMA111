@@ -37,5 +37,7 @@ public partial class Product
 
     public virtual ShopBranch Branch { get; set; } = null!;
 
+    public virtual ProductCategory CategoryType { get; set; } = null!;
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

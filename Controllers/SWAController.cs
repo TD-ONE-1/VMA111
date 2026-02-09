@@ -16,7 +16,7 @@ namespace RMS.Controllers
     [ApiController]
     public class SWAController : ControllerBase
     {
-        private readonly RMSContext _context;
+        private readonly RMSContext _context; 
         private readonly IWebHostEnvironment _env;
         public SWAController(RMSContext context, IWebHostEnvironment env)
         {
@@ -407,6 +407,57 @@ namespace RMS.Controllers
         {
             List<ProductPurchaseModel> model = new List<ProductPurchaseModel>();
             model = MapperHelper.MapList<ProductPurchaseModel, ProductPurchase>(_context.ProductPurchases.ToList());
+
+            return Ok(model);
+        }
+
+        [HttpPost("SaveProductCategory")]
+        public IActionResult SaveProductCategory([FromBody] ProductCategoryModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.CategoryType))
+                    return Ok(new { success = false, message = "Invalid Data!" });
+
+                if (model.Id == 0)
+                {
+                    _context.ProductCategories.Add(MapperHelper.Map<ProductCategory, ProductCategoryModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.ProductCategories.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.CategoryType = model.CategoryType;
+                        record.IsActive = model.IsActive;
+                    }
+                    ;
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetProductCategories")]
+        public IActionResult GetProductCategories()
+        {
+            List<ProductCategoryModel> model = new List<ProductCategoryModel>();
+            model = MapperHelper.MapList<ProductCategoryModel, ProductCategory>(_context.ProductCategories.ToList());
 
             return Ok(model);
         }

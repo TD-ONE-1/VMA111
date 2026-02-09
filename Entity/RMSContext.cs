@@ -27,6 +27,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+
     public virtual DbSet<ProductPurchase> ProductPurchases { get; set; }
 
     public virtual DbSet<R_BookingType> R_BookingTypes { get; set; }
@@ -204,6 +206,20 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Products_ShopBranch");
+
+            entity.HasOne(d => d.CategoryType).WithMany(p => p.Products)
+                .HasForeignKey(d => d.CategoryTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Products_ProductCategory");
+        });
+
+        modelBuilder.Entity<ProductCategory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ProductCategory");
+
+            entity.ToTable("ProductCategory");
+
+            entity.Property(e => e.CategoryType).HasMaxLength(200);
         });
 
         modelBuilder.Entity<ProductPurchase>(entity =>
