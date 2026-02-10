@@ -792,6 +792,16 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetProductCategories",
+    "RelativePath": "api/SWA/GetProductCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
     "Method": "GetProducts",
     "RelativePath": "api/SWA/GetProducts",
     "HttpMethod": "GET",
@@ -896,6 +906,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveProductCategory",
+    "RelativePath": "api/SWA/SaveProductCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.SecondApp.ProductCategoryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
     "Method": "SavePurchaseProduct",
     "RelativePath": "api/SWA/SavePurchaseProduct",
     "HttpMethod": "POST",
@@ -940,6 +966,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWADashboardController",
+    "Method": "GetDashboardCount",
+    "RelativePath": "api/SWADashboard/GetDashboardCount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
