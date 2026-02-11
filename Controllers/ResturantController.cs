@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RMS.Common.Helper;
 using RMS.Entity;
 using RMS.Models;
+using System.Numerics;
 
 namespace RMS.Controllers
 {
@@ -436,6 +437,15 @@ namespace RMS.Controllers
         {
             List<R_SlotModel> model = new List<R_SlotModel>();
             model = MapperHelper.MapList<R_SlotModel, R_Slot>(_context.R_Slots.Where(p => p.IsActive == true).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetSlotsByIsEidReservation")]
+        public IActionResult GetSlotsByIsEidReservation(bool isEidReservation)
+        {
+            List<R_SlotModel> model = new List<R_SlotModel>();
+            model = MapperHelper.MapList<R_SlotModel, R_Slot>(_context.R_Slots.Where(p => p.IsActive == true && p.isEidReservation == isEidReservation).ToList());
 
             return Ok(model);
         }
@@ -1000,6 +1010,60 @@ namespace RMS.Controllers
             }
            
         }
+        
+        [HttpPost("SaveEidReservation")]
+        public IActionResult SaveEidReservation([FromBody] EidReservationModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Name) || model.NoOfMembers == 0)
+                    return Ok(new { success = false, message = "Invalid Data!" });
 
+                if (model.Id == 0)
+                {
+                    _context.EidReservations.Add(MapperHelper.Map<EidReservation, EidReservationModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.EidReservations.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+                    
+                    if (record != null)
+                    {
+                        record.Name = model.Name;
+                        record.Phone = model.Phone;
+                        record.NoOfMembers = model.NoOfMembers;
+                        record.BookingTypeId = model.BookingTypeId;
+                        record.SlotId = model.SlotId;
+                        record.SpecialRequest = model.SpecialRequest;
+                    }
+                    ;
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception ex)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetEidReservations")]
+        public IActionResult GetEidReservations()
+        {
+            List<EidReservationModel> model = new List<EidReservationModel>();
+            model = MapperHelper.MapList<EidReservationModel, EidReservation>(_context.EidReservations.ToList());
+
+            return Ok(model);
+        }
     }
 }

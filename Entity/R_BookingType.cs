@@ -15,5 +15,7 @@ public partial class R_BookingType
 
     public bool IsActive { get; set; }
 
+    public virtual ICollection<EidReservation> EidReservations { get; set; } = new List<EidReservation>();
+
     public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 }

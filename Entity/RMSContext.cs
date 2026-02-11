@@ -17,6 +17,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<EidReservation> EidReservations { get; set; }
+
     public virtual DbSet<EventQuery> EventQueries { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -106,6 +108,28 @@ public partial class RMSContext : DbContext
                 .HasMaxLength(20)
                 .HasDefaultValue("");
             entity.Property(e => e.Status).HasDefaultValue(true);
+        });
+
+        modelBuilder.Entity<EidReservation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SpecialRequest");
+
+            entity.ToTable("EidReservation");
+
+            entity.Property(e => e.Name).HasDefaultValue("");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(30)
+                .HasDefaultValue("");
+
+            entity.HasOne(d => d.BookingType).WithMany(p => p.EidReservations)
+                .HasForeignKey(d => d.BookingTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SpecialRequest_R_BookingType");
+
+            entity.HasOne(d => d.Slot).WithMany(p => p.EidReservations)
+                .HasForeignKey(d => d.SlotId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SpecialRequest_R_Slots");
         });
 
         modelBuilder.Entity<EventQuery>(entity =>

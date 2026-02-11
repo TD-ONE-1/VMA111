@@ -23,6 +23,8 @@ public partial class R_Slot
 
     public int Maximum_Capacity { get; set; }
 
+    public bool isEidReservation { get; set; }
+
     public bool IsActive { get; set; }
 
     public TimeOnly? BreakStartTime { get; set; }
@@ -30,6 +32,8 @@ public partial class R_Slot
     public TimeOnly? BreakEndTime { get; set; }
 
     public decimal? BreakDuration { get; set; }
+
+    public virtual ICollection<EidReservation> EidReservations { get; set; } = new List<EidReservation>();
 
     public virtual ICollection<ReservationRequest> ReservationRequests { get; set; } = new List<ReservationRequest>();
 }

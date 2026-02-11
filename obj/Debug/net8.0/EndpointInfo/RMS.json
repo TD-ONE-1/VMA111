@@ -610,6 +610,27 @@
         }
       }
     },
+    "/api/Resturant/GetSlotsByIsEidReservation": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "isEidReservation",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Resturant/GetR_SlotsByRestaurantIdandBranchId": {
       "get": {
         "tags": [
@@ -1083,6 +1104,49 @@
         }
       }
     },
+    "/api/Resturant/SaveEidReservation": {
+      "post": {
+        "tags": [
+          "Resturant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EidReservationModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EidReservationModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EidReservationModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Resturant/GetEidReservations": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Service/SaveServiceMaster": {
       "post": {
         "tags": [
@@ -1212,7 +1276,7 @@
         }
       }
     },
-    "/api/SWA/SaveProduct": {
+    "/SaveProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1243,7 +1307,7 @@
         }
       }
     },
-    "/api/SWA/GetProducts": {
+    "/GetProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1255,7 +1319,7 @@
         }
       }
     },
-    "/api/SWA/SaveShopkeeper": {
+    "/SaveShopkeeper": {
       "post": {
         "tags": [
           "SWA"
@@ -1286,7 +1350,7 @@
         }
       }
     },
-    "/api/SWA/GetShopkeepers": {
+    "/GetShopkeepers": {
       "get": {
         "tags": [
           "SWA"
@@ -1298,7 +1362,7 @@
         }
       }
     },
-    "/api/SWA/GetShopkeeperByBussinessTypeId": {
+    "/GetShopkeeperByBussinessTypeId": {
       "get": {
         "tags": [
           "SWA"
@@ -1320,7 +1384,7 @@
         }
       }
     },
-    "/api/SWA/SaveCustomer": {
+    "/SaveCustomer": {
       "post": {
         "tags": [
           "SWA"
@@ -1351,7 +1415,7 @@
         }
       }
     },
-    "/api/SWA/GetCustomers": {
+    "/GetCustomers": {
       "get": {
         "tags": [
           "SWA"
@@ -1363,7 +1427,7 @@
         }
       }
     },
-    "/api/SWA/SaveShopBranch": {
+    "/SaveShopBranch": {
       "post": {
         "tags": [
           "SWA"
@@ -1394,7 +1458,7 @@
         }
       }
     },
-    "/api/SWA/GetShopBranches": {
+    "/GetShopBranches": {
       "get": {
         "tags": [
           "SWA"
@@ -1406,7 +1470,7 @@
         }
       }
     },
-    "/api/SWA/SaveOrder": {
+    "/SaveOrder": {
       "post": {
         "tags": [
           "SWA"
@@ -1437,7 +1501,7 @@
         }
       }
     },
-    "/api/SWA/GetOrders": {
+    "/GetOrders": {
       "get": {
         "tags": [
           "SWA"
@@ -1449,7 +1513,7 @@
         }
       }
     },
-    "/api/SWA/SavePurchaseProduct": {
+    "/SavePurchaseProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1480,7 +1544,7 @@
         }
       }
     },
-    "/api/SWA/GetPurchaseProducts": {
+    "/GetPurchaseProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1492,7 +1556,7 @@
         }
       }
     },
-    "/api/SWA/SaveProductCategory": {
+    "/SaveProductCategory": {
       "post": {
         "tags": [
           "SWA"
@@ -1523,7 +1587,7 @@
         }
       }
     },
-    "/api/SWA/GetProductCategories": {
+    "/GetProductCategories": {
       "get": {
         "tags": [
           "SWA"
@@ -1694,6 +1758,39 @@
           "discount": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EidReservationModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "noOfMembers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bookingTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slotId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "specialRequest": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
