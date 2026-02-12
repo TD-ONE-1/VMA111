@@ -19,5 +19,7 @@
         public int CancelledEventQueryCount { get; set; }
 
         public int ReviewsCount { get; set; }
+
+        public int EidReservationCount { get; set; }
     }
 }

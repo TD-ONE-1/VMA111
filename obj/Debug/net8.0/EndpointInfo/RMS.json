@@ -1276,7 +1276,7 @@
         }
       }
     },
-    "/SaveProduct": {
+    "/api/SWA/SaveProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1307,7 +1307,7 @@
         }
       }
     },
-    "/GetProducts": {
+    "/api/SWA/GetProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1319,7 +1319,7 @@
         }
       }
     },
-    "/SaveShopkeeper": {
+    "/api/SWA/SaveShopkeeper": {
       "post": {
         "tags": [
           "SWA"
@@ -1350,7 +1350,7 @@
         }
       }
     },
-    "/GetShopkeepers": {
+    "/api/SWA/GetShopkeepers": {
       "get": {
         "tags": [
           "SWA"
@@ -1362,7 +1362,7 @@
         }
       }
     },
-    "/GetShopkeeperByBussinessTypeId": {
+    "/api/SWA/GetShopkeeperByBussinessTypeId": {
       "get": {
         "tags": [
           "SWA"
@@ -1384,7 +1384,7 @@
         }
       }
     },
-    "/SaveCustomer": {
+    "/api/SWA/SaveCustomer": {
       "post": {
         "tags": [
           "SWA"
@@ -1415,7 +1415,7 @@
         }
       }
     },
-    "/GetCustomers": {
+    "/api/SWA/GetCustomers": {
       "get": {
         "tags": [
           "SWA"
@@ -1427,7 +1427,7 @@
         }
       }
     },
-    "/SaveShopBranch": {
+    "/api/SWA/SaveShopBranch": {
       "post": {
         "tags": [
           "SWA"
@@ -1458,7 +1458,7 @@
         }
       }
     },
-    "/GetShopBranches": {
+    "/api/SWA/GetShopBranches": {
       "get": {
         "tags": [
           "SWA"
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "/SaveOrder": {
+    "/api/SWA/SaveOrder": {
       "post": {
         "tags": [
           "SWA"
@@ -1501,7 +1501,7 @@
         }
       }
     },
-    "/GetOrders": {
+    "/api/SWA/GetOrders": {
       "get": {
         "tags": [
           "SWA"
@@ -1513,7 +1513,7 @@
         }
       }
     },
-    "/SavePurchaseProduct": {
+    "/api/SWA/SavePurchaseProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1544,7 +1544,7 @@
         }
       }
     },
-    "/GetPurchaseProducts": {
+    "/api/SWA/GetPurchaseProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1556,7 +1556,7 @@
         }
       }
     },
-    "/SaveProductCategory": {
+    "/api/SWA/SaveProductCategory": {
       "post": {
         "tags": [
           "SWA"
@@ -1587,7 +1587,7 @@
         }
       }
     },
-    "/GetProductCategories": {
+    "/api/SWA/GetProductCategories": {
       "get": {
         "tags": [
           "SWA"

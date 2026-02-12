@@ -21,6 +21,7 @@ namespace RMS.Controllers
         [HttpGet, Route("GetDashboardCount")]
         public IActionResult GetDashboardCount()
         {
+            var eidRes = _context.EidReservations.Count();
             var res = _context.ReservationRequests
            .GroupBy(x => 1)
            .Select(g => new
@@ -55,7 +56,8 @@ namespace RMS.Controllers
                 ConfirmedEventQueryCount = eq?.Confirmed ?? 0,
                 PendingEventQueryCount = eq?.Pending ?? 0,
                 CancelledEventQueryCount = eq?.Cancelled ?? 0,
-                ReviewsCount = rev
+                ReviewsCount = rev,
+                EidReservationCount = eidRes
             };
 
             return Ok(model);

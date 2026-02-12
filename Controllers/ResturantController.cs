@@ -1060,8 +1060,8 @@ namespace RMS.Controllers
         [HttpGet, Route("GetEidReservations")]
         public IActionResult GetEidReservations()
         {
-            List<EidReservationModel> model = new List<EidReservationModel>();
-            model = MapperHelper.MapList<EidReservationModel, EidReservation>(_context.EidReservations.ToList());
+            List<vwEidReservationModel> model = new List<vwEidReservationModel>();
+            model = MapperHelper.MapList<vwEidReservationModel, vwEidReservation>(_context.vwEidReservations.ToList());
 
             return Ok(model);
         }
