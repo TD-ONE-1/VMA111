@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RMS.Common.Helper;
 using RMS.Entity;
@@ -25,56 +26,108 @@ namespace RMS.Controllers
         }
 
         [HttpPost("SaveProduct")]
-        public IActionResult SaveProduct([FromBody] ProductsModel model)
+        [RequestSizeLimit(5 * 1024 * 1024)]
+        public async Task<IActionResult> SaveProduct([FromForm] ProductsModel model)
         {
             try
             {
-                if (string.IsNullOrEmpty(model.Name))
+                if (string.IsNullOrWhiteSpace(model.Name))
                     return Ok(new { success = false, message = "Name is required!" });
+
+                string? imagePath = null;
+
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    if (model.Image.Length > 2 * 1024 * 1024)
+                        return Ok(new { success = false, message = "Image size must be less than 2MB." });
+
+                    var extension = Path.GetExtension(model.Image.FileName).ToLower();
+
+                    if (!allowedExtensions.Contains(extension))
+                        return Ok(new { success = false, message = "Only JPG, PNG, WEBP images are allowed." });
+
+                    string folderPath = Path.Combine(_env.WebRootPath, "ProductImages");
+
+                    if (!Directory.Exists(folderPath))
+                        Directory.CreateDirectory(folderPath);
+
+                    string fileName = $"{Guid.NewGuid()}{extension}";
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.Image.CopyToAsync(stream);
+                    }
+
+                    imagePath = "/ProductImages/" + fileName;
+                }
 
                 if (model.ProductId == 0)
                 {
-                    _context.Products.Add(MapperHelper.Map<Product, ProductsModel>(model));
+                    var product = new Product
+                    {
+                        BranchId = model.BranchId,
+                        ProductCode = model.ProductCode,
+                        Name = model.Name,
+                        Price = model.Price,
+                        CategoryTypeId = model.CategoryTypeId,
+                        Stock = model.Stock,
+                        Description = model.Description,
+                        Image = imagePath ?? "",
+                        Status = model.Status,
+                        TDDiscount = model.TDDiscount,
+                        Cost = model.Cost,
+                        TaxAppilcable = model.TaxAppilcable,
+                        TaxPercentage = model.TaxPercentage,
+                        CreatedOn = DateTime.Now
+                    };
 
-                    _context.SaveChanges();
+                    _context.Products.Add(product);
+                    await _context.SaveChangesAsync();
 
                     return Ok(new { success = true, message = "Saved Successfully!" });
                 }
-                if (model.ProductId != 0)
+                else
                 {
-                    var record = _context.Products.FirstOrDefault(p => p.ProductId == model.ProductId);
+                    var record = await _context.Products
+                        .FirstOrDefaultAsync(p => p.ProductId == model.ProductId);
 
                     if (record == null)
-                        return Ok(new { success = true, message = "Not Found!" });
+                        return Ok(new { success = false, message = "Product not found!" });
 
-                    if (record != null)
+                    if (imagePath != null && !string.IsNullOrEmpty(record.Image))
                     {
-                        record.Name = model.Name;
-                        record.BranchId = model.BranchId;
-                        record.ProductCode = model.ProductCode;
-                        record.Name = model.Name;
-                        record.Price = model.Price;
-                        record.CategoryTypeId = model.CategoryTypeId;
-                        record.Stock = model.Stock;
-                        record.Description = model.Description;
-                        record.Image = model.Image;
-                        record.Status = model.Status;
-                        record.TDDiscount = model.TDDiscount;
-                        record.TaxAppilcable = model.TaxAppilcable;
-                        record.TaxPercentage = model.TaxPercentage;
-                        record.CreatedOn = model.CreatedOn;
-                    }
-                    ;
+                        var oldImageFullPath = Path.Combine(_env.WebRootPath, record.Image.TrimStart('/'));
 
-                    _context.SaveChanges();
+                        if (System.IO.File.Exists(oldImageFullPath))
+                            System.IO.File.Delete(oldImageFullPath);
+
+                        record.Image = imagePath;
+                    }
+
+                    record.BranchId = model.BranchId;
+                    record.ProductCode = model.ProductCode;
+                    record.Name = model.Name;
+                    record.Price = model.Price;
+                    record.CategoryTypeId = model.CategoryTypeId;
+                    record.Stock = model.Stock;
+                    record.Description = model.Description;
+                    record.Status = model.Status;
+                    record.TDDiscount = model.TDDiscount;
+                    record.Cost = model.Cost;
+                    record.TaxAppilcable = model.TaxAppilcable;
+                    record.TaxPercentage = model.TaxPercentage;
+
+                    await _context.SaveChangesAsync();
 
                     return Ok(new { success = true, message = "Updated successfully!" });
                 }
-                return Ok(new { success = false, message = "No action found!" });
             }
             catch (Exception)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Internal server error." });
             }
         }
 

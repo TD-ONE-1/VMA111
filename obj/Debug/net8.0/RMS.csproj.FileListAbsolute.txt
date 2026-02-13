@@ -367,3 +367,4 @@ D:\FL\RMS\VMA111\obj\Debug\net8.0\refint\RMS.dll
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.pdb
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.genruntimeconfig.cache
 D:\FL\RMS\VMA111\obj\Debug\net8.0\ref\RMS.dll
+D:\FL\RMS\VMA111\bin\Debug\net8.0\RMS.staticwebassets.runtime.json

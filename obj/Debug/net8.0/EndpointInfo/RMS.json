@@ -1276,26 +1276,120 @@
         }
       }
     },
-    "/api/SWA/SaveProduct": {
+    "/SaveProduct": {
       "post": {
         "tags": [
           "SWA"
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/ProductsModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductsModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductsModel"
+                "type": "object",
+                "properties": {
+                  "ProductId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "BranchId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductCode": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CategoryTypeId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Stock": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Status": {
+                    "type": "boolean"
+                  },
+                  "TDDiscount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Cost": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "TaxAppilcable": {
+                    "type": "boolean"
+                  },
+                  "TaxPercentage": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CreatedOn": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "encoding": {
+                "ProductId": {
+                  "style": "form"
+                },
+                "BranchId": {
+                  "style": "form"
+                },
+                "ProductCode": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "CategoryTypeId": {
+                  "style": "form"
+                },
+                "Stock": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Image": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "TDDiscount": {
+                  "style": "form"
+                },
+                "Cost": {
+                  "style": "form"
+                },
+                "TaxAppilcable": {
+                  "style": "form"
+                },
+                "TaxPercentage": {
+                  "style": "form"
+                },
+                "CreatedOn": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1307,7 +1401,7 @@
         }
       }
     },
-    "/api/SWA/GetProducts": {
+    "/GetProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1319,7 +1413,7 @@
         }
       }
     },
-    "/api/SWA/SaveShopkeeper": {
+    "/SaveShopkeeper": {
       "post": {
         "tags": [
           "SWA"
@@ -1350,7 +1444,7 @@
         }
       }
     },
-    "/api/SWA/GetShopkeepers": {
+    "/GetShopkeepers": {
       "get": {
         "tags": [
           "SWA"
@@ -1362,7 +1456,7 @@
         }
       }
     },
-    "/api/SWA/GetShopkeeperByBussinessTypeId": {
+    "/GetShopkeeperByBussinessTypeId": {
       "get": {
         "tags": [
           "SWA"
@@ -1384,7 +1478,7 @@
         }
       }
     },
-    "/api/SWA/SaveCustomer": {
+    "/SaveCustomer": {
       "post": {
         "tags": [
           "SWA"
@@ -1415,7 +1509,7 @@
         }
       }
     },
-    "/api/SWA/GetCustomers": {
+    "/GetCustomers": {
       "get": {
         "tags": [
           "SWA"
@@ -1427,7 +1521,7 @@
         }
       }
     },
-    "/api/SWA/SaveShopBranch": {
+    "/SaveShopBranch": {
       "post": {
         "tags": [
           "SWA"
@@ -1458,7 +1552,7 @@
         }
       }
     },
-    "/api/SWA/GetShopBranches": {
+    "/GetShopBranches": {
       "get": {
         "tags": [
           "SWA"
@@ -1470,7 +1564,7 @@
         }
       }
     },
-    "/api/SWA/SaveOrder": {
+    "/SaveOrder": {
       "post": {
         "tags": [
           "SWA"
@@ -1501,7 +1595,7 @@
         }
       }
     },
-    "/api/SWA/GetOrders": {
+    "/GetOrders": {
       "get": {
         "tags": [
           "SWA"
@@ -1513,7 +1607,7 @@
         }
       }
     },
-    "/api/SWA/SavePurchaseProduct": {
+    "/SavePurchaseProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1544,7 +1638,7 @@
         }
       }
     },
-    "/api/SWA/GetPurchaseProducts": {
+    "/GetPurchaseProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1556,7 +1650,7 @@
         }
       }
     },
-    "/api/SWA/SaveProductCategory": {
+    "/SaveProductCategory": {
       "post": {
         "tags": [
           "SWA"
@@ -1587,7 +1681,7 @@
         }
       }
     },
-    "/api/SWA/GetProductCategories": {
+    "/GetProductCategories": {
       "get": {
         "tags": [
           "SWA"
@@ -2072,70 +2166,6 @@
           "transactionType": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ProductsModel": {
-        "type": "object",
-        "properties": {
-          "productId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "branchId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "productCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "categoryTypeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "stock": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "image": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "tdDiscount": {
-            "type": "number",
-            "format": "double"
-          },
-          "cost": {
-            "type": "number",
-            "format": "double"
-          },
-          "taxAppilcable": {
-            "type": "boolean"
-          },
-          "taxPercentage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "createdOn": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false
