@@ -11,9 +11,9 @@ using System.Numerics;
 
 namespace RMS.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Authorize]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class ResturantController : ControllerBase
     {
         private readonly RMSContext _context;
@@ -1041,6 +1041,7 @@ namespace RMS.Controllers
                         record.NoOfMembers = model.NoOfMembers;
                         record.BookingTypeId = model.BookingTypeId;
                         record.SlotId = model.SlotId;
+                        record.MealTypeId = model.MealTypeId;
                         record.SpecialRequest = model.SpecialRequest;
                     }
                     ;
@@ -1062,6 +1063,57 @@ namespace RMS.Controllers
         {
             List<vwEidReservationModel> model = new List<vwEidReservationModel>();
             model = MapperHelper.MapList<vwEidReservationModel, vwEidReservation>(_context.vwEidReservations.ToList());
+
+            return Ok(model);
+        }
+
+        [HttpPost("SaveMealType")]
+        public IActionResult SaveMealType([FromBody] MealTypeModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.MealTypeName))
+                    return Ok(new { success = false, message = "Invalid Data!" });
+
+                if (model.Id == 0)
+                {
+                    _context.MealTypes.Add(MapperHelper.Map<MealType, MealTypeModel>(model));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Saved Successfully!" });
+                }
+                if (model.Id != 0)
+                {
+                    var record = _context.MealTypes.FirstOrDefault(p => p.Id == model.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record != null)
+                    {
+                        record.MealTypeName = model.MealTypeName;
+                        record.IsActive = model.IsActive;
+                    }
+                    ;
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception ex)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpGet, Route("GetMealTypes")]
+        public IActionResult GetMealTypes()
+        {
+            List<MealTypeModel> model = new List<MealTypeModel>();
+            model = MapperHelper.MapList<MealTypeModel, MealType>(_context.MealTypes.ToList());
 
             return Ok(model);
         }

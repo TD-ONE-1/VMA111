@@ -17,9 +17,13 @@ public partial class EidReservation
 
     public int SlotId { get; set; }
 
+    public int MealTypeId { get; set; }
+
     public bool SpecialRequest { get; set; }
 
     public virtual R_BookingType BookingType { get; set; } = null!;
+
+    public virtual MealType MealType { get; set; } = null!;
 
     public virtual R_Slot Slot { get; set; } = null!;
 }

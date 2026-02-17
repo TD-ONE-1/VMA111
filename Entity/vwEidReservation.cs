@@ -13,6 +13,10 @@ public partial class vwEidReservation
 
     public int SlotId { get; set; }
 
+    public int MealTypeId { get; set; }
+
+    public string MealTypeName { get; set; } = null!;
+
     public string? Slot { get; set; }
 
     public int BookingTypeId { get; set; }

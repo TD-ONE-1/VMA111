@@ -21,6 +21,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<EventQuery> EventQueries { get; set; }
 
+    public virtual DbSet<MealType> MealTypes { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Package> Packages { get; set; }
@@ -128,6 +130,11 @@ public partial class RMSContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SpecialRequest_R_BookingType");
 
+            entity.HasOne(d => d.MealType).WithMany(p => p.EidReservations)
+                .HasForeignKey(d => d.MealTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EidReservation_MealType");
+
             entity.HasOne(d => d.Slot).WithMany(p => p.EidReservations)
                 .HasForeignKey(d => d.SlotId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -146,6 +153,17 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.EnquiryDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<MealType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__MealType");
+
+            entity.ToTable("MealType");
+
+            entity.Property(e => e.MealTypeName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -529,6 +547,9 @@ public partial class RMSContext : DbContext
                 .ToView("vwEidReservation");
 
             entity.Property(e => e.BookingType)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.MealTypeName)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Phone).HasMaxLength(30);

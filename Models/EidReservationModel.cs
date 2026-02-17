@@ -14,6 +14,8 @@
 
         public int SlotId { get; set; }
 
+        public int MealTypeId { get; set; }
+
         public bool SpecialRequest { get; set; }
     }
 }

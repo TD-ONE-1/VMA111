@@ -248,7 +248,7 @@
         }
       }
     },
-    "/api/Resturant/SaveResturant": {
+    "/SaveResturant": {
       "post": {
         "tags": [
           "Resturant"
@@ -279,7 +279,7 @@
         }
       }
     },
-    "/api/Resturant/GetResturants": {
+    "/GetResturants": {
       "get": {
         "tags": [
           "Resturant"
@@ -291,7 +291,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_BookingType": {
+    "/SaveR_BookingType": {
       "post": {
         "tags": [
           "Resturant"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_BookingTypes": {
+    "/GetR_BookingTypes": {
       "get": {
         "tags": [
           "Resturant"
@@ -334,7 +334,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_BookingTypesByResturandandBranch": {
+    "/GetR_BookingTypesByResturandandBranch": {
       "get": {
         "tags": [
           "Resturant"
@@ -364,7 +364,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_Branch": {
+    "/SaveR_Branch": {
       "post": {
         "tags": [
           "Resturant"
@@ -395,7 +395,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_Branches": {
+    "/GetR_Branches": {
       "get": {
         "tags": [
           "Resturant"
@@ -407,7 +407,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_BranchesByRestaurantId": {
+    "/GetR_BranchesByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -429,7 +429,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_Event": {
+    "/SaveR_Event": {
       "post": {
         "tags": [
           "Resturant"
@@ -460,7 +460,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_Events": {
+    "/GetR_Events": {
       "get": {
         "tags": [
           "Resturant"
@@ -472,7 +472,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_EventsByResturandandBranch": {
+    "/GetR_EventsByResturandandBranch": {
       "get": {
         "tags": [
           "Resturant"
@@ -502,7 +502,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_Offer": {
+    "/SaveR_Offer": {
       "post": {
         "tags": [
           "Resturant"
@@ -533,7 +533,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_Offers": {
+    "/GetR_Offers": {
       "get": {
         "tags": [
           "Resturant"
@@ -545,7 +545,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_OffersByRestaurantId": {
+    "/GetR_OffersByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -567,7 +567,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_Slot": {
+    "/SaveR_Slot": {
       "post": {
         "tags": [
           "Resturant"
@@ -598,7 +598,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_Slots": {
+    "/GetR_Slots": {
       "get": {
         "tags": [
           "Resturant"
@@ -610,7 +610,7 @@
         }
       }
     },
-    "/api/Resturant/GetSlotsByIsEidReservation": {
+    "/GetSlotsByIsEidReservation": {
       "get": {
         "tags": [
           "Resturant"
@@ -631,7 +631,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_SlotsByRestaurantIdandBranchId": {
+    "/GetR_SlotsByRestaurantIdandBranchId": {
       "get": {
         "tags": [
           "Resturant"
@@ -661,7 +661,7 @@
         }
       }
     },
-    "/api/Resturant/ReservationRequest": {
+    "/ReservationRequest": {
       "post": {
         "tags": [
           "Resturant"
@@ -692,7 +692,7 @@
         }
       }
     },
-    "/api/Resturant/GetReservations": {
+    "/GetReservations": {
       "get": {
         "tags": [
           "Resturant"
@@ -704,7 +704,7 @@
         }
       }
     },
-    "/api/Resturant/GetReservationsByUserId": {
+    "/GetReservationsByUserId": {
       "get": {
         "tags": [
           "Resturant"
@@ -726,7 +726,7 @@
         }
       }
     },
-    "/api/Resturant/ConfirmReservation": {
+    "/ConfirmReservation": {
       "post": {
         "tags": [
           "Resturant"
@@ -755,7 +755,7 @@
         }
       }
     },
-    "/api/Resturant/GetReviews": {
+    "/GetReviews": {
       "get": {
         "tags": [
           "Resturant"
@@ -767,7 +767,7 @@
         }
       }
     },
-    "/api/Resturant/AddReview": {
+    "/AddReview": {
       "post": {
         "tags": [
           "Resturant"
@@ -798,7 +798,7 @@
         }
       }
     },
-    "/api/Resturant/GetMenuByRestaurantIdandOfferId": {
+    "/GetMenuByRestaurantIdandOfferId": {
       "get": {
         "tags": [
           "Resturant"
@@ -828,7 +828,7 @@
         }
       }
     },
-    "/api/Resturant/SaveMenu": {
+    "/SaveMenu": {
       "post": {
         "tags": [
           "Resturant"
@@ -859,7 +859,7 @@
         }
       }
     },
-    "/api/Resturant/SaveR_Media": {
+    "/SaveR_Media": {
       "post": {
         "tags": [
           "Resturant"
@@ -912,7 +912,7 @@
         }
       }
     },
-    "/api/Resturant/GetR_MediaByRestaurantId": {
+    "/GetR_MediaByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -934,7 +934,7 @@
         }
       }
     },
-    "/api/Resturant/GetReservations/{id}": {
+    "/GetReservations/{id}": {
       "get": {
         "tags": [
           "Resturant"
@@ -957,7 +957,7 @@
         }
       }
     },
-    "/api/Resturant/GetReservationsByStatus": {
+    "/GetReservationsByStatus": {
       "get": {
         "tags": [
           "Resturant"
@@ -979,7 +979,7 @@
         }
       }
     },
-    "/api/Resturant/SaveEventQuery": {
+    "/SaveEventQuery": {
       "post": {
         "tags": [
           "Resturant"
@@ -1010,7 +1010,7 @@
         }
       }
     },
-    "/api/Resturant/GetEventQuery": {
+    "/GetEventQuery": {
       "get": {
         "tags": [
           "Resturant"
@@ -1022,7 +1022,7 @@
         }
       }
     },
-    "/api/Resturant/ConfirmEventQueries": {
+    "/ConfirmEventQueries": {
       "post": {
         "tags": [
           "Resturant"
@@ -1051,7 +1051,7 @@
         }
       }
     },
-    "/api/Resturant/GetEventQueryByStatus": {
+    "/GetEventQueryByStatus": {
       "get": {
         "tags": [
           "Resturant"
@@ -1073,7 +1073,7 @@
         }
       }
     },
-    "/api/Resturant/CreateRestaurant": {
+    "/CreateRestaurant": {
       "post": {
         "tags": [
           "Resturant"
@@ -1104,7 +1104,7 @@
         }
       }
     },
-    "/api/Resturant/SaveEidReservation": {
+    "/SaveEidReservation": {
       "post": {
         "tags": [
           "Resturant"
@@ -1135,7 +1135,7 @@
         }
       }
     },
-    "/api/Resturant/GetEidReservations": {
+    "/GetEidReservations": {
       "get": {
         "tags": [
           "Resturant"
@@ -1276,7 +1276,7 @@
         }
       }
     },
-    "/SaveProduct": {
+    "/api/SWA/SaveProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1401,7 +1401,7 @@
         }
       }
     },
-    "/GetProducts": {
+    "/api/SWA/GetProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1413,7 +1413,7 @@
         }
       }
     },
-    "/SaveShopkeeper": {
+    "/api/SWA/SaveShopkeeper": {
       "post": {
         "tags": [
           "SWA"
@@ -1444,7 +1444,7 @@
         }
       }
     },
-    "/GetShopkeepers": {
+    "/api/SWA/GetShopkeepers": {
       "get": {
         "tags": [
           "SWA"
@@ -1456,7 +1456,7 @@
         }
       }
     },
-    "/GetShopkeeperByBussinessTypeId": {
+    "/api/SWA/GetShopkeeperByBussinessTypeId": {
       "get": {
         "tags": [
           "SWA"
@@ -1478,7 +1478,7 @@
         }
       }
     },
-    "/SaveCustomer": {
+    "/api/SWA/SaveCustomer": {
       "post": {
         "tags": [
           "SWA"
@@ -1509,7 +1509,7 @@
         }
       }
     },
-    "/GetCustomers": {
+    "/api/SWA/GetCustomers": {
       "get": {
         "tags": [
           "SWA"
@@ -1521,7 +1521,7 @@
         }
       }
     },
-    "/SaveShopBranch": {
+    "/api/SWA/SaveShopBranch": {
       "post": {
         "tags": [
           "SWA"
@@ -1552,7 +1552,7 @@
         }
       }
     },
-    "/GetShopBranches": {
+    "/api/SWA/GetShopBranches": {
       "get": {
         "tags": [
           "SWA"
@@ -1564,7 +1564,7 @@
         }
       }
     },
-    "/SaveOrder": {
+    "/api/SWA/SaveOrder": {
       "post": {
         "tags": [
           "SWA"
@@ -1595,7 +1595,7 @@
         }
       }
     },
-    "/GetOrders": {
+    "/api/SWA/GetOrders": {
       "get": {
         "tags": [
           "SWA"
@@ -1607,7 +1607,7 @@
         }
       }
     },
-    "/SavePurchaseProduct": {
+    "/api/SWA/SavePurchaseProduct": {
       "post": {
         "tags": [
           "SWA"
@@ -1638,7 +1638,7 @@
         }
       }
     },
-    "/GetPurchaseProducts": {
+    "/api/SWA/GetPurchaseProducts": {
       "get": {
         "tags": [
           "SWA"
@@ -1650,7 +1650,7 @@
         }
       }
     },
-    "/SaveProductCategory": {
+    "/api/SWA/SaveProductCategory": {
       "post": {
         "tags": [
           "SWA"
@@ -1681,7 +1681,7 @@
         }
       }
     },
-    "/GetProductCategories": {
+    "/api/SWA/GetProductCategories": {
       "get": {
         "tags": [
           "SWA"
