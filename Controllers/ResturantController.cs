@@ -11,9 +11,9 @@ using System.Numerics;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
-    //[Route("api/[controller]")]
-    //[ApiController]
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
     public class ResturantController : ControllerBase
     {
         private readonly RMSContext _context;

@@ -645,6 +645,16 @@
   },
   {
     "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetMealTypes",
+    "RelativePath": "GetMealTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
     "Method": "GetMenuByRestaurantIdandOfferId",
     "RelativePath": "GetMenuByRestaurantIdandOfferId",
     "HttpMethod": "GET",
@@ -962,6 +972,22 @@
       {
         "Name": "model",
         "Type": "RMS.Models.EventQueryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveMealType",
+    "RelativePath": "SaveMealType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.MealTypeModel",
         "IsRequired": true
       }
     ],
