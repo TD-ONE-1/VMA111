@@ -13,11 +13,13 @@ public partial class vwEventQuery
 
     public int NoOfPeople { get; set; }
 
+    public int UserId { get; set; }
+
     public string? Timing { get; set; }
 
-    public long? Status { get; set; }
+    public long Status { get; set; }
 
-    public bool? IsActive { get; set; }
+    public bool IsActive { get; set; }
 
     public DateOnly? EnquiryDate { get; set; }
 

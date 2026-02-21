@@ -214,9 +214,10 @@ public partial class RMSContext : DbContext
 
         modelBuilder.Entity<Package>(entity =>
         {
-            entity.HasNoKey();
-
-            entity.Property(e => e.PkgName).HasMaxLength(50);
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.PkgName)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
         });
 

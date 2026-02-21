@@ -840,6 +840,7 @@ namespace RMS.Controllers
                         record.BookingDate = model.BookingDate;
                         record.NoOfPeople = model.NoOfPeople;
                         record.EventTypeId = model.EventTypeId;
+                        record.PackageId = model.PackageId;
                         record.ServiceTypeId = model.ServiceTypeId;
                         record.Timing = model.Timing;
                         record.EnquiryDate = model.EnquiryDate;
@@ -908,6 +909,16 @@ namespace RMS.Controllers
                 model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.Where(p => p.Status == status).OrderByDescending(p => p.id).ToList());
             else
                 model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.OrderByDescending(p => p.id).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetEventQueriesByUserId")]
+        public IActionResult GetEventQueriesByUserId(int UserId)
+        {
+            List<vwEventQueryModel> model = new List<vwEventQueryModel>();
+
+            model = MapperHelper.MapList<vwEventQueryModel, vwEventQuery>(_context.vwEventQueries.Where(p => p.UserId == UserId).OrderByDescending(p => p.id).ToList());
 
             return Ok(model);
         }

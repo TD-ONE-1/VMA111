@@ -16,6 +16,8 @@
 
         public int EventTypeId { get; set; }
 
+        public long PackageId { get; set; }
+
         public int ServiceTypeId { get; set; }
 
         public TimeOnly Timing { get; set; }
