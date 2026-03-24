@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWAController : ControllerBase

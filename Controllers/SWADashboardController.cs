@@ -5,7 +5,7 @@ using RMS.Models.SecondApp;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWADashboardController : Controller
