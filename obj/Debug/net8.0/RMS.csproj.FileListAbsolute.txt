@@ -368,3 +368,7 @@ D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.pdb
 D:\FL\RMS\VMA111\obj\Debug\net8.0\RMS.genruntimeconfig.cache
 D:\FL\RMS\VMA111\obj\Debug\net8.0\ref\RMS.dll
 D:\FL\RMS\VMA111\bin\Debug\net8.0\RMS.staticwebassets.runtime.json
+D:\FL\RMS\VMA111\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\FL\RMS\VMA111\obj\Debug\net8.0\rjimswa.dswa.cache.json
+D:\FL\RMS\VMA111\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+D:\FL\RMS\VMA111\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

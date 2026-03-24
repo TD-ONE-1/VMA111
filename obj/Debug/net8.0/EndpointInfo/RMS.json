@@ -248,7 +248,7 @@
         }
       }
     },
-    "/SaveResturant": {
+    "/api/Resturant/SaveResturant": {
       "post": {
         "tags": [
           "Resturant"
@@ -279,7 +279,7 @@
         }
       }
     },
-    "/GetResturants": {
+    "/api/Resturant/GetResturants": {
       "get": {
         "tags": [
           "Resturant"
@@ -291,7 +291,7 @@
         }
       }
     },
-    "/SaveR_BookingType": {
+    "/api/Resturant/SaveR_BookingType": {
       "post": {
         "tags": [
           "Resturant"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/GetR_BookingTypes": {
+    "/api/Resturant/GetR_BookingTypes": {
       "get": {
         "tags": [
           "Resturant"
@@ -334,7 +334,7 @@
         }
       }
     },
-    "/GetR_BookingTypesByResturandandBranch": {
+    "/api/Resturant/GetR_BookingTypesByResturandandBranch": {
       "get": {
         "tags": [
           "Resturant"
@@ -364,7 +364,7 @@
         }
       }
     },
-    "/SaveR_Branch": {
+    "/api/Resturant/SaveR_Branch": {
       "post": {
         "tags": [
           "Resturant"
@@ -395,7 +395,7 @@
         }
       }
     },
-    "/GetR_Branches": {
+    "/api/Resturant/GetR_Branches": {
       "get": {
         "tags": [
           "Resturant"
@@ -407,7 +407,7 @@
         }
       }
     },
-    "/GetR_BranchesByRestaurantId": {
+    "/api/Resturant/GetR_BranchesByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -429,7 +429,7 @@
         }
       }
     },
-    "/SaveR_Event": {
+    "/api/Resturant/SaveR_Event": {
       "post": {
         "tags": [
           "Resturant"
@@ -460,7 +460,7 @@
         }
       }
     },
-    "/GetR_Events": {
+    "/api/Resturant/GetR_Events": {
       "get": {
         "tags": [
           "Resturant"
@@ -472,7 +472,7 @@
         }
       }
     },
-    "/GetR_EventsByResturandandBranch": {
+    "/api/Resturant/GetR_EventsByResturandandBranch": {
       "get": {
         "tags": [
           "Resturant"
@@ -502,7 +502,7 @@
         }
       }
     },
-    "/SaveR_Offer": {
+    "/api/Resturant/SaveR_Offer": {
       "post": {
         "tags": [
           "Resturant"
@@ -533,7 +533,7 @@
         }
       }
     },
-    "/GetR_Offers": {
+    "/api/Resturant/GetR_Offers": {
       "get": {
         "tags": [
           "Resturant"
@@ -545,7 +545,7 @@
         }
       }
     },
-    "/GetR_OffersByRestaurantId": {
+    "/api/Resturant/GetR_OffersByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -567,7 +567,7 @@
         }
       }
     },
-    "/SaveR_Slot": {
+    "/api/Resturant/SaveR_Slot": {
       "post": {
         "tags": [
           "Resturant"
@@ -598,7 +598,7 @@
         }
       }
     },
-    "/GetR_Slots": {
+    "/api/Resturant/GetR_Slots": {
       "get": {
         "tags": [
           "Resturant"
@@ -610,7 +610,7 @@
         }
       }
     },
-    "/GetSlotsByIsEidReservation": {
+    "/api/Resturant/GetSlotsByIsEidReservation": {
       "get": {
         "tags": [
           "Resturant"
@@ -631,7 +631,7 @@
         }
       }
     },
-    "/GetR_SlotsByRestaurantIdandBranchId": {
+    "/api/Resturant/GetR_SlotsByRestaurantIdandBranchId": {
       "get": {
         "tags": [
           "Resturant"
@@ -661,7 +661,7 @@
         }
       }
     },
-    "/ReservationRequest": {
+    "/api/Resturant/ReservationRequest": {
       "post": {
         "tags": [
           "Resturant"
@@ -692,7 +692,7 @@
         }
       }
     },
-    "/GetReservations": {
+    "/api/Resturant/GetReservations": {
       "get": {
         "tags": [
           "Resturant"
@@ -704,7 +704,7 @@
         }
       }
     },
-    "/GetReservationsByUserId": {
+    "/api/Resturant/GetReservationsByUserId": {
       "get": {
         "tags": [
           "Resturant"
@@ -726,7 +726,7 @@
         }
       }
     },
-    "/ConfirmReservation": {
+    "/api/Resturant/ConfirmReservation": {
       "post": {
         "tags": [
           "Resturant"
@@ -755,7 +755,7 @@
         }
       }
     },
-    "/GetReviews": {
+    "/api/Resturant/GetReviews": {
       "get": {
         "tags": [
           "Resturant"
@@ -767,7 +767,7 @@
         }
       }
     },
-    "/AddReview": {
+    "/api/Resturant/AddReview": {
       "post": {
         "tags": [
           "Resturant"
@@ -798,7 +798,7 @@
         }
       }
     },
-    "/GetMenuByRestaurantIdandOfferId": {
+    "/api/Resturant/GetMenuByRestaurantIdandOfferId": {
       "get": {
         "tags": [
           "Resturant"
@@ -828,7 +828,7 @@
         }
       }
     },
-    "/SaveMenu": {
+    "/api/Resturant/SaveMenu": {
       "post": {
         "tags": [
           "Resturant"
@@ -859,7 +859,7 @@
         }
       }
     },
-    "/SaveR_Media": {
+    "/api/Resturant/SaveR_Media": {
       "post": {
         "tags": [
           "Resturant"
@@ -912,7 +912,7 @@
         }
       }
     },
-    "/GetR_MediaByRestaurantId": {
+    "/api/Resturant/GetR_MediaByRestaurantId": {
       "get": {
         "tags": [
           "Resturant"
@@ -934,7 +934,7 @@
         }
       }
     },
-    "/GetReservations/{id}": {
+    "/api/Resturant/GetReservations/{id}": {
       "get": {
         "tags": [
           "Resturant"
@@ -957,7 +957,7 @@
         }
       }
     },
-    "/GetReservationsByStatus": {
+    "/api/Resturant/GetReservationsByStatus": {
       "get": {
         "tags": [
           "Resturant"
@@ -979,7 +979,7 @@
         }
       }
     },
-    "/SaveEventQuery": {
+    "/api/Resturant/SaveEventQuery": {
       "post": {
         "tags": [
           "Resturant"
@@ -1010,7 +1010,7 @@
         }
       }
     },
-    "/GetEventQuery": {
+    "/api/Resturant/GetEventQuery": {
       "get": {
         "tags": [
           "Resturant"
@@ -1022,7 +1022,7 @@
         }
       }
     },
-    "/ConfirmEventQueries": {
+    "/api/Resturant/ConfirmEventQueries": {
       "post": {
         "tags": [
           "Resturant"
@@ -1051,7 +1051,7 @@
         }
       }
     },
-    "/GetEventQueryByStatus": {
+    "/api/Resturant/GetEventQueryByStatus": {
       "get": {
         "tags": [
           "Resturant"
@@ -1073,7 +1073,29 @@
         }
       }
     },
-    "/CreateRestaurant": {
+    "/api/Resturant/GetEventQueriesByUserId": {
+      "get": {
+        "tags": [
+          "Resturant"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Resturant/CreateRestaurant": {
       "post": {
         "tags": [
           "Resturant"
@@ -1104,7 +1126,7 @@
         }
       }
     },
-    "/SaveEidReservation": {
+    "/api/Resturant/SaveEidReservation": {
       "post": {
         "tags": [
           "Resturant"
@@ -1135,7 +1157,7 @@
         }
       }
     },
-    "/GetEidReservations": {
+    "/api/Resturant/GetEidReservations": {
       "get": {
         "tags": [
           "Resturant"
@@ -1147,7 +1169,7 @@
         }
       }
     },
-    "/SaveMealType": {
+    "/api/Resturant/SaveMealType": {
       "post": {
         "tags": [
           "Resturant"
@@ -1178,7 +1200,7 @@
         }
       }
     },
-    "/GetMealTypes": {
+    "/api/Resturant/GetMealTypes": {
       "get": {
         "tags": [
           "Resturant"
@@ -1360,6 +1382,9 @@
                     "type": "string"
                   },
                   "Image": {
+                    "type": "string"
+                  },
+                  "ImageFile": {
                     "type": "string",
                     "format": "binary"
                   },
@@ -1413,6 +1438,9 @@
                   "style": "form"
                 },
                 "Image": {
+                  "style": "form"
+                },
+                "ImageFile": {
                   "style": "form"
                 },
                 "Status": {
@@ -1984,6 +2012,10 @@
           "eventTypeId": {
             "type": "integer",
             "format": "int32"
+          },
+          "packageId": {
+            "type": "integer",
+            "format": "int64"
           },
           "serviceTypeId": {
             "type": "integer",

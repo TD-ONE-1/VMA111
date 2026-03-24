@@ -1,21 +1,5 @@
 [
   {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "AddReview",
-    "RelativePath": "AddReview",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.ReviewModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "RMS.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "api/Account/login",
@@ -168,6 +152,625 @@
       {
         "Name": "model",
         "Type": "RMS.Models.EmailRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "AddReview",
+    "RelativePath": "api/Resturant/AddReview",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ReviewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "ConfirmEventQueries",
+    "RelativePath": "api/Resturant/ConfirmEventQueries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventQueriesIds",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "ConfirmReservation",
+    "RelativePath": "api/Resturant/ConfirmReservation",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ReservationRequestIds",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "CreateRestaurant",
+    "RelativePath": "api/Resturant/CreateRestaurant",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.RestaurantCreateModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEidReservations",
+    "RelativePath": "api/Resturant/GetEidReservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEventQueriesByUserId",
+    "RelativePath": "api/Resturant/GetEventQueriesByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEventQuery",
+    "RelativePath": "api/Resturant/GetEventQuery",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetEventQueryByStatus",
+    "RelativePath": "api/Resturant/GetEventQueryByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetMealTypes",
+    "RelativePath": "api/Resturant/GetMealTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetMenuByRestaurantIdandOfferId",
+    "RelativePath": "api/Resturant/GetMenuByRestaurantIdandOfferId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OfferId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_BookingTypes",
+    "RelativePath": "api/Resturant/GetR_BookingTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_BookingTypesByResturandandBranch",
+    "RelativePath": "api/Resturant/GetR_BookingTypesByResturandandBranch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "BranchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_Branches",
+    "RelativePath": "api/Resturant/GetR_Branches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_BranchesByRestaurantId",
+    "RelativePath": "api/Resturant/GetR_BranchesByRestaurantId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_Events",
+    "RelativePath": "api/Resturant/GetR_Events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_EventsByResturandandBranch",
+    "RelativePath": "api/Resturant/GetR_EventsByResturandandBranch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "BranchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_MediaByRestaurantId",
+    "RelativePath": "api/Resturant/GetR_MediaByRestaurantId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_Offers",
+    "RelativePath": "api/Resturant/GetR_Offers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_OffersByRestaurantId",
+    "RelativePath": "api/Resturant/GetR_OffersByRestaurantId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_Slots",
+    "RelativePath": "api/Resturant/GetR_Slots",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetR_SlotsByRestaurantIdandBranchId",
+    "RelativePath": "api/Resturant/GetR_SlotsByRestaurantIdandBranchId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "BranchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservations",
+    "RelativePath": "api/Resturant/GetReservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservations",
+    "RelativePath": "api/Resturant/GetReservations/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservationsByStatus",
+    "RelativePath": "api/Resturant/GetReservationsByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReservationsByUserId",
+    "RelativePath": "api/Resturant/GetReservationsByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetResturants",
+    "RelativePath": "api/Resturant/GetResturants",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetReviews",
+    "RelativePath": "api/Resturant/GetReviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "GetSlotsByIsEidReservation",
+    "RelativePath": "api/Resturant/GetSlotsByIsEidReservation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "isEidReservation",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "ReservationRequest",
+    "RelativePath": "api/Resturant/ReservationRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ReservationRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveEidReservation",
+    "RelativePath": "api/Resturant/SaveEidReservation",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.EidReservationModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveEventQuery",
+    "RelativePath": "api/Resturant/SaveEventQuery",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.EventQueryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveMealType",
+    "RelativePath": "api/Resturant/SaveMealType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.MealTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveMenu",
+    "RelativePath": "api/Resturant/SaveMenu",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_MenuModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_BookingType",
+    "RelativePath": "api/Resturant/SaveR_BookingType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_BookingTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_Branch",
+    "RelativePath": "api/Resturant/SaveR_Branch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_BranchModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_Event",
+    "RelativePath": "api/Resturant/SaveR_Event",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_EventModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_Media",
+    "RelativePath": "api/Resturant/SaveR_Media",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RestaurantId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Logo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Banner",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gallery",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_Offer",
+    "RelativePath": "api/Resturant/SaveR_Offer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_OfferModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveR_Slot",
+    "RelativePath": "api/Resturant/SaveR_Slot",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.R_SlotModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.ResturantController",
+    "Method": "SaveResturant",
+    "RelativePath": "api/Resturant/SaveResturant",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ResturantModel",
         "IsRequired": true
       }
     ],
@@ -419,6 +1022,11 @@
       },
       {
         "Name": "Image",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageFile",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
@@ -547,593 +1155,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "ConfirmEventQueries",
-    "RelativePath": "ConfirmEventQueries",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "EventQueriesIds",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "StatusType",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "ConfirmReservation",
-    "RelativePath": "ConfirmReservation",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ReservationRequestIds",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "StatusType",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "CreateRestaurant",
-    "RelativePath": "CreateRestaurant",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.RestaurantCreateModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetEidReservations",
-    "RelativePath": "GetEidReservations",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetEventQuery",
-    "RelativePath": "GetEventQuery",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetEventQueryByStatus",
-    "RelativePath": "GetEventQueryByStatus",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "status",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetMealTypes",
-    "RelativePath": "GetMealTypes",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetMenuByRestaurantIdandOfferId",
-    "RelativePath": "GetMenuByRestaurantIdandOfferId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "OfferId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_BookingTypes",
-    "RelativePath": "GetR_BookingTypes",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_BookingTypesByResturandandBranch",
-    "RelativePath": "GetR_BookingTypesByResturandandBranch",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "BranchId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_Branches",
-    "RelativePath": "GetR_Branches",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_BranchesByRestaurantId",
-    "RelativePath": "GetR_BranchesByRestaurantId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_Events",
-    "RelativePath": "GetR_Events",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_EventsByResturandandBranch",
-    "RelativePath": "GetR_EventsByResturandandBranch",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "BranchId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_MediaByRestaurantId",
-    "RelativePath": "GetR_MediaByRestaurantId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_Offers",
-    "RelativePath": "GetR_Offers",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_OffersByRestaurantId",
-    "RelativePath": "GetR_OffersByRestaurantId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_Slots",
-    "RelativePath": "GetR_Slots",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetR_SlotsByRestaurantIdandBranchId",
-    "RelativePath": "GetR_SlotsByRestaurantIdandBranchId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "BranchId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetReservations",
-    "RelativePath": "GetReservations",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetReservations",
-    "RelativePath": "GetReservations/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetReservationsByStatus",
-    "RelativePath": "GetReservationsByStatus",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "status",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetReservationsByUserId",
-    "RelativePath": "GetReservationsByUserId",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "UserId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetResturants",
-    "RelativePath": "GetResturants",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetReviews",
-    "RelativePath": "GetReviews",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "GetSlotsByIsEidReservation",
-    "RelativePath": "GetSlotsByIsEidReservation",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "isEidReservation",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "ReservationRequest",
-    "RelativePath": "ReservationRequest",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.ReservationRequestModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveEidReservation",
-    "RelativePath": "SaveEidReservation",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.EidReservationModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveEventQuery",
-    "RelativePath": "SaveEventQuery",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.EventQueryModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveMealType",
-    "RelativePath": "SaveMealType",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.MealTypeModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveMenu",
-    "RelativePath": "SaveMenu",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_MenuModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_BookingType",
-    "RelativePath": "SaveR_BookingType",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_BookingTypeModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_Branch",
-    "RelativePath": "SaveR_Branch",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_BranchModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_Event",
-    "RelativePath": "SaveR_Event",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_EventModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_Media",
-    "RelativePath": "SaveR_Media",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "RestaurantId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Logo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Banner",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Gallery",
-        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_Offer",
-    "RelativePath": "SaveR_Offer",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_OfferModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveR_Slot",
-    "RelativePath": "SaveR_Slot",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.R_SlotModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RMS.Controllers.ResturantController",
-    "Method": "SaveResturant",
-    "RelativePath": "SaveResturant",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RMS.Models.ResturantModel",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   }
 ]

@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWAController : ControllerBase
@@ -43,7 +43,7 @@ namespace RMS.Controllers
                     if (model.Image.Length > 2 * 1024 * 1024)
                         return Ok(new { success = false, message = "Image size must be less than 2MB." });
 
-                    var extension = Path.GetExtension(model.Image.FileName).ToLower();
+                    var extension = Path.GetExtension(model.ImageFile.FileName).ToLower();
 
                     if (!allowedExtensions.Contains(extension))
                         return Ok(new { success = false, message = "Only JPG, PNG, WEBP images are allowed." });
@@ -58,7 +58,7 @@ namespace RMS.Controllers
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await model.Image.CopyToAsync(stream);
+                        await model.ImageFile.CopyToAsync(stream);
                     }
 
                     imagePath = "/ProductImages/" + fileName;
