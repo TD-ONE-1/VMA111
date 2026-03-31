@@ -7,7 +7,7 @@ using RMS.Models;
 
 namespace RMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DashboardController : ControllerBase
