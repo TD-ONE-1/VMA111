@@ -19,18 +19,15 @@ builder.Services.AddCors(options =>
         policy => policy
             .WithOrigins("http://localhost:3000", 
             "http://localhost:5000", 
-            "http://localhost:5173")
+            "http://localhost:5173",
+            "https://lalqila-sandton-admin.muhammad-18870.workers.dev")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
     );
 });
 var config = builder.Configuration;
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -61,8 +58,6 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-
-// Configure DbContext with connection string
 builder.Services.AddDbContext<RMSContext>(options =>
     options.UseSqlServer(config.GetConnectionString("dbcs")));
 
@@ -81,12 +76,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
-
 var app = builder.Build();
-
 app.UseCors("AllowReactApp");
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
