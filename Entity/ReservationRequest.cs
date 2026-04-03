@@ -25,6 +25,8 @@ public partial class ReservationRequest
 
     public int BookingTypeId { get; set; }
 
+    public string BookingFor { get; set; } = null!;
+
     public int SlotId { get; set; }
 
     public int Members { get; set; }

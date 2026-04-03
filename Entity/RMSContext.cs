@@ -383,6 +383,9 @@ public partial class RMSContext : DbContext
 
             entity.ToTable("ReservationRequest");
 
+            entity.Property(e => e.BookingFor)
+                .HasMaxLength(50)
+                .HasDefaultValue("");
             entity.Property(e => e.PhoneNo)
                 .HasMaxLength(50)
                 .HasDefaultValue("");

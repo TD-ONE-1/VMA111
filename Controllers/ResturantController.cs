@@ -495,12 +495,14 @@ namespace RMS.Controllers
                         record.BranchId = model.BranchId;
                         record.OfferId = model.OfferId;
                         record.BookingTypeId = model.BookingTypeId;
+                        record.BookingFor = model.BookingFor;
                         record.SlotId = model.SlotId;
                         record.Members = model.Members;
                         record.Remarks = model.Remarks;
                         record.PhoneNo = model.PhoneNo;
                         record.ReservationName = model.ReservationName;
                         record.IsArrived = model.IsArrived;
+                        record.Status = 0;
                     }
                     ;
 
