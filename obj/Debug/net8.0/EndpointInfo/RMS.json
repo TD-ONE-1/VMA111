@@ -1902,12 +1902,12 @@
             "nullable": true
           },
           "latitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "longitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "ratingId": {
             "type": "integer",
@@ -2520,6 +2520,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "bookingFor": {
+            "type": "string",
+            "nullable": true
+          },
           "slotId": {
             "type": "integer",
             "format": "int32"
@@ -2713,12 +2717,12 @@
             "nullable": true
           },
           "latitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "longitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "boolean"
@@ -2777,12 +2781,12 @@
             "type": "boolean"
           },
           "latitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "longitude": {
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "nullable": true
           },
           "ratingId": {
             "type": "integer",

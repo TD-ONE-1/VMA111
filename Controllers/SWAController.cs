@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWAController : ControllerBase
@@ -188,7 +188,7 @@ namespace RMS.Controllers
                 }
                 return Ok(new { success = false, message = "No action found!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Ok("Something went wrong!");
             }
@@ -198,7 +198,7 @@ namespace RMS.Controllers
         public IActionResult GetShopkeepers()
         {
             List<ShopkeeperModel> model = new List<ShopkeeperModel>();
-            model = MapperHelper.MapList<ShopkeeperModel, Shopkeeper>(_context.Shopkeepers.Where(p => p.Status == true).ToList());
+            model = MapperHelper.MapList<ShopkeeperModel, Shopkeeper>(_context.Shopkeepers.ToList());
 
             return Ok(model);
         }
@@ -265,7 +265,7 @@ namespace RMS.Controllers
                 }
                 return Ok(new { success = false, message = "No action found!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Ok("Something went wrong!");
             }
@@ -323,7 +323,7 @@ namespace RMS.Controllers
                 }
                 return Ok(new { success = false, message = "No action found!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Ok("Something went wrong!");
             }

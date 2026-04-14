@@ -29,9 +29,9 @@ public partial class Shopkeeper
 
     public bool Status { get; set; }
 
-    public decimal Latitude { get; set; }
+    public string Latitude { get; set; } = null!;
 
-    public decimal Longitude { get; set; }
+    public string Longitude { get; set; } = null!;
 
     public int RatingId { get; set; }
 

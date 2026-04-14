@@ -100,8 +100,12 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasDefaultValue("");
-            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
-            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Latitude)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Longitude)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
             entity.Property(e => e.MobileNo)
                 .HasMaxLength(20)
                 .HasDefaultValue("");
@@ -471,8 +475,12 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasDefaultValue("");
-            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
-            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Latitude)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
+            entity.Property(e => e.Longitude)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
             entity.Property(e => e.MobileNumber)
                 .HasMaxLength(20)
                 .HasDefaultValue("");
@@ -499,8 +507,12 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasDefaultValue("");
-            entity.Property(e => e.Latitude).HasColumnType("decimal(9, 6)");
-            entity.Property(e => e.Longitude).HasColumnType("decimal(9, 6)");
+            entity.Property(e => e.Latitude)
+                .HasMaxLength(100)
+                .HasDefaultValueSql("((0.00))");
+            entity.Property(e => e.Longitude)
+                .HasMaxLength(100)
+                .HasDefaultValue("");
             entity.Property(e => e.MobileNumber)
                 .HasMaxLength(20)
                 .HasDefaultValue("");
