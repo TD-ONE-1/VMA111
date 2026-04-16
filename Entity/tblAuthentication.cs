@@ -19,5 +19,11 @@ public partial class tblAuthentication
 
     public string CreatedBy { get; set; } = null!;
 
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual ICollection<ShopBranch> ShopBranches { get; set; } = new List<ShopBranch>();
+
     public virtual UserType UserType { get; set; } = null!;
 }

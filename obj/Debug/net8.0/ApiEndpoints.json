@@ -974,6 +974,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "SaveOrderList",
+    "RelativePath": "api/SWA/SaveOrderList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "models",
+        "Type": "System.Collections.Generic.List\u00601[[RMS.Models.SecondApp.OrdersModel, RMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
     "Method": "SaveProduct",
     "RelativePath": "api/SWA/SaveProduct",
     "HttpMethod": "POST",

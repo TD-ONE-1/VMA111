@@ -118,6 +118,16 @@ public partial class RMSContext : DbContext
                 .HasMaxLength(20)
                 .HasDefaultValue("");
             entity.Property(e => e.Status).HasDefaultValue(true);
+
+            entity.HasOne(d => d.Shopkeeper).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.ShopkeeperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Customer_Shopkeeper");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Customer_tblAuthentication");
         });
 
         modelBuilder.Entity<EidReservation>(entity =>
@@ -216,6 +226,11 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.ShopkeeperId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Orders_ShopBranch");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Orders_tblAuthentication");
         });
 
         modelBuilder.Entity<Package>(entity =>
@@ -489,6 +504,11 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.PhoneNo)
                 .HasMaxLength(20)
                 .HasDefaultValue("");
+
+            entity.HasOne(d => d.User).WithMany(p => p.ShopBranches)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ShopBranch_tblAuthentication");
         });
 
         modelBuilder.Entity<Shopkeeper>(entity =>

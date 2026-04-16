@@ -3,12 +3,14 @@
     public class CustomerModel
     {
         public int CustomerId { get; set; }
-
+        
         public string CustomerCode { get; set; } = null!;
 
         public string CustName { get; set; } = null!;
 
         public string CustAccountCode { get; set; } = null!;
+
+        public int ShopkeeperId { get; set; }
 
         public string Address { get; set; } = null!;
 
@@ -33,5 +35,7 @@
         public int PaymentTermId { get; set; }
 
         public decimal Discount { get; set; }
+
+        public int UserId { get; set; }
     }
 }

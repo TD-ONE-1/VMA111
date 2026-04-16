@@ -13,6 +13,8 @@ public partial class Customer
 
     public string CustAccountCode { get; set; } = null!;
 
+    public int ShopkeeperId { get; set; }
+
     public string Address { get; set; } = null!;
 
     public string NTN { get; set; } = null!;
@@ -37,5 +39,11 @@ public partial class Customer
 
     public decimal Discount { get; set; }
 
+    public int UserId { get; set; }
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual Shopkeeper Shopkeeper { get; set; } = null!;
+
+    public virtual tblAuthentication User { get; set; } = null!;
 }

@@ -47,9 +47,13 @@ public partial class Order
 
     public DateTime ConfirmDeliveryDate { get; set; }
 
+    public int UserId { get; set; }
+
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;
 
     public virtual Shopkeeper Shopkeeper { get; set; } = null!;
+
+    public virtual tblAuthentication User { get; set; } = null!;
 }

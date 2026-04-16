@@ -43,5 +43,7 @@
         public DateTime ExpectedDeliveryDate { get; set; }
 
         public DateTime ConfirmDeliveryDate { get; set; }
+
+        public int UserId { get; set; }
     }
 }

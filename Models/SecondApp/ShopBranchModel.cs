@@ -21,5 +21,7 @@
         public string Longitude { get; set; } = null!;
 
         public bool Status { get; set; }
+
+        public int UserId { get; set; }
     }
 }

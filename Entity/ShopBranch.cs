@@ -25,5 +25,9 @@ public partial class ShopBranch
 
     public bool Status { get; set; }
 
+    public int UserId { get; set; }
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public virtual tblAuthentication User { get; set; } = null!;
 }

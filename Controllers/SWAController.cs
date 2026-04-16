@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWAController : ControllerBase
@@ -244,6 +244,7 @@ namespace RMS.Controllers
                         record.CustomerCode = model.CustomerCode;
                         record.CustName = model.CustName;
                         record.CustAccountCode = model.CustAccountCode;
+                        record.ShopkeeperId = model.ShopkeeperId;
                         record.Address = model.Address;
                         record.NTN = model.NTN;
                         record.CNIC = model.CNIC;
@@ -256,6 +257,7 @@ namespace RMS.Controllers
                         record.RatingId = model.RatingId;
                         record.PaymentTermId = model.PaymentTermId;
                         record.Discount = model.Discount;
+                        record.UserId = model.UserId;
                     }
                     ;
 
@@ -276,6 +278,15 @@ namespace RMS.Controllers
         {
             List<CustomerModel> model = new List<CustomerModel>();
             model = MapperHelper.MapList<CustomerModel, Customer>(_context.Customers.Where(p => p.Status == true).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetCustomersByUserId")]
+        public IActionResult GetCustomersByUserId(int UserId)
+        {
+            List<CustomerModel> model = new List<CustomerModel>();
+            model = MapperHelper.MapList<CustomerModel, Customer>(_context.Customers.Where(u => u.UserId == UserId).ToList());
 
             return Ok(model);
         }
@@ -314,6 +325,7 @@ namespace RMS.Controllers
                         record.Latitude = model.Latitude;
                         record.Longitude = model.Longitude;
                         record.Status = model.Status;
+                        record.UserId = model.UserId;
                     }
                     ;
 
@@ -334,6 +346,15 @@ namespace RMS.Controllers
         {
             List<ShopBranchModel> model = new List<ShopBranchModel>();
             model = MapperHelper.MapList<ShopBranchModel, ShopBranch>(_context.ShopBranches.Where(p => p.Status == true).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetShopBranchesByUserId")]
+        public IActionResult GetShopBranchesByUserId(int UserId)
+        {
+            List<ShopBranchModel> model = new List<ShopBranchModel>();
+            model = MapperHelper.MapList<ShopBranchModel, ShopBranch>(_context.ShopBranches.Where(u => u.UserId == UserId).ToList());
 
             return Ok(model);
         }
@@ -383,6 +404,7 @@ namespace RMS.Controllers
                         record.OrderDate = model.OrderDate;
                         record.ExpectedDeliveryDate = model.ExpectedDeliveryDate;
                         record.ConfirmDeliveryDate = model.ConfirmDeliveryDate;
+                        record.UserId = model.UserId;
                     }
                     ;
 
@@ -398,11 +420,82 @@ namespace RMS.Controllers
             }
         }
 
+        [HttpPost("SaveOrderList")]
+        public IActionResult SaveOrderList([FromBody] List<OrdersModel> models)
+        {
+            try
+            {
+                if (models == null || !models.Any())
+                    return BadRequest(new { success = false, message = "No data provided!" });
+
+                foreach (var model in models)
+                {
+                    if (model.Quantity == 0 || model.ShopkeeperId == 0 || model.BranchId == 0
+                        || model.CustomerId == 0 || model.ProductId == 0)
+                    {
+                        continue;
+                    }
+
+                    if (model.OrderId == 0)
+                    {
+                        var entity = MapperHelper.Map<Order, OrdersModel>(model);
+                        _context.Orders.Add(entity);
+                    }
+                    else
+                    {
+                        var record = _context.Orders.FirstOrDefault(p => p.OrderId == model.OrderId);
+
+                        if (record == null)
+                            continue;
+
+                        record.ShopkeeperId = model.ShopkeeperId;
+                        record.BranchId = model.BranchId;
+                        record.CustomerId = model.CustomerId;
+                        record.ProductId = model.ProductId;
+                        record.Quantity = model.Quantity;
+                        record.Price = model.Price;
+                        record.Discount = model.Discount;
+                        record.Cost = model.Cost;
+                        record.TaxApplicable = model.TaxApplicable;
+                        record.TaxPercentage = model.TaxPercentage;
+                        record.IsDeliveryAddressChange = model.IsDeliveryAddressChange;
+                        record.DeliveryAddress = model.DeliveryAddress;
+                        record.ContactPerson = model.ContactPerson;
+                        record.DeliveryReceivedBy = model.DeliveryReceivedBy;
+                        record.Latitude = model.Latitude;
+                        record.Longitude = model.Longitude;
+                        record.OrderStatus = model.OrderStatus;
+                        record.OrderDate = model.OrderDate;
+                        record.ExpectedDeliveryDate = model.ExpectedDeliveryDate;
+                        record.ConfirmDeliveryDate = model.ConfirmDeliveryDate;
+                        record.UserId = model.UserId;
+                    }
+                }
+
+                _context.SaveChanges();
+
+                return Ok(new { success = true, message = "Processed successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
+
         [HttpGet, Route("GetOrders")]
         public IActionResult GetOrders()
         {
             List<OrdersModel> model = new List<OrdersModel>();
             model = MapperHelper.MapList<OrdersModel, Order>(_context.Orders.ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetOrdersByUserId")]
+        public IActionResult GetOrdersByUserId(int UserId)
+        {
+            List<OrdersModel> model = new List<OrdersModel>();
+            model = MapperHelper.MapList<OrdersModel, Order>(_context.Orders.Where(u => u.UserId == UserId).ToList());
 
             return Ok(model);
         }

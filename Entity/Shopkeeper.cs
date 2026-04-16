@@ -35,6 +35,8 @@ public partial class Shopkeeper
 
     public int RatingId { get; set; }
 
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<ProductPurchase> ProductPurchases { get; set; } = new List<ProductPurchase>();
