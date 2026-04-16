@@ -71,6 +71,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<vwEventQuery> vwEventQueries { get; set; }
 
+    public virtual DbSet<vwProduct> vwProducts { get; set; }
+
     public virtual DbSet<vwReservation> vwReservations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -591,6 +593,23 @@ public partial class RMSContext : DbContext
             entity.Property(e => e.Timing)
                 .HasMaxLength(5)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<vwProduct>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vwProducts");
+
+            entity.Property(e => e.BranchName).HasMaxLength(100);
+            entity.Property(e => e.CategoryType).HasMaxLength(200);
+            entity.Property(e => e.Cost).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(150);
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ProductCode).HasMaxLength(150);
+            entity.Property(e => e.TDDiscount).HasColumnType("decimal(18, 2)");
         });
 
         modelBuilder.Entity<vwReservation>(entity =>

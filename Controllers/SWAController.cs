@@ -134,8 +134,8 @@ namespace RMS.Controllers
         [HttpGet, Route("GetProducts")]
         public IActionResult GetProducts()
         {
-            List<ProductsModel> model = new List<ProductsModel>();
-            model = MapperHelper.MapList<ProductsModel, Product>(_context.Products.Where(p => p.Status == true).ToList());
+            List<vwProductModel> model = new List<vwProductModel>();
+            model = MapperHelper.MapList<vwProductModel, vwProduct>(_context.vwProducts.Where(p => p.Status == true).ToList());
 
             return Ok(model);
         }
@@ -190,7 +190,7 @@ namespace RMS.Controllers
             }
             catch (Exception ex)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!"});
             }
         }
 
@@ -267,7 +267,7 @@ namespace RMS.Controllers
             }
             catch (Exception ex)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!" });
             }
         }
 
@@ -325,7 +325,7 @@ namespace RMS.Controllers
             }
             catch (Exception ex)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!" });
             }
         }
 
@@ -394,7 +394,7 @@ namespace RMS.Controllers
             }
             catch (Exception)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!" });
             }
         }
 
@@ -451,7 +451,7 @@ namespace RMS.Controllers
             }
             catch (Exception)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!" });
             }
         }
 
@@ -500,9 +500,9 @@ namespace RMS.Controllers
                 }
                 return Ok(new { success = false, message = "No action found!" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Ok("Something went wrong!");
+                return StatusCode(500, new { success = false, message = "Something went wrong!" });
             }
         }
 
