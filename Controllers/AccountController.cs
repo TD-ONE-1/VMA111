@@ -52,6 +52,34 @@ namespace RMS.Controllers
             }
         }
 
+        [HttpPost("loginJV")]
+        public IActionResult loginJV([FromBody] AccountJVModel login)
+        {
+            try
+            {
+                TokenJVModel model = new TokenJVModel();
+
+                if (login.UserName == null || login.Password == null)
+                {
+                    return Ok("Invalid UserName or Password!");
+                }
+                var user = _context.tblAuthenticationJovees.Where(x => x.isActive == true && x.UserName == login.UserName && x.Password == login.Password).FirstOrDefault();
+                if (user == null)
+                {
+                    return Ok("Invalid UserName or Password!");
+                }
+                var usr = (MapperHelper.Map<AccountJVModel, tblAuthenticationJovee>(user));
+
+                model = _jWTManager.AuthenticateJV(usr, Convert.ToInt32(Configuration["TokenTimeOutHours"]));
+                model.userDetail = usr;
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                return Ok("Invalid UserName or Password!");
+            }
+        }
+
         [HttpPost("UsersSignUp")]
         public IActionResult UsersSignUp([FromBody] AccountModel user)
         {
@@ -91,7 +119,68 @@ namespace RMS.Controllers
                     {
                         record.UserName = user.UserName;
                         record.Password = user.Password;
+                        record.UserTypeId = user.UserTypeId;
+                        record.CreatedBy = user.CreatedBy;
                         record.CreationDate = user.CreationDate;
+                        record.isActive = user.isActive;
+                    }
+                    ;
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Updated successfully!" });
+                }
+                return Ok(new { success = false, message = "No action found!" });
+            }
+            catch (Exception)
+            {
+                return Ok("Something went wrong!");
+            }
+        }
+
+        [HttpPost("UsersJVSignUp")]
+        public IActionResult UsersJVSignUp([FromBody] AccountJVModel user)
+        {
+            try
+            {
+                if (user.UserName == null || user.Password == null)
+                {
+                    return Ok("UserName or Password is required!");
+                }
+                if (user.Id == 0)
+                {
+                    var dupCheck = _context.tblAuthenticationJovees.Where(x => x.UserName == user.UserName).FirstOrDefault();
+                    if (dupCheck != null)
+                    {
+                        return Ok(new { success = false, message = "This User Name is already present. Please add a different one!" });
+                    }
+
+                    _context.tblAuthenticationJovees.Add(MapperHelper.Map<tblAuthenticationJovee, AccountJVModel>(user));
+
+                    _context.SaveChanges();
+
+                    return Ok(new { success = true, message = "Successful Sign Up!" });
+                }
+                if (user.Id != 0)
+                {
+                    var record = _context.tblAuthenticationJovees.FirstOrDefault(p => p.Id == user.Id);
+
+                    if (record == null)
+                        return Ok(new { success = true, message = "Not Found!" });
+
+                    if (record.UserName == user.UserName)
+                    {
+                        return Ok(new { success = false, message = "This User Name is already present. Please add a different one!" });
+                    }
+
+                    if (record != null)
+                    {
+                        record.UserName = user.UserName;
+                        record.Password = user.Password;
+                        record.UserTypeId = user.UserTypeId;
+                        record.BusinessId = user.BusinessId;
+                        record.CreationDate = user.CreationDate;
+                        record.CreatedBy = user.CreatedBy;
                         record.isActive = user.isActive;
                     }
                     ;

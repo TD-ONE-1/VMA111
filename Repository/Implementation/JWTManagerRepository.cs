@@ -33,5 +33,24 @@ namespace RMS.Repository.Implementation
 
             return new TokenModel { Token = tokenHandler.WriteToken(token) };
         }
+        public TokenJVModel AuthenticateJV(AccountJVModel users, int tokenTimeOut)
+        {
+            var tokenKey = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                     new Claim(ClaimTypes.Name, users.UserName),
+                     new Claim("Password", users.Password)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(tokenTimeOut),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return new TokenJVModel { Token = tokenHandler.WriteToken(token) };
+        }
     }
 }

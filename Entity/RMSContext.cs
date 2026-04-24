@@ -67,6 +67,8 @@ public partial class RMSContext : DbContext
 
     public virtual DbSet<tblAuthentication> tblAuthentications { get; set; }
 
+    public virtual DbSet<tblAuthenticationJovee> tblAuthenticationJovees { get; set; }
+
     public virtual DbSet<vwEidReservation> vwEidReservations { get; set; }
 
     public virtual DbSet<vwEventQuery> vwEventQueries { get; set; }
@@ -576,6 +578,25 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.UserTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tblAuthentication_UserTypes");
+        });
+
+        modelBuilder.Entity<tblAuthenticationJovee>(entity =>
+        {
+            entity.ToTable("tblAuthenticationJovee");
+
+            entity.Property(e => e.CreatedBy).HasMaxLength(50);
+            entity.Property(e => e.CreationDate).HasColumnType("datetime");
+            entity.Property(e => e.Password).HasMaxLength(500);
+
+            entity.HasOne(d => d.Business).WithMany(p => p.tblAuthenticationJovees)
+                .HasForeignKey(d => d.BusinessId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblAuthenticationJovee_Shopkeeper");
+
+            entity.HasOne(d => d.UserType).WithMany(p => p.tblAuthenticationJovees)
+                .HasForeignKey(d => d.UserTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tblAuthenticationJovee_UserTypes");
         });
 
         modelBuilder.Entity<vwEidReservation>(entity =>

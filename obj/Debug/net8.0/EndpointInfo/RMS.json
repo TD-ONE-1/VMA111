@@ -1592,6 +1592,28 @@
         }
       }
     },
+    "/api/SWA/GetCustomersByUserId": {
+      "get": {
+        "tags": [
+          "SWA"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/SWA/SaveShopBranch": {
       "post": {
         "tags": [
@@ -1627,6 +1649,28 @@
       "get": {
         "tags": [
           "SWA"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWA/GetShopBranchesByUserId": {
+      "get": {
+        "tags": [
+          "SWA"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1710,6 +1754,28 @@
       "get": {
         "tags": [
           "SWA"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWA/GetOrdersByUserId": {
+      "get": {
+        "tags": [
+          "SWA"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1917,6 +1983,10 @@
             "type": "string",
             "nullable": true
           },
+          "shopkeeperId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "address": {
             "type": "string",
             "nullable": true
@@ -1963,6 +2033,10 @@
           "discount": {
             "type": "number",
             "format": "double"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2191,6 +2265,10 @@
           "confirmDeliveryDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2766,6 +2844,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

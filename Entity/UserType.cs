@@ -9,5 +9,7 @@ public partial class UserType
 
     public string UserTypes { get; set; } = null!;
 
+    public virtual ICollection<tblAuthenticationJovee> tblAuthenticationJovees { get; set; } = new List<tblAuthenticationJovee>();
+
     public virtual ICollection<tblAuthentication> tblAuthentications { get; set; } = new List<tblAuthentication>();
 }
