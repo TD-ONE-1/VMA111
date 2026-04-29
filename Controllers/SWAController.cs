@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RMS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SWAController : ControllerBase
@@ -69,6 +69,7 @@ namespace RMS.Controllers
                     var product = new Product
                     {
                         BranchId = model.BranchId,
+                        ShopkeeperId = model.ShopkeeperId,
                         ProductCode = model.ProductCode,
                         Name = model.Name,
                         Price = model.Price,
@@ -108,6 +109,7 @@ namespace RMS.Controllers
                     }
 
                     record.BranchId = model.BranchId;
+                    record.ShopkeeperId = model.ShopkeeperId;
                     record.ProductCode = model.ProductCode;
                     record.Name = model.Name;
                     record.Price = model.Price;
@@ -136,6 +138,15 @@ namespace RMS.Controllers
         {
             List<vwProductModel> model = new List<vwProductModel>();
             model = MapperHelper.MapList<vwProductModel, vwProduct>(_context.vwProducts.Where(p => p.Status == true).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetProductsByShopkeeperId")]
+        public IActionResult GetProductsByShopkeeperId(int ShopKeeperId)
+        {
+            List<vwProductModel> model = new List<vwProductModel>();
+            model = MapperHelper.MapList<vwProductModel, vwProduct>(_context.vwProducts.Where(p => p.ShopKeeperId == ShopKeeperId).ToList());
 
             return Ok(model);
         }
@@ -287,6 +298,15 @@ namespace RMS.Controllers
         {
             List<CustomerModel> model = new List<CustomerModel>();
             model = MapperHelper.MapList<CustomerModel, Customer>(_context.Customers.Where(u => u.UserId == UserId).ToList());
+
+            return Ok(model);
+        }
+
+        [HttpGet, Route("GetCustomersByShopKeeperId")]
+        public IActionResult GetCustomersByShopKeeperId(int ShopKeeperId)
+        {
+            List<CustomerModel> model = new List<CustomerModel>();
+            model = MapperHelper.MapList<CustomerModel, Customer>(_context.Customers.Where(u => u.ShopkeeperId == ShopKeeperId).ToList());
 
             return Ok(model);
         }

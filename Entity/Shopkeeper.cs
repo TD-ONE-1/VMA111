@@ -41,5 +41,7 @@ public partial class Shopkeeper
 
     public virtual ICollection<ProductPurchase> ProductPurchases { get; set; } = new List<ProductPurchase>();
 
+    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
     public virtual ICollection<tblAuthenticationJovee> tblAuthenticationJovees { get; set; } = new List<tblAuthenticationJovee>();
 }

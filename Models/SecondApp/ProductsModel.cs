@@ -6,6 +6,8 @@
 
         public int BranchId { get; set; }
 
+        public int ShopkeeperId { get; set; }
+
         public string ProductCode { get; set; } = null!;
 
         public string Name { get; set; } = null!;

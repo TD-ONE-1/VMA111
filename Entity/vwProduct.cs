@@ -9,6 +9,8 @@ public partial class vwProduct
 
     public int BranchId { get; set; }
 
+    public int ShopKeeperId { get; set; }
+
     public string BranchName { get; set; } = null!;
 
     public string ProductCode { get; set; } = null!;

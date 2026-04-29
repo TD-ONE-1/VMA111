@@ -9,6 +9,8 @@ public partial class Product
 
     public int BranchId { get; set; }
 
+    public int ShopkeeperId { get; set; }
+
     public string ProductCode { get; set; } = null!;
 
     public string Name { get; set; } = null!;
@@ -40,4 +42,6 @@ public partial class Product
     public virtual ProductCategory CategoryType { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual Shopkeeper Shopkeeper { get; set; } = null!;
 }

@@ -279,6 +279,11 @@ public partial class RMSContext : DbContext
                 .HasForeignKey(d => d.CategoryTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Products_ProductCategory");
+
+            entity.HasOne(d => d.Shopkeeper).WithMany(p => p.Products)
+                .HasForeignKey(d => d.ShopkeeperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Products_Shopkeeper");
         });
 
         modelBuilder.Entity<ProductCategory>(entity =>

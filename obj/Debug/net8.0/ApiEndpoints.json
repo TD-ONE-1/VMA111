@@ -17,6 +17,38 @@
   },
   {
     "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "loginJV",
+    "RelativePath": "api/Account/loginJV",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "RMS.Models.AccountJVModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "UsersJVSignUp",
+    "RelativePath": "api/Account/UsersJVSignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "RMS.Models.AccountJVModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
     "Method": "UsersSignUp",
     "RelativePath": "api/Account/UsersSignUp",
     "HttpMethod": "POST",
