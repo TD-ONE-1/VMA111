@@ -1,6 +1,38 @@
 [
   {
     "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Account/ChangePassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ChangePasswordModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "ChangePasswordJV",
+    "RelativePath": "api/Account/ChangePasswordJV",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ChangePasswordModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "api/Account/login",
     "HttpMethod": "POST",
@@ -26,6 +58,38 @@
       {
         "Name": "login",
         "Type": "RMS.Models.AccountJVModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Account/ResetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ResetPasswordModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.AccountController",
+    "Method": "ResetPasswordJV",
+    "RelativePath": "api/Account/ResetPasswordJV",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RMS.Models.ResetPasswordModel",
         "IsRequired": true
       }
     ],
@@ -898,6 +962,22 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetCustomersByShopKeeperId",
+    "RelativePath": "api/SWA/GetCustomersByShopKeeperId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ShopKeeperId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
     "Method": "GetCustomersByUserId",
     "RelativePath": "api/SWA/GetCustomersByUserId",
     "HttpMethod": "GET",
@@ -956,6 +1036,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAController",
+    "Method": "GetProductsByShopkeeperId",
+    "RelativePath": "api/SWA/GetProductsByShopkeeperId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ShopKeeperId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -1083,6 +1179,11 @@
       },
       {
         "Name": "BranchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ShopkeeperId",
         "Type": "System.Int32",
         "IsRequired": false
       },

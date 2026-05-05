@@ -52,6 +52,71 @@ namespace RMS.Controllers
             }
         }
 
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword([FromBody] ChangePasswordModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserName) ||
+                    string.IsNullOrEmpty(model.OldPassword) ||
+                    string.IsNullOrEmpty(model.NewPassword))
+                {
+                    return Ok("Invalid request!");
+                }
+
+                var user = _context.tblAuthentications
+                    .FirstOrDefault(x => x.UserName == model.UserName && x.isActive);
+
+                if (user == null)
+                    return Ok("User not found!");
+
+                if (user.Password != model.OldPassword)
+                    return Ok("Old password is incorrect!");
+
+                user.Password = model.NewPassword;
+                _context.SaveChanges();
+
+                return Ok("Password changed successfully!");
+            }
+            catch (Exception)
+            {
+                return Ok("Error while changing password!");
+            }
+        }
+
+        [HttpPost("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserName))
+                {
+                    return Ok("Invalid request!");
+                }
+
+                var user = _context.tblAuthentications
+                    .FirstOrDefault(x => x.UserName == model.UserName && x.isActive);
+
+                if (user == null)
+                    return Ok("User not found!");
+
+                var newPassword = GenerateRandomPassword();
+
+                user.Password = newPassword;
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    Message = "Password reset successfully!",
+                    TempPassword = newPassword
+                });
+            }
+            catch (Exception)
+            {
+                return Ok("Error while resetting password!");
+            }
+        }
+
         [HttpPost("loginJV")]
         public IActionResult loginJV([FromBody] AccountJVModel login)
         {
@@ -78,6 +143,78 @@ namespace RMS.Controllers
             {
                 return Ok("Invalid UserName or Password!");
             }
+        }
+
+        [HttpPost("ChangePasswordJV")]
+        public IActionResult ChangePasswordJV([FromBody] ChangePasswordModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserName) ||
+                    string.IsNullOrEmpty(model.OldPassword) ||
+                    string.IsNullOrEmpty(model.NewPassword))
+                {
+                    return Ok("Invalid request!");
+                }
+
+                var user = _context.tblAuthenticationJovees
+                    .FirstOrDefault(x => x.UserName == model.UserName && x.isActive);
+
+                if (user == null)
+                    return Ok("User not found!");
+
+                if (user.Password != model.OldPassword)
+                    return Ok("Old password is incorrect!");
+
+                user.Password = model.NewPassword;
+                _context.SaveChanges();
+
+                return Ok("Password changed successfully!");
+            }
+            catch (Exception)
+            {
+                return Ok("Error while changing password!");
+            }
+        }        
+
+        [HttpPost("ResetPasswordJV")]
+        public IActionResult ResetPasswordJV([FromBody] ResetPasswordModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserName))
+                {
+                    return Ok("Invalid request!");
+                }
+
+                var user = _context.tblAuthenticationJovees
+                    .FirstOrDefault(x => x.UserName == model.UserName && x.isActive);
+
+                if (user == null)
+                    return Ok("User not found!");
+
+                var newPassword = GenerateRandomPassword();
+
+                user.Password = newPassword;
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    Message = "Password reset successfully!",
+                    TempPassword = newPassword
+                });
+            }
+            catch (Exception)
+            {
+                return Ok("Error while resetting password!");
+            }
+        }
+
+        private string GenerateRandomPassword()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, 8)
+                .Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
 
         [HttpPost("UsersSignUp")]
