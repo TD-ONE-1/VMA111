@@ -1335,6 +1335,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetDashboardCounts",
+    "RelativePath": "api/SWAReports/GetDashboardCounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetOrdersByPayment",
+    "RelativePath": "api/SWAReports/GetOrdersByPayment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentStatus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetOrdersByStatus",
+    "RelativePath": "api/SWAReports/GetOrdersByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetShopkeeperByBussinessId",
+    "RelativePath": "api/SWAReports/GetShopkeeperByBussinessId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BussinessId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetShopsByStatus",
+    "RelativePath": "api/SWAReports/GetShopsByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RMS.Controllers.UserController",
     "Method": "GetUsers",
     "RelativePath": "api/User/GetUsers",

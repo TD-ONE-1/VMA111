@@ -2119,6 +2119,103 @@
         }
       }
     },
+    "/api/SWAReports/GetDashboardCounts": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWAReports/GetShopsByStatus": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWAReports/GetOrdersByStatus": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWAReports/GetOrdersByPayment": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "paymentStatus",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWAReports/GetShopkeeperByBussinessId": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "BussinessId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/GetUsers": {
       "get": {
         "tags": [
