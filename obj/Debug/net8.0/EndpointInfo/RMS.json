@@ -2173,6 +2173,28 @@
         }
       }
     },
+    "/api/SWAReports/GetOrdersByShopkeeperId": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "ShopkeeperId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/SWAReports/GetOrdersByPayment": {
       "get": {
         "tags": [
@@ -2216,6 +2238,48 @@
         }
       }
     },
+    "/api/SWAReports/GetOrdersByDateRange": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SWAReports/GetTopSellingProducts": {
+      "get": {
+        "tags": [
+          "SWAReports"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/GetUsers": {
       "get": {
         "tags": [
@@ -2232,6 +2296,30 @@
       "get": {
         "tags": [
           "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/WAT/GetShopBranches": {
+      "get": {
+        "tags": [
+          "WAT"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/WAT/GetShopkeepers": {
+      "get": {
+        "tags": [
+          "WAT"
         ],
         "responses": {
           "200": {

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RMS.Common.Helper;
 using RMS.Entity;
+using RMS.Middleware;
 using RMS.Repository.Implementation;
 using RMS.Repository.Interface;
 using System.Text;
@@ -91,6 +92,8 @@ app.UseStaticFiles();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.MapControllers();
 

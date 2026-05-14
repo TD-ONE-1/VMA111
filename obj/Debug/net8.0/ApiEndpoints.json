@@ -1346,6 +1346,27 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetOrdersByDateRange",
+    "RelativePath": "api/SWAReports/GetOrdersByDateRange",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
     "Method": "GetOrdersByPayment",
     "RelativePath": "api/SWAReports/GetOrdersByPayment",
     "HttpMethod": "GET",
@@ -1355,6 +1376,22 @@
       {
         "Name": "paymentStatus",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetOrdersByShopkeeperId",
+    "RelativePath": "api/SWAReports/GetOrdersByShopkeeperId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ShopkeeperId",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -1409,6 +1446,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetTopSellingProducts",
+    "RelativePath": "api/SWAReports/GetTopSellingProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RMS.Controllers.UserController",
     "Method": "GetUsers",
     "RelativePath": "api/User/GetUsers",
@@ -1422,6 +1469,26 @@
     "ContainingType": "RMS.Controllers.UserController",
     "Method": "GetUserType",
     "RelativePath": "api/User/GetUserType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.WATController",
+    "Method": "GetShopBranches",
+    "RelativePath": "api/WAT/GetShopBranches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.WATController",
+    "Method": "GetShopkeepers",
+    "RelativePath": "api/WAT/GetShopkeepers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
