@@ -1415,6 +1415,37 @@
   },
   {
     "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetRevenueByShopAndBranch",
+    "RelativePath": "api/SWAReports/GetRevenueByShopAndBranch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fromDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
+    "Method": "GetRevenueLast3MonthsByShopAndBranch",
+    "RelativePath": "api/SWAReports/GetRevenueLast3MonthsByShopAndBranch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RMS.Controllers.SWAReportsController",
     "Method": "GetShopkeeperByBussinessId",
     "RelativePath": "api/SWAReports/GetShopkeeperByBussinessId",
     "HttpMethod": "GET",
